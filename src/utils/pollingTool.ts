@@ -1,36 +1,28 @@
 class PollingTool {
-  private continuePolling = true;
-  private intervalObject?: ReturnType<typeof setTimeout>;
+  private intervalObject?: ReturnType<typeof setInterval>;
 
   constructor(
+    private callback: () => void,
     private interval: number,
-    private callback: () => Promise<unknown>,
     private stopTrigger?: () => boolean,
   ) {
-    this.interval = interval;
     this.callback = callback;
+    this.interval = interval;
     if (stopTrigger) this.stopTrigger = stopTrigger;
   }
 
-  async start() {
-    try {
-      await this.callback();
-    } catch (error) {
-      console.log(error);
-      this.stop();
-    }
-
-    if (this.stopTrigger && this.stopTrigger()) return;
-
-    if (this.continuePolling)
-    this.intervalObject = setTimeout(this.start, this.interval * 1000);
+  start() {
+    this.intervalObject = setInterval(() => {
+      if (this.stopTrigger && this.stopTrigger()) {
+        return this.stop();
+      }
+      this.callback();
+    }, this.interval);
   }
 
   stop() {
-    this.continuePolling = false;
-    if (this.intervalObject) clearTimeout(this.intervalObject);
+    if (this.intervalObject) clearInterval(this.intervalObject);
   }
-
 }
 
 export default PollingTool;
