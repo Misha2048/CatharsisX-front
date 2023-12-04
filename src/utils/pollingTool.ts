@@ -2,7 +2,7 @@ class PollingTool {
   private intervalObject?: ReturnType<typeof setInterval>;
 
   constructor(
-    private callback: () => void,
+    private callback: () => any,
     private interval: number,
     private stopTrigger?: () => boolean,
   ) {
