@@ -23,7 +23,7 @@ class PollingTool {
     if (this.stopTrigger && this.stopTrigger()) return;
 
     if (this.continuePolling)
-    this.intervalObject = setTimeout(this.start, this.interval);
+    this.intervalObject = setTimeout(this.start, this.interval * 1000);
   }
 
   stop() {
