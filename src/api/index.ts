@@ -1,44 +1,56 @@
-import axios from 'axios';
-import { store } from '../redux/store';
-import { setTokens, clearTokens } from '../redux/slices/tokensSlice';
-import history from '../helpers/customRouter/history';
+import axiosInstance from "./axiosInstanse";
+import { ILoginRequest, ISignUpRequest, ITokensResponse, IUsersMe } from "./intefaces";
 
-const axiosInstance = axios.create({
-  baseURL: process.env.REACT_APP_API_BASE_URL,
-});
+export const api = {
 
-axiosInstance.interceptors.request.use(config => {
-  const token = localStorage.getItem('accessToken');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-  }
-  return config;
-});
+    users: {
+        me: async (): Promise<IUsersMe> => {
+            return axiosInstance.request({
+                method: 'GET',
+                url: '/users/me'
+            }).then(response => response.data as IUsersMe);
+        }
+    },
 
-axiosInstance.interceptors.response.use(
-  response => response,
+    auth: {
+        signUp: async (options: ISignUpRequest): Promise<ITokensResponse> => {
+            return axiosInstance.request({
+                method: 'POST',
+                url: '/auth/signup',
+                data: options
+            }).then(response => response.data as ITokensResponse);
+        },
 
-  async error => {
-    const originalRequest = { ...error.config };
-    originalRequest._isRetry = true;
-    const refreshToken = localStorage.getItem('refreshToken');
-    if (error.response.status === 401 && !error.config._isRetry && refreshToken) {
-      try {
-        const resp = await axiosInstance.get('/auth/refresh', {
-          headers: { Authorization: `Bearer ${refreshToken}` },
-        });
-        store.dispatch(setTokens(resp.data));
-        originalRequest.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
-        return axiosInstance.request(originalRequest);
-      } catch (error) {
-        console.log(error);
-      }
-    } else {
-      store.dispatch(clearTokens());
-      history.push('/login');
-      return Promise.reject(error);
-    }
-  },
-);
+        login: async (options: ILoginRequest): Promise<ITokensResponse> => {
+            return axiosInstance.request({
+                method: 'POST',
+                url: '/auth/login',
+                data: options
+            }).then(response => response.data as ITokensResponse);
+        },
 
-export default axiosInstance;
+        logout: async (): Promise<null> => {
+            return axiosInstance.request({
+                url: '/auth/logout'
+            })
+        }
+    },
+
+    emailVerify: (() => {
+        const funcToCall = async (): Promise<null> => {
+            return axiosInstance.request({
+                url: '/email-verify'
+            }).then(response => response.data)
+        }
+
+        /*
+            Тут сделано таким образом, чтобы можно было вызвать как
+            api.emailVerify() так и, например, api.emailVerify.doSmtg()
+
+            Для этого нужно объявить новый проп, например, так:
+            funcToCall.test = () => {console.log('test')}
+        */
+
+        return funcToCall
+    }) ()
+};
