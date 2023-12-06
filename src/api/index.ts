@@ -31,6 +31,7 @@ export const api = {
 
         logout: async (): Promise<null> => {
             return axiosInstance.request({
+                method: 'GET',
                 url: '/auth/logout'
             })
         }
