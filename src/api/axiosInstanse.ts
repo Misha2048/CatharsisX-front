@@ -36,7 +36,7 @@ axiosInstance.interceptors.response.use(
     } else {
       store.dispatch(clearTokens());
       history.push('/login');
-      throw error;
+      return error.response;
     }
   },
 );
