@@ -7,7 +7,6 @@ export const Container = styled.div`
   z-index: 10;
   background-color: #3ec290;
   width: 300px;
-  margin: 0px auto;
   max-height: calc(100vh - 32px);
   overflow: auto;
   padding: 16px;
