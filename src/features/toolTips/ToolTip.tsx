@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../../redux/store';
 import { clearHint } from '../../redux/slices/hintSlice';
 
-function index() {
+function ToolTip() {
   const dispatch = useDispatch() as AppDispatch;
   const [show, setShow] = useState(false);
   const message = useSelector((state: RootState) => state.hint.message);
@@ -32,4 +32,4 @@ function index() {
   );
 }
 
-export default index;
+export default ToolTip;
