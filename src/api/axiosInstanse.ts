@@ -2,6 +2,7 @@ import axios from 'axios';
 import { store } from '../redux/store';
 import { setTokens, clearTokens } from '../redux/slices/tokensSlice';
 import history from '../helpers/customRouter/history';
+import { setHint } from '../redux/slices/hintSlice';
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -19,6 +20,15 @@ axiosInstance.interceptors.response.use(
   response => response,
 
   async error => {
+    if (
+      error.response.status !== 401 &&
+      error.response.status >= 400 &&
+      error.response.status <= 599
+    ) {
+      store.dispatch(setHint({ message: error.response.data.message }));
+      return error.response;
+    }
+
     const originalRequest = { ...error.config };
     originalRequest._isRetry = true;
     const refreshToken = localStorage.getItem('refreshToken');
