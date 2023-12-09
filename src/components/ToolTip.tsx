@@ -1,34 +1,34 @@
 import React, { useEffect, useState } from 'react';
-import { Container } from './components/Container';
-import { Text } from './components/Text';
-import CloseBtn from '../../components/CloseBtn';
+import TooltipContainer from './TooltipContainer';
+import TooltipText from './TooltipText';
+import CloseBtn from './CloseBtn';
 import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../redux/store';
-import { clearHint } from '../../redux/slices/hintSlice';
+import { AppDispatch, RootState } from '../redux/store';
+import { clearHint } from '../redux/slices/hintSlice';
 
 function ToolTip() {
   const dispatch = useDispatch() as AppDispatch;
-  const [show, setShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const message = useSelector((state: RootState) => state.hint.message);
 
   useEffect(() => {
     if (message !== '') {
-      setShow(true);
+      setIsShow(true);
     }
   }, [message]);
 
   function hideMessage() {
-    setShow(false);
+    setIsShow(false);
     setTimeout(() => {
       dispatch(clearHint());
     }, 300);
   }
 
   return (
-    <Container data-show={show}>
-      <Text>{message}</Text>
+    <TooltipContainer show={isShow}>
+      <TooltipText>{message}</TooltipText>
       <CloseBtn onClick={hideMessage} />
-    </Container>
+    </TooltipContainer>
   );
 }
 

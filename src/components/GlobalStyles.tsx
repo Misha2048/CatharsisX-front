@@ -10,7 +10,7 @@ const styles = `
   :focus,:active{outline: none;}
   a:focus,a:active{outline: none;}
   nav,footer,header,aside{display: block;}
-  html,body{height:100%;width:100%;font-size:100%;line-height:1;-ms-text-size-adjust:100%;
+  html,body{width:100%;height:100%;font-size:100%;line-height:1;-ms-text-size-adjust:100%;
       -moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
   input,button,textarea{font-family:inherit;}
   input::-ms-clear{display: none;}
@@ -21,6 +21,8 @@ const styles = `
   ul, ol, li{list-style: none;}
   img{vertical-align: top;}
   h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
+
+  #root{width:100%;height:100%;}
   /*------------------------------------------------------*/
 
   body{font-family: 'Inter', sans-serif;}
@@ -30,4 +32,7 @@ export const GlobalStyles = styled.div`
   :global() {
     ${styles}
   }
+
+  width: 100%;
+  height: 100%;
 `;
