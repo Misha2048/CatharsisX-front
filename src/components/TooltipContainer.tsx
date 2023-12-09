@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react';
 
-export const Container = styled.div`
+export const TooltipContainer = styled.div`
   position: fixed;
   right: 10px;
   bottom: 16px;
@@ -13,6 +13,7 @@ export const Container = styled.div`
   border-radius: 8px;
   display: flex;
   justify-content: space-between;
+  gap: 0px 8px;
   transition: all 0.3s ease 0s;
 
   &[data-show='false'] {
