@@ -1,8 +1,11 @@
 import { styled } from '@linaria/react';
 
-const TooltipContainer = styled.div`
+interface Props {
+  show: boolean;
+}
+
+const TooltipContainer = styled.div<Props>`
   position: fixed;
-  right: 10px;
   bottom: 16px;
   z-index: 10;
   background-color: #3ec290;
@@ -15,13 +18,10 @@ const TooltipContainer = styled.div`
   justify-content: space-between;
   gap: 0px 8px;
   transition: all 0.3s ease 0s;
-
-  &[data-show='false'] {
-    right: -100%;
-  }
+  right: ${props => (props.show ? '10px' : '-100%')};
 
   @media (min-width: 375px) {
-    right: 16px;
+    right: ${props => (props.show ? '16px' : '-100%')};
   }
 
   @media (min-width: 1024px) {

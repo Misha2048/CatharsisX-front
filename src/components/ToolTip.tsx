@@ -8,24 +8,24 @@ import { clearHint } from '../redux/slices/hintSlice';
 
 function ToolTip() {
   const dispatch = useDispatch() as AppDispatch;
-  const [show, setShow] = useState(false);
+  const [isShow, setIsShow] = useState(false);
   const message = useSelector((state: RootState) => state.hint.message);
 
   useEffect(() => {
     if (message !== '') {
-      setShow(true);
+      setIsShow(true);
     }
   }, [message]);
 
   function hideMessage() {
-    setShow(false);
+    setIsShow(false);
     setTimeout(() => {
       dispatch(clearHint());
     }, 300);
   }
 
   return (
-    <TooltipContainer data-show={show}>
+    <TooltipContainer show={isShow}>
       <TooltipText>{message}</TooltipText>
       <CloseBtn onClick={hideMessage} />
     </TooltipContainer>
