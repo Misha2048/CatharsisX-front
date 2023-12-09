@@ -10,7 +10,7 @@ const styles = `
   :focus,:active{outline: none;}
   a:focus,a:active{outline: none;}
   nav,footer,header,aside{display: block;}
-  html,body{font-size:100%;line-height:1;-ms-text-size-adjust:100%;
+  html,body{width:100%;height:100%;font-size:100%;line-height:1;-ms-text-size-adjust:100%;
       -moz-text-size-adjust:100%;-webkit-text-size-adjust:100%;}
   input,button,textarea{font-family:inherit;}
   input::-ms-clear{display: none;}
