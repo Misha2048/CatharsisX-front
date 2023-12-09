@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react';
 
-export const TooltipText = styled.p`
+const TooltipText = styled.p`
   font-size: 16px;
   line-height: 22.4px;
   font-family: 'Inter', sans-serif;
@@ -8,3 +8,5 @@ export const TooltipText = styled.p`
   text-align: center;
   flex: 1 1 auto;
 `;
+
+export default TooltipText;

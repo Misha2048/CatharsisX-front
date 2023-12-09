@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { TooltipContainer } from './TooltipContainer';
-import { TooltipText } from './TooltipText';
+import TooltipContainer from './TooltipContainer';
+import TooltipText from './TooltipText';
 import CloseBtn from './CloseBtn';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../redux/store';

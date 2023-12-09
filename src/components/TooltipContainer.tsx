@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react';
 
-export const TooltipContainer = styled.div`
+const TooltipContainer = styled.div`
   position: fixed;
   right: 10px;
   bottom: 16px;
@@ -28,3 +28,5 @@ export const TooltipContainer = styled.div`
     width: 400px;
   }
 `;
+
+export default TooltipContainer;
