@@ -36,6 +36,7 @@ background-color:${secondaryBlackColor}
   
 const box = css`
 position:relative;
+min-height:400px;
 padding: 45px 96px 80px;
 background-color:${blackGreyColor};
 display:flex;
@@ -115,6 +116,8 @@ const Additional = styled.div`
 const Main = styled.div`
   display:flex;
   flex-direction:column;
+  justify-content:center;
+  aligh-items:center;
   gap:20px;
 
 `
