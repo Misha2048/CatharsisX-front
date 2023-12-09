@@ -1,13 +1,17 @@
 import React from 'react';
 import './App.css';
 import SignUp from './components/Registration';
-
+import { Route, Routes } from 'react-router-dom';
+import Home from './pages/Home';
 
 function App() {
   return (
-    <SignUp></SignUp>
+    <Routes>
+      <Route path='/' element={<Home />} />
+      <Route path='/login' element={<SignUp />} />
+      <Route path='/signup' element={<SignUp />} />
+    </Routes>
   );
 }
 
-export default App
-
+export default App;
