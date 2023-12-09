@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignUp from './components/SignUp';
+import SignUp from './components/Registration';
 
 
 function App() {

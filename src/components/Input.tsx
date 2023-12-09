@@ -24,10 +24,21 @@ const StyledInputField = styled.input`
   display:block;
   width:calc(100%-10px);
   border: 1px solid ${whiteColor};
-  padding:5px 0;
+  padding:10px 0;
   padding-left:10px;
   border-radius: 5px;
-  transition: border-color 0.3s ease-out;   
+  transition: border-color 0.3s ease-out;
+  
+  &::placeholder{
+    color: #000;
+    opacity:70%;
+  // font-family: Karla;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: 10px; /* 83.333% */
+  letter-spacing: 0.42px;
+  }
   `;
 
 
