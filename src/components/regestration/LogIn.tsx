@@ -12,14 +12,11 @@ import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import { api } from "../../api";
 import { ILoginRequest } from "../../api/intefaces";
-import { error } from "console";
 
 
 
-function LogIn({handleToggle}:any){
+function LogIn(){
   
-
-
     //Referencing to ILoginRequest interface
     const [formDate,setFormDate] = useState<ILoginRequest>({
       email:'',
@@ -55,7 +52,7 @@ function LogIn({handleToggle}:any){
         <AdditionalRegistryContent>
          <Logo/>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
-          <SecondaryText>Don’t have an accout? <Link onClick={handleToggle}>Sign up</Link></SecondaryText>
+          <SecondaryText>Don’t have an accout? <Link href="/signup">Sign up</Link></SecondaryText>
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Log in</Title>
@@ -75,7 +72,7 @@ function LogIn({handleToggle}:any){
         onChange={handleChange}
         minLength={8}
         required />
-        <Link onClick={(e)=>e.preventDefault()}>Forgot your password?</Link>
+        <Link href="/forgot-password" >Forgot your password?</Link>
         <Button>Log in</Button>
       </Form>
         </MainRegistryContent>     

@@ -1,9 +1,12 @@
 import { styled } from "@linaria/react";
 import { primaryColor } from "./colors";
 
-const Link = styled.button`
+const Link = styled.a`
 font-size:12px;
-&{
+&,
+&:visited,
+&:link,
+&:active{
   background:none;
   border:none;
   color:${primaryColor};

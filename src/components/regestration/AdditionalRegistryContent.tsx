@@ -15,8 +15,23 @@ const AdditionalRegistryContent = styled.div`
   }
 
 
-  @media only screen and (max-width: 450px){
-    
+
+  @media only screen and (max-width: 680px) and (orientation:portrait){    
+    & > h1{
+      display: none;
+    }
+    & > img{
+      align-self:center;
+    }
+    & > span{
+      position:absolute;
+      bottom:0px;
+      align-self:center;
+      font-size:14px;
+    }
+  }
+
+  @media only screen and (max-width: 550px) and (orientation:portrait){    
     & > h1{
       display: none;
     }
@@ -29,6 +44,36 @@ const AdditionalRegistryContent = styled.div`
       align-self:center;
     }
   }
+
+  @media only screen and (max-height: 450px) and (orientation:landscape){    
+    & > h1{
+      display: none;
+    }
+    & > img{
+      align-self:center;
+    }
+    & > span{
+      position:absolute;
+      bottom:45px;
+      align-self:center;
+    }
+  }
+
+  @media only screen and (max-height: 380px) and (orientation:landscape){    
+    & > h1{
+      display: none;
+    }
+    & > img{
+      align-self:center;
+    }
+    & > span{
+      position:absolute;
+      bottom:60px;
+      align-self:center;
+    }
+  }
+
+
 
   
 `
