@@ -1,5 +1,5 @@
 import React from "react";
-import {primaryColor,whiteColor} from './colors'
+import {greyColor,primaryColor,whiteColor} from './colors'
 import { styled } from "@linaria/react";
 
 //////////////////////
@@ -10,7 +10,7 @@ interface ButtonProps{
     onClick?:(event:React.MouseEvent<HTMLButtonElement>) => void;
 }
 
-const StyledButton = styled('button')`
+const StyledButton = styled.button`
 background-color: ${primaryColor};
 color: ${whiteColor};
 font-size: 14px;
@@ -23,9 +23,11 @@ border: none;
 border-radius: 8px;
 cursor: pointer;
 transition: all 0.2s ease-in-out;
-
+&.disabled{
+  background-color:${greyColor};
+}
 :hover {
-  opacity:0.9
+  opacity:0.9;
 }
 `;
 
