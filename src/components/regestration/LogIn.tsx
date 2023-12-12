@@ -12,13 +12,14 @@ import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import { api } from "../../api";
 import { ILoginRequest } from "../../api/intefaces";
+import { error } from "console";
 
-// interface LogInFormState {
-//     email:string;
-//     password:string;
-//   }
+
 
 function LogIn({handleToggle}:any){
+  
+
+
     //Referencing to ILoginRequest interface
     const [formDate,setFormDate] = useState<ILoginRequest>({
       email:'',
@@ -31,6 +32,7 @@ function LogIn({handleToggle}:any){
       setFormDate(previousData =>({...previousData,[name]:value}));
     }
   
+
   // Send formDate to server
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) =>{
      
@@ -73,7 +75,7 @@ function LogIn({handleToggle}:any){
         onChange={handleChange}
         minLength={8}
         required />
-        <Link >Forgot your password?</Link>
+        <Link onClick={(e)=>e.preventDefault()}>Forgot your password?</Link>
         <Button>Log in</Button>
       </Form>
         </MainRegistryContent>     

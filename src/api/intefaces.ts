@@ -23,3 +23,7 @@ export interface ILoginRequest {
     password: string;
 }
 
+export interface IForgotPasswordRequest {
+    email: string;
+}
+
