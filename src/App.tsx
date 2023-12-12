@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import SignUp from './components/Registration';
+import SignUp from './components/RegistrationForm';
 import { Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 

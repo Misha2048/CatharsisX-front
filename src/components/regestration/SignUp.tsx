@@ -1,8 +1,8 @@
 import React,{useState} from "react";
 import Input from '../Input';
 import Button from "../Button";
-import Container from "../Container";
-import Box from "../Box";
+import CenteredContainer from "../CenteredContainer";
+import GreyContainerBox from "../GreyContainerBox";
 import Link from "../Link";
 import SecondaryText from "../SecondaryText";
 import MainRegistryContent from "./MainRegistryContent";
@@ -10,19 +10,22 @@ import Form from "../Form";
 import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import Logo from "../Logo";
+import { api } from "../../api";
+import { ISignUpRequest } from "../../api/intefaces";
 
-interface SignUpFormState {
-    firstname:string;
-    lastname:string;
-    email:string;
-    password:string;
-  }
+
+// interface SignUpFormState {
+//     firstname:string;
+//     lastname:string;
+//     email:string;
+//     password:string;
+//   }
 
 function SignUp({handleToggle}:any){
     //Referencing to SignUpFormState interface
-    const [formDate,setFormDate] = useState<SignUpFormState>({
-      firstname:'',
-      lastname:'',
+    const [formDate,setFormDate] = useState<ISignUpRequest>({
+      first_name:'',
+      last_name:'',
       email:'',
       password:''
     })
@@ -36,41 +39,42 @@ function SignUp({handleToggle}:any){
   // Send formDate to server
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) =>{
       e.preventDefault();
-      console.log(formDate);
+
+      api.auth.signUp(formDate)
+      .then(data=>console.log(data));
+
       setFormDate({
-        firstname:'',
-        lastname:'',
+        first_name:'',
+        last_name:'',
         email:'',
         password:''
       })
+
+ 
     }
   
-    return <Container>
-      <Box>
+    return <CenteredContainer>
+      <GreyContainerBox>
         <AdditionalRegistryContent>
           <Logo/>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
-          <SecondaryText>Don’t have an accout?
-             <Link onClick={handleToggle}>
-                Log in
-             </Link>
-             </SecondaryText>
+          <SecondaryText>Don’t have an accout? <Link onClick={handleToggle}>Log in</Link></SecondaryText>
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Get Started</Title>
         <Form action="POST" onSubmit={handleSubmit}>
         <Input
         label="Firstname"
-        name="firstname"
+        name="first_name"
         type="text"
-        value={formDate.firstname}
+        value={formDate.first_name}
         onChange={handleChange}
         required />
         <Input
         label="Lastname"
-        name="lastname"
+        name="last_name"
         type="text"
-        value={formDate.lastname}
+        value={formDate.last_name}
         onChange={handleChange}
         required />
         <Input
@@ -91,8 +95,8 @@ function SignUp({handleToggle}:any){
         <Button>Sign up</Button>
       </Form>
         </MainRegistryContent>     
-      </Box>
-    </Container>
+      </GreyContainerBox>
+    </CenteredContainer>
   }
 
 export default SignUp;

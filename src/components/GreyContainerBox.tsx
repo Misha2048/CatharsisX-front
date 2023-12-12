@@ -2,9 +2,9 @@ import { styled } from "@linaria/react";
 import { blackGreyColor } from "./colors";
 import { secondaryBlackColor } from "./colors";
 
-const Box = styled.div`
+const GreyContainerBox = styled.div`
 position:relative;
-min-height:400px;
+min-height:450px;
 padding: 45px 96px 80px;
 background-color:${blackGreyColor};
 display:flex;
@@ -20,4 +20,4 @@ gap:20px;
 }
 `;
 
-export default Box;
+export default GreyContainerBox;

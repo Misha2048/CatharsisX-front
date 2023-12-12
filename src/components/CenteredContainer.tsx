@@ -1,7 +1,7 @@
 import { styled } from "@linaria/react";
 import { secondaryBlackColor } from "./colors";
 
-const Container = styled.div`
+const CenteredContainer = styled.div`
 width:100%; 
 height:100vh;
 display:flex;
@@ -10,4 +10,4 @@ justify-content:center;
 background-color:${secondaryBlackColor}
 `;
 
-export default Container;
+export default CenteredContainer;

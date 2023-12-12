@@ -2,23 +2,25 @@ import React,{useState} from "react";
 import Form from "../Form";
 import Input from '../Input';
 import Button from "../Button";
-import Box from "../Box";
-import Container from "../Container";
+import GreyContainerBox from "../GreyContainerBox";
+import CenteredContainer from "../CenteredContainer";
 import Link from "../Link";
 import Logo from "../Logo";
 import MainRegistryContent from "./MainRegistryContent";
 import SecondaryText from "../SecondaryText";
 import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
+import { api } from "../../api";
+import { ILoginRequest } from "../../api/intefaces";
 
-interface LogInFormState {
-    email:string;
-    password:string;
-  }
+// interface LogInFormState {
+//     email:string;
+//     password:string;
+//   }
 
 function LogIn({handleToggle}:any){
-    //Referencing to SignUpFormState interface
-    const [formDate,setFormDate] = useState<LogInFormState>({
+    //Referencing to ILoginRequest interface
+    const [formDate,setFormDate] = useState<ILoginRequest>({
       email:'',
       password:''
     })
@@ -31,17 +33,23 @@ function LogIn({handleToggle}:any){
   
   // Send formDate to server
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) =>{
+     
       e.preventDefault();
-      console.log(formDate);
-      setFormDate({
-        email:'',
-        password:''
-      })
+     
+      api.auth.login(formDate)
+      .then(data=>{
+        console.log(data)
+        
+        setFormDate({
+          email:'',
+          password:''
+        });
+      });      
     }
   
   
-    return <Container>
-      <Box>
+    return <CenteredContainer>
+      <GreyContainerBox>
         <AdditionalRegistryContent>
          <Logo/>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
@@ -49,7 +57,7 @@ function LogIn({handleToggle}:any){
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Log in</Title>
-        <Form action="POST" onSubmit={handleSubmit}>
+        <Form action="GET" onSubmit={handleSubmit}>
         <Input
         label="Email"
         name="email"
@@ -69,8 +77,8 @@ function LogIn({handleToggle}:any){
         <Button>Log in</Button>
       </Form>
         </MainRegistryContent>     
-      </Box>
-    </Container>
+      </GreyContainerBox>
+    </CenteredContainer>
   }
   
   
