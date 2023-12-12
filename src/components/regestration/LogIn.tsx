@@ -12,9 +12,6 @@ import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import { api } from "../../api";
 import { ILoginRequest } from "../../api/intefaces";
-import { error } from "console";
-
-
 
 function LogIn({handleToggle}:any){
   
