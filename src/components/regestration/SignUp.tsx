@@ -21,7 +21,7 @@ import { ISignUpRequest } from "../../api/intefaces";
 //     password:string;
 //   }
 
-function SignUp({handleToggle}:any){
+function SignUp(){
     //Referencing to SignUpFormState interface
     const [formDate,setFormDate] = useState<ISignUpRequest>({
       first_name:'',
@@ -58,7 +58,7 @@ function SignUp({handleToggle}:any){
         <AdditionalRegistryContent>
           <Logo/>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
-          <SecondaryText>Don’t have an accout? <Link onClick={handleToggle}>Log in</Link></SecondaryText>
+          <SecondaryText>Don’t have an accout? <Link href="/login">Log in</Link></SecondaryText>
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Get Started</Title>
