@@ -18,6 +18,11 @@ gap:20px;
   padding: 40px 48px 40px;
 }
 
+@media only screen and (max-width: 680px) and (orientation: portrait) {
+  flex-direction: column;
+  max-width: 350px;
+}
+
 @media only screen and (max-height: 450px) and (orientation:landscape){
   background-color:${secondaryBlackColor};    
   flex-direction:column;

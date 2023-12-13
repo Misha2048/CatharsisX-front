@@ -7,7 +7,8 @@ height:100vh;
 display:flex;
 align-items:center;
 justify-content:center;
-background-color:${secondaryBlackColor}
+background-color:${secondaryBlackColor};
+overflow:hidden;
 `;
 
 export default CenteredContainer;
