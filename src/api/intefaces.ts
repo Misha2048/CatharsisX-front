@@ -27,3 +27,7 @@ export interface IForgotPasswordRequest {
     email: string;
 }
 
+export interface INewPasswordRequest {
+    id: string;
+    password: string;
+}

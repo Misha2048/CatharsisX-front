@@ -1,5 +1,5 @@
 import axiosInstance from "./axiosInstanse";
-import { IForgotPasswordRequest, ILoginRequest, ISignUpRequest, ITokensResponse, IUsersMe } from "./intefaces";
+import { IForgotPasswordRequest, ILoginRequest, INewPasswordRequest, ISignUpRequest, ITokensResponse, IUsersMe } from "./intefaces";
 
 export const api = {
 
@@ -32,6 +32,13 @@ export const api = {
             return axiosInstance.request({
                 method: 'POST',
                 url: '/auth/forgot-password',
+                data: options
+            }).then(response => response.data as ITokensResponse);
+        },
+        newPassword: async (options: INewPasswordRequest): Promise<ITokensResponse> => {
+            return axiosInstance.request({
+                method: 'POST',
+                url: '/auth/new-password',
                 data: options
             }).then(response => response.data as ITokensResponse);
         },

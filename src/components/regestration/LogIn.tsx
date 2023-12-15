@@ -52,7 +52,7 @@ function LogIn(){
         <AdditionalRegistryContent>
          <Logo/>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
-          <SecondaryText>Don’t have an accout? <Link href="/signup">Sign up</Link></SecondaryText>
+          <SecondaryText>Don’t have an accout? <Link to="/signup">Sign up</Link></SecondaryText>
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Log in</Title>
@@ -72,7 +72,7 @@ function LogIn(){
         onChange={handleChange}
         minLength={8}
         required />
-        <Link href="/forgot-password" >Forgot your password?</Link>
+        <Link to="/forgot-password" >Forgot your password?</Link>
         <Button>Log in</Button>
       </Form>
         </MainRegistryContent>     
