@@ -34,7 +34,7 @@ const ResetPasswordForm: React.FC = () =>{
     //Getting key/value from input to update formDate
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) =>{
       const {name,value} = e.target;
-      setFormDate(previousData =>({...previousData,[name]:value}));
+      setFormData(previousData =>({...previousData,[name]:value}));
     }
   
   // Send formDate to server
