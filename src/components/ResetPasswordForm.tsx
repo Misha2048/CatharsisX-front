@@ -26,7 +26,7 @@ const ResetPasswordForm: React.FC = () =>{
     const id = pathname.substring('/password-reset/'.length);
 
 
-    const [formDate,setFormDate] = useState<{newPassword:string, confimedPassword:string}>({
+    const [formData,setFormData] = useState<{newPassword:string, confimedPassword:string}>({
       newPassword:'',
       confimedPassword:'',
     })
@@ -41,12 +41,12 @@ const ResetPasswordForm: React.FC = () =>{
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) =>{  
         e.preventDefault(); 
 
-        if(arePasswordsMatching(formDate.newPassword,formDate.confimedPassword)){
+        if(arePasswordsMatching(formData.newPassword,formData.confimedPassword)){
             api.auth.newPassword({
                 id:id,
-                password:formDate.newPassword
+                password:formData.newPassword
             })
-            setFormDate({
+            setFormData({
               newPassword:"",
               confimedPassword:""
             });
@@ -63,14 +63,14 @@ const ResetPasswordForm: React.FC = () =>{
         label="Password"
         name="newPassword"
         type="password"
-        value={formDate.newPassword}
+        value={formData.newPassword}
         onChange={handleChange}
         required />
             <Input
         label="Confirmed password"
         name="confimedPassword"
         type="password"
-        value={formDate.confimedPassword}
+        value={formData.confimedPassword}
         onChange={handleChange}
         required />
         <Button>Reset password</Button>
