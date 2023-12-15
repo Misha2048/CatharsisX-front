@@ -12,6 +12,7 @@ import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import Logo from "../Logo";
 import { api } from "../../api";
 import { ISignUpRequest } from "../../api/intefaces";
+import ToolTip from "../ToolTip";
 
 
 // interface SignUpFormState {
@@ -96,6 +97,7 @@ function SignUp(){
       </Form>
         </MainRegistryContent>     
       </GreyContainerBox>
+      <ToolTip />
     </CenteredContainer>
   }
 
