@@ -39,6 +39,22 @@ const StyledInputField = styled.input`
   line-height: 10px; /* 83.333% */
   letter-spacing: 0.42px;
   }
+
+  @media only screen and (max-width: 768px){
+   padding:8px 0;
+   padding-left:10px;
+   &::placeholder{
+    font-size:10px;
+   }
+
+   @media only screen and (max-height: 450px) and (orientation:landscape){    
+    padding: 5px 0;
+    padding-left:10px;
+    &::placeholder{
+      font-size:8px;
+     }
+    }
+  }
   `;
 
 

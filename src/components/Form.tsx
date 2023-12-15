@@ -10,5 +10,10 @@ gap:14px;
 flex-direction:column;
 justify-content:space-around;
 gap:${props=>props.gap || 20 }px;
+
+@media only screen and (max-height: 450px) and (orientation:landscape){    
+    gap 10px;
+   }
+
 `
 export default Form;
