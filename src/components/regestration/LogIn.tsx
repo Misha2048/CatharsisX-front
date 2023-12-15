@@ -12,6 +12,7 @@ import {Title,DisplayTitle} from "../Titles";
 import AdditionalRegistryContent from "./AdditionalRegistryContent";
 import { api } from "../../api";
 import { ILoginRequest } from "../../api/intefaces";
+import ToolTip from "../ToolTip";
 
 
 
@@ -56,7 +57,7 @@ function LogIn(){
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Log in</Title>
-        <Form action="GET" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
         <Input
         label="Email"
         name="email"
@@ -77,6 +78,7 @@ function LogIn(){
       </Form>
         </MainRegistryContent>     
       </GreyContainerBox>
+      <ToolTip />
     </CenteredContainer>
   }
   
