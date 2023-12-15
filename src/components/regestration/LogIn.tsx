@@ -56,7 +56,7 @@ function LogIn(){
         </AdditionalRegistryContent>
         <MainRegistryContent>
           <Title>Log in</Title>
-        <Form action="GET" onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
         <Input
         label="Email"
         name="email"

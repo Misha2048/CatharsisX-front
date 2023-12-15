@@ -12,8 +12,8 @@ display:flex;
 justify-content:center;
 gap:20px;
 
-@media only screen and (max-width: 768px){
-  min-height:250px;
+@media only screen and (max-width: 920px){
+  min-height:auto;
   background-color:${secondaryBlackColor};
   padding: 40px 48px 40px;
 }
