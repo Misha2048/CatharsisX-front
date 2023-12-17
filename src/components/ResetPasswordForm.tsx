@@ -10,6 +10,9 @@ import { css } from "@linaria/core";
 import { api } from "../api";
 import { useLocation } from "react-router-dom";
 import ToolTip from "./ToolTip";
+import { setHint } from "../redux/slices/hintSlice";
+import { useDispatch } from "react-redux";
+
 
 const ResetPasswordFormStyle = css `
     display:flex;
@@ -24,8 +27,7 @@ const ResetPasswordFormStyle = css `
 const ResetPasswordForm: React.FC = () =>{
     const {pathname} = useLocation();
     const id = pathname.substring('/password-reset/'.length);
-
-
+    const dispatch = useDispatch();
     const [formData,setFormData] = useState<{newPassword:string, confimedPassword:string}>({
       newPassword:'',
       confimedPassword:'',
@@ -50,6 +52,8 @@ const ResetPasswordForm: React.FC = () =>{
               newPassword:"",
               confimedPassword:""
             });
+        }else{
+          dispatch(setHint({ message:"Passwords should be the same!"}));
         }
     } 
     return <CenteredContainer>

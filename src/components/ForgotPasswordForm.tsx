@@ -9,6 +9,7 @@ import {Title} from "./Titles";
 import { css } from "@linaria/core";
 import { api } from "../api";
 import { IForgotPasswordRequest } from "../api/intefaces";
+import ToolTip from "./ToolTip";
 
 const ForgotPasswordFormStyle = css `
     display:flex;
@@ -41,18 +42,14 @@ const ForgotPasswordForm: React.FC = () =>{
   
   // Send formDate to server
     const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) =>{  
-    e.preventDefault(); 
-      
-      api.auth.forgotPassword(formDate).then(
+      e.preventDefault(); 
+      api.auth.forgotPassword(formDate).then(  
         data=>{
-        console.log(data);
-        setIsEmailSend(true);
-        setFormDate({
-          email:'',
-        });
-      });
-        
-      
+              setIsEmailSend(true);
+              setFormDate({
+              email:'',
+            });
+        })
     }
   
   
@@ -75,6 +72,7 @@ const ForgotPasswordForm: React.FC = () =>{
     </div>):
     (<Title className={ForgotPasswordMessage}>Email was send to you. Please check your email box</Title>)}    
       </GreyContainerBox>
+      <ToolTip/>
     </CenteredContainer>
   }
   

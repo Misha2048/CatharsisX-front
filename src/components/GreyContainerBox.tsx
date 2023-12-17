@@ -12,7 +12,7 @@ display:flex;
 justify-content:center;
 gap:20px;
 
-@media only screen and (max-width: 920px){
+@media only screen and (max-width: 940px){
   min-height:auto;
   background-color:${secondaryBlackColor};
   padding: 40px 48px 40px;
@@ -20,12 +20,14 @@ gap:20px;
 
 @media only screen and (max-width: 680px) and (orientation: portrait) {
   flex-direction: column;
+  align-items:center;
   max-width: 350px;
 }
 
 @media only screen and (max-height: 450px) and (orientation:landscape){
   background-color:${secondaryBlackColor};    
   flex-direction:column;
+  align-items:center;
   padding: 20px 150px 30px
 }
 
