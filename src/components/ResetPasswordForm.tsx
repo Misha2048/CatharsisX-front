@@ -9,7 +9,7 @@ import {Title} from "./Titles";
 import { css } from "@linaria/core";
 import { api } from "../api";
 import { useLocation } from "react-router-dom";
-
+import ToolTip from "./ToolTip";
 
 const ResetPasswordFormStyle = css `
     display:flex;
@@ -77,7 +77,7 @@ const ResetPasswordForm: React.FC = () =>{
       </Form>
     </div>  
       </GreyContainerBox>
-      
+      <ToolTip />
     </CenteredContainer>
   }
   
