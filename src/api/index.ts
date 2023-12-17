@@ -3,6 +3,7 @@ import { dispatchSetTokens } from '../helpers/tokensHelper'
 import {
   IForgotPasswordRequest,
   ILoginRequest,
+  INewPasswordRequest,
   ISignUpRequest,
   ITokensResponse,
   IUsersMe,
@@ -59,6 +60,13 @@ export const api = {
         })
         .then((response) => response.data as ITokensResponse)
     },
+        newPassword: async (options: INewPasswordRequest): Promise<ITokensResponse> => {
+            return axiosInstance.request({
+                method: 'POST',
+                url: '/auth/new-password',
+                data: options
+            }).then(response => response.data as ITokensResponse);
+        },
     logout: async (): Promise<null> => {
       return axiosInstance.request({
         method: 'GET',

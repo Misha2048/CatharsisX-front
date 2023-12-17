@@ -1,5 +1,5 @@
 import React from "react";
-import {whiteColor,blackColor} from './colors'
+import {whiteColor} from './colors'
 import { styled } from "@linaria/react";
 //////////////////////
 // INPUT FIELD
