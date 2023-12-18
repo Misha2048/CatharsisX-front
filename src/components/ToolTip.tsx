@@ -12,10 +12,6 @@ function ToolTip() {
   const message = useSelector((state: RootState) => state.hint.message);
 
   useEffect(() => {
-    hideMessage();
-  }, []);
-
-  useEffect(() => {
     if (message !== '') {
       setIsShow(true);
     }
