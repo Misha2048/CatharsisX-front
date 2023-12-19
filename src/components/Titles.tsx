@@ -14,7 +14,7 @@ text-align:center;
 export const DisplayTitle = styled.h1`
 color: #FFF;
 max-width:270px;
-font-family: Space Grotesk;
+font-family: Inter;
 font-size: 36px;
 font-style: normal;
 font-weight: 700;

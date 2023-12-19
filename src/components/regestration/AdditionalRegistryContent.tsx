@@ -14,8 +14,6 @@ const AdditionalRegistryContent = styled.div`
     }
   }
 
-
-
   @media only screen and (max-width: 680px) and (orientation:portrait){    
     & > h1{
       display: none;

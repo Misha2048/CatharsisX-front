@@ -72,7 +72,6 @@ const ForgotPasswordForm: React.FC = () =>{
     </div>):
     (<Title className={ForgotPasswordMessage}>Email was sent to you. Please check your email box</Title>)}    
       </GreyContainerBox>
-      <ToolTip/>
     </CenteredContainer>
   }
   

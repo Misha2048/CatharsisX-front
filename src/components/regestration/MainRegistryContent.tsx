@@ -17,8 +17,12 @@ const MainRegistryContent = styled.div`
     }
   }
 
+  @media only screen and (max-width:450px){
+    width:90%;
+  }
 
-  @media only screen and (max-height: 450px) and (orientation:landscape){    
+  @media only screen and (max-height: 450px) and (orientation:landscape){
+    width:50%;    
     & > h2{
       display:none;
     }

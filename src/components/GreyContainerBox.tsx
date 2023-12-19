@@ -10,6 +10,7 @@ padding: 45px 96px 80px;
 background-color:${blackGreyColor};
 display:flex;
 justify-content:center;
+overflow:hidden;
 gap:20px;
 
 @media only screen and (max-width: 940px){
@@ -21,19 +22,21 @@ gap:20px;
 @media only screen and (max-width: 680px) and (orientation: portrait) {
   flex-direction: column;
   align-items:center;
-  max-width: 350px;
+  width: 350px;
+  scroll:none;
 }
 
 @media only screen and (max-height: 450px) and (orientation:landscape){
   background-color:${secondaryBlackColor};    
   flex-direction:column;
   align-items:center;
-  padding: 20px 150px 30px
+  padding: 20px 0px 30px
 }
 
 @media only screen and (max-width: 450px) and (orientation:portrait) {
   flex-direction:column;
   padding-bottom: 70px;
+  padding: 40px 0px 40px;
 }
 `;
 

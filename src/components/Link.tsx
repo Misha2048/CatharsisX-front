@@ -2,7 +2,7 @@ import { styled } from "@linaria/react";
 import { primaryColor } from "./colors";
 import { Link as RouteLink } from "react-router-dom";
 const Link = styled(RouteLink)`
-font-size:12px;
+font-size:14px;
 &,
 &:visited,
 &:link,

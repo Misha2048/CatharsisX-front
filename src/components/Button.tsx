@@ -29,10 +29,10 @@ transition: all 0.2s ease-in-out;
 :hover {
   opacity:0.9;
 }
-@media only screen and (max-height: 450px) and (orientation:landscape){    
-  font-size:12px;
-  line-height:1;
-}
+// @media only screen and (max-height: 450px) and (orientation:landscape){    
+//   font-size:14px;
+//   line-height:1;
+// }
 `;
 
 const Button: React.FC<ButtonProps> = ({children,onClick}) => {
