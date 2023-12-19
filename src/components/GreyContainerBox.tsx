@@ -10,7 +10,7 @@ padding: 45px 96px 80px;
 background-color:${blackGreyColor};
 display:flex;
 justify-content:center;
-overflow:hidden;
+overflow-x:hidden;
 gap:20px;
 
 @media only screen and (max-width: 940px){

@@ -8,7 +8,7 @@ display:flex;
 align-items:center;
 justify-content:center;
 background-color:${secondaryBlackColor};
-overflow:hidden;
+overflow-x:hidden;
 `;
 
 export default CenteredContainer;
