@@ -9,7 +9,7 @@ import {Title} from "./Titles";
 import { css } from "@linaria/core";
 import { api } from "../api";
 import { IForgotPasswordRequest } from "../api/intefaces";
-import ToolTip from "./ToolTip";
+
 
 const ForgotPasswordFormStyle = css `
     display:flex;
