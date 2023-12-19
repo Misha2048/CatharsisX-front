@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Router } from 'react-router-dom';
 import { BrowserHistory } from 'history';
 import { useState, useLayoutEffect } from 'react';
+import { store } from '../../redux/store';
+import { clearHint } from '../../redux/slices/hintSlice';
 
 interface Props {
   children: React.ReactNode;
@@ -16,6 +18,12 @@ function CustomRouter({ children, history, basename }: Props) {
   });
 
   useLayoutEffect(() => history.listen(setState), [history]);
+
+  useEffect(() => {
+    history.listen(() => {
+      store.dispatch(clearHint());
+    });
+  }, []);
 
   return (
     <Router
