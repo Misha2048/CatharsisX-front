@@ -9,7 +9,7 @@ import {Title} from "./Titles";
 import { css } from "@linaria/core";
 import { api } from "../api";
 import { IForgotPasswordRequest } from "../api/intefaces";
-import ToolTip from "./ToolTip";
+
 
 const ForgotPasswordFormStyle = css `
     display:flex;
@@ -72,7 +72,6 @@ const ForgotPasswordForm: React.FC = () =>{
     </div>):
     (<Title className={ForgotPasswordMessage}>Email was sent to you. Please check your email box</Title>)}    
       </GreyContainerBox>
-      <ToolTip/>
     </CenteredContainer>
   }
   

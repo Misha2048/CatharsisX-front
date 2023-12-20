@@ -30,30 +30,29 @@ const StyledInputField = styled.input`
   transition: border-color 0.3s ease-out;
   
   &::placeholder{
-    color: #000;
-    opacity:70%;
-  // font-family: Karla;
+  color: #000;
+  opacity:70%;
   font-size: 12px;
   font-style: normal;
   font-weight: 300;
-  line-height: 10px; /* 83.333% */
+  line-height: 10px;
   letter-spacing: 0.42px;
   }
 
-  @media only screen and (max-width: 768px){
-   padding:8px 0;
-   padding-left:10px;
-   &::placeholder{
-    font-size:10px;
-   }
+  // @media only screen and (max-width: 768px){
+  //  padding:8px 0;
+  //  padding-left:10px;
+  //  &::placeholder{
+  //   font-size:10px;
+  //  }
 
-   @media only screen and (max-height: 450px) and (orientation:landscape){    
-    padding: 5px 0;
-    padding-left:10px;
-    &::placeholder{
-      font-size:8px;
-     }
-    }
+  //  @media only screen and (max-height: 450px) and (orientation:landscape){    
+  //   padding: 5px 0;
+  //   padding-left:10px;
+  //   &::placeholder{
+  //     font-size:8px;
+  //    }
+  //   }
   }
   `;
 
