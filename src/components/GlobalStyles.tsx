@@ -22,7 +22,7 @@ const styles = `
   img{vertical-align: top;}
   h1,h2,h3,h4,h5,h6{font-size:inherit;font-weight: inherit;}
 
-  #root{width:100%;height:100svh;}
+  #root{width:100%;height:100vh;}
   /*------------------------------------------------------*/
 
   body{font-family: 'Inter', sans-serif;}
