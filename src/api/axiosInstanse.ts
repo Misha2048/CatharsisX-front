@@ -1,8 +1,12 @@
-import axios from 'axios';
+import axios, { AxiosRequestConfig } from 'axios';
 import { store } from '../redux/store';
 import { setTokens, clearTokens } from '../redux/slices/tokensSlice';
 import history from '../helpers/customRouter/history';
 import { setHint } from '../redux/slices/hintSlice';
+
+interface ConfigType extends AxiosRequestConfig {
+  _isRetry: boolean;
+}
 
 const axiosInstance = axios.create({
   baseURL: process.env.REACT_APP_API_BASE_URL,
@@ -10,7 +14,7 @@ const axiosInstance = axios.create({
 
 axiosInstance.interceptors.request.use(config => {
   const token = localStorage.getItem('accessToken');
-  if (token) {
+  if (token && !config.headers.Authorization) {
     config.headers.Authorization = `Bearer ${token}`;
   }
   return config;
@@ -36,7 +40,8 @@ axiosInstance.interceptors.response.use(
       try {
         const resp = await axiosInstance.get('/auth/refresh', {
           headers: { Authorization: `Bearer ${refreshToken}` },
-        });
+          _isRetry: true,
+        } as ConfigType);
         store.dispatch(setTokens(resp.data));
         originalRequest.headers.Authorization = `Bearer ${localStorage.getItem('accessToken')}`;
         return axiosInstance.request(originalRequest);
