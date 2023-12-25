@@ -5,7 +5,7 @@ import Home from './pages/Home'
 import LogIn from './components/regestration/LogIn'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm';
-
+import Header from './components/Header'
 function App() {
   return (
     <Routes>
@@ -14,6 +14,7 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       <Route path='/forgot-password' element={<ForgotPasswordForm/>}/>
       <Route path={`/password-reset/:id`} element={<ResetPassworForm/>}/>
+      <Route path={`/header`} element={<Header/>}/>
     </Routes>
   )
 }
