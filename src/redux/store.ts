@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import tokensReducer from './slices/tokensSlice';
 import hintReducer from './slices/hintSlice';
+import stillageReducer from './slices/stillageSlice';
 
 export const store = configureStore({
   reducer: {
     tokens: tokensReducer,
     hint: hintReducer,
+    stillage: stillageReducer,
   },
 });
 

@@ -4,6 +4,8 @@ import {
   IForgotPasswordRequest,
   ILoginRequest,
   INewPasswordRequest,
+  IShelfsRequest,
+  IShelfsResponse,
   ISignUpRequest,
   ITokensResponse,
   IUsersMe,
@@ -94,4 +96,14 @@ export const api = {
 
     return funcToCall
   })(),
+
+  shelves: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
+    return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/shelfs',
+          data: options,
+        })
+        .then(response => response.data as IShelfsResponse[])
+  },
 }
