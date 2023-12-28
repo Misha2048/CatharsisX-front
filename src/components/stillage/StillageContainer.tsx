@@ -7,10 +7,6 @@ const StillageContainer = styled.div`
   display: flex;
   flex-direction: column;
 
-  & > div {
-    flex-grow: 1;
-  }
-
   @media screen and (min-width: 375px) {
     padding: 20px;
   }
