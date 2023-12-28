@@ -4,6 +4,7 @@ const GreyStillageBox = styled.div`
   min-height: 100%;
   background-color: #333;
   padding: 16px 20px;
+  flex: 1 1 auto;
 
   @media screen and (min-width: 375px) {
     padding: 20px;
