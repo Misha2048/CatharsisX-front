@@ -1,6 +1,7 @@
 import React from 'react'
-import SignUp from './components/regestration/SignUp'
 import { Route, Routes } from 'react-router-dom'
+
+import SignUp from './components/regestration/SignUp'
 import Home from './pages/Home'
 import LogIn from './components/regestration/LogIn'
 import ForgotPasswordForm from './components/ForgotPasswordForm'

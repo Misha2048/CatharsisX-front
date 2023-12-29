@@ -1,5 +1,6 @@
 import React from 'react'
 import { styled } from '@linaria/react'
+
 import settingsIcon from '../assets/settings-icon.svg'
 
 const StyledFilterBtn = styled.button`

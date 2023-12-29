@@ -1,9 +1,10 @@
 import React, { PropsWithChildren } from 'react'
 import { styled } from '@linaria/react'
+import { useDispatch } from 'react-redux'
+
 import folderIcon from '../../assets/folder-icon.svg'
 import editIcon from '../../assets/edit-icon.svg'
 import trashIcon from '../../assets/trash-icon.svg'
-import { useDispatch } from 'react-redux'
 import { removeStillageItem } from '../../redux/slices/stillageSlice'
 
 interface PropsType extends PropsWithChildren {

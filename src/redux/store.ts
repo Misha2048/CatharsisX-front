@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+
 import tokensReducer from './slices/tokensSlice';
 import hintReducer from './slices/hintSlice';
 import stillageReducer from './slices/stillageSlice';
