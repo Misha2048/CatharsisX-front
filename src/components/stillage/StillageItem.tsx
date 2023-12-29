@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import React, { PropsWithChildren, useCallback } from 'react'
 import { styled } from '@linaria/react'
 import { useDispatch } from 'react-redux'
 
@@ -52,11 +52,11 @@ const StyledItem = styled.li`
 function StillageItem({ children, id }: PropsType) {
   const dispatch = useDispatch()
 
-  function deleteShelf() {
+  const deleteShelf = useCallback(() => {
     // const resp = await api.shelf.delete(key);
     // if (resp.ok) {
     dispatch(removeStillageItem(id))
-  }
+  }, [id])
 
   return (
     <StyledItem>

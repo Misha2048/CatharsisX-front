@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React, { useCallback, useEffect } from 'react'
 import { styled } from '@linaria/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -29,12 +29,12 @@ function StillageList() {
   const { id: stillageId } = useParams()
   const dispatch = useDispatch()
 
-  async function fetchData() {
+  const fetchData = useCallback(async () => {
     const shelves = await api.shelves({ stillage: stillageId })
     if (Array.isArray(shelves)) {
       dispatch(setStillageList(shelves))
     }
-  }
+  }, [])
 
   useEffect(() => {
     fetchData()
