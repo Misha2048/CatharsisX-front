@@ -34,7 +34,7 @@ function StillageList() {
     if (Array.isArray(shelves)) {
       dispatch(setStillageList(shelves))
     }
-  }, [])
+  }, [stillageId])
 
   useEffect(() => {
     fetchData()
