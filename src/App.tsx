@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import LogIn from './components/regestration/LogIn'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm';
+import BlockUnverifiedUser from './components/CheckVerify';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       <Route path='/forgot-password' element={<ForgotPasswordForm/>}/>
       <Route path={`/password-reset/:id`} element={<ResetPassworForm/>}/>
+      <Route path='/check-email' element={<BlockUnverifiedUser/>}/>
     </Routes>
   )
 }
