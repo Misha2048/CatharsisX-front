@@ -3,10 +3,10 @@ import { styled } from '@linaria/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
 
-import StillageItem from './StillageItem'
-import { RootState } from '../../redux/store'
-import { clearStillageList, setStillageList } from '../../redux/slices/stillageSlice'
-import { api } from '../../api'
+import StillageItem from '@components/stillage/StillageItem'
+import { RootState } from '@redux/store'
+import { clearStillageList, setStillageList } from '@redux/slices/stillageSlice'
+import { api } from '@api/index'
 
 const StyledList = styled.ul`
   display: flex;
