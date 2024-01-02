@@ -5,6 +5,7 @@ import Home from './pages/Home'
 import LogIn from './components/regestration/LogIn'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm';
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Route path='/signup' element={<SignUp/>} />
       <Route path='/forgot-password' element={<ForgotPasswordForm/>}/>
       <Route path={`/password-reset/:id`} element={<ResetPassworForm/>}/>
+      <Route path={`/footer`} element={<Footer/>}/>
     </Routes>
   )
 }
