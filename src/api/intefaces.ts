@@ -31,3 +31,19 @@ export interface INewPasswordRequest {
     id: string;
     password: string;
 }
+
+export interface IShelfsRequest {
+    stillage?: string;
+    name?: string;
+    last_upload_at?: string;
+    created_at?: string;
+}
+
+export interface IShelfsResponse {
+    id: string;
+    userId: string;
+    stillageId: string;
+    name: string;
+    last_upload_at: string;
+    created_at: string;
+}
