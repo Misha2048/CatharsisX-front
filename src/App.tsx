@@ -6,9 +6,7 @@ import LogIn from './components/regestration/LogIn'
 import SignUp from './components/regestration/SignUp'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm'
-import Footer from './components/Footer'
 import Stillage from '@pages/Stillage'
-import Header from '@components/Header'
 
 function App() {
   return (
