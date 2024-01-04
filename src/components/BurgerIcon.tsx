@@ -35,7 +35,7 @@ const Burger = styled.div<{ open: boolean }>`
   }
 
   &[open] {
-        background-color: rgba(255, 255, 255, 0);
+    background-color: rgba(255, 255, 255, 0);
 
     &::after {
       transform: translateY(-10px) rotate(-45deg);

@@ -5,7 +5,6 @@ import Home from './pages/Home'
 import LogIn from './components/regestration/LogIn'
 import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm';
-import Header from './components/Header'
 function App() {
   return (
     <Routes>
