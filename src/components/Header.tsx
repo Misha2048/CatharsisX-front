@@ -1,45 +1,20 @@
 import { styled } from '@linaria/react'
-import React from 'react'
+import React, { useState } from 'react'
 import Logo from './Logo'
 import SearchField from './SearchField'
-import { Link, useNavigate } from 'react-router-dom'
 import Button from './Button'
-
-const HeaderContainer = styled.header`
-  display: flex;
-  gap: 10px;
-  padding: 30px 63px;
-  justify-content: space-between;
-  align-items: center;
-  background: #000;
-  overflow-x: hidden;
-
-  @media only screen and (max-width: 1024px) {
-    padding: 30px 15px;
-  }
-  @media only screen and (max-width: 768px) {
-  }
-  @media only screen and (max-width: 320px) {
-  }
-`
+import BurgerIcon from './BurgerIcon'
+import { css } from '@linaria/core'
 
 const HeaderNavigation = styled.nav`
-display: flex;
-justify-content: center;
-align-items: center;
-gap: 35px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
 
-@media only screen and (max-width: 1024px){
-    gap:15px;
-}
-@media only screen and (max-width: 1024px){
-
-}
-@media only screen and (max-width: 768px){
-
-}
-@media only screen and (max-width: 320px){
-
+  @media only screen and (max-width: 1024px) {
+    gap: 15px;
+  }
 `
 const HeaderLink = styled.button`
   color: #fff;
@@ -61,24 +36,84 @@ const ButtonsContainer = styled.div`
   gap: 10px;
   flex: 0 0 140px;
 `
+const BurgerMenuContainer = styled.div<{ open: boolean }>`
+  display: contents;
+
+  &[open] {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    width: 200px;
+    height: 100svh;
+    ${HeaderNavigation} {
+      flex-direction: column;
+    }
+    ${ButtonsContainer} {
+      width: 100%;
+      flex-direction: column;
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    display: none;
+  }
+`
+
+const HeaderContainer = styled.header<{ open: boolean }>`
+  display: flex;
+  gap: 10px;
+  padding: 30px 63px;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  overflow-x: hidden;
+
+  &[open] {
+    width: 100%;
+    position: fixed;
+    justify-content: center;
+
+    & img {
+      display: none;
+    }
+  }
+
+  @media only screen and (max-width: 1024px) {
+    padding: 30px 15px;
+  }
+`
+const HeaderBurger = styled.div<{open:boolean}>`
+  &[open]{
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+`
+
 function Header() {
-  const navigate = useNavigate()
+  const [isOpen, setIsOpen] = useState(false)
   return (
-    <HeaderContainer>
+    <HeaderContainer open={isOpen}>
       <Logo></Logo>
-      <SearchField></SearchField>
-      <HeaderNavigation>
-        <HeaderLink>Forum</HeaderLink>
-        <HeaderLink>Library</HeaderLink>
-        <HeaderLink>My Materials</HeaderLink>
-        <HeaderLink>Purchases</HeaderLink>
-        <HeaderLink>Price</HeaderLink>
-        <HeaderLink>Chat</HeaderLink>
-      </HeaderNavigation>
-      <ButtonsContainer>
-        <Button>Log in</Button>
-        <Button>Sign up</Button>
-      </ButtonsContainer>
+      <BurgerMenuContainer open={isOpen}>
+        <SearchField></SearchField>
+        <HeaderNavigation>
+          <HeaderLink>Forum</HeaderLink>
+          <HeaderLink>Library</HeaderLink>
+          <HeaderLink>My Materials</HeaderLink>
+          <HeaderLink>Purchases</HeaderLink>
+          <HeaderLink>Price</HeaderLink>
+          <HeaderLink>Chat</HeaderLink>
+        </HeaderNavigation>
+        <ButtonsContainer>
+          <Button>Log in</Button>
+          <Button>Sign up</Button>
+        </ButtonsContainer>
+      </BurgerMenuContainer>
+      <HeaderBurger open={isOpen}>
+        <BurgerIcon open={isOpen} onClick={setIsOpen} />
+      </HeaderBurger>
     </HeaderContainer>
   )
 }
