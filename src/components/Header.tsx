@@ -88,7 +88,7 @@ const HeaderBurger = styled.div<{ open: boolean }>`
   &[open] {
     position: absolute;
     top: 30px;
-    right: 30px;
+    right: 15px;
   }
   @media only screen and (max-width: 768px) {
     display: block;

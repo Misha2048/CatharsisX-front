@@ -8,6 +8,7 @@ import ForgotPasswordForm from './components/ForgotPasswordForm'
 import ResetPassworForm from './components/ResetPasswordForm'
 import Footer from './components/Footer'
 import Stillage from '@pages/Stillage'
+import Header from '@components/Header'
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Route path='/forgot-password' element={<ForgotPasswordForm />} />
       <Route path={`/password-reset/:id`} element={<ResetPassworForm />} />
       <Route path={`/footer`} element={<Footer />} />
+      <Route path={`/header`} element={<Header />} />
       <Route path='/stillage/:id' element={<Stillage />} />
     </Routes>
   )
