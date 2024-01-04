@@ -4,7 +4,7 @@ import Logo from './Logo'
 import SearchField from './SearchField'
 import Button from './Button'
 import BurgerIcon from './BurgerIcon'
-import { css } from '@linaria/core'
+import OutlinedButton from './OutlinedButton'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -46,7 +46,7 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
     justify-content: center;
     gap: 15px;
     width: 200px;
-    height: 100svh;
+    height: 100vh;
     ${HeaderNavigation} {
       flex-direction: column;
     }
@@ -74,7 +74,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     position: fixed;
     justify-content: center;
 
-    & img {
+    & > img {
       display: none;
     }
   }
@@ -84,10 +84,14 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   }
 `
 const HeaderBurger = styled.div<{open:boolean}>`
+  display:none;
   &[open]{
     position: absolute;
     top: 30px;
     right: 30px;
+  }
+  @media only screen and (max-width: 768px) {
+    display: block;
   }
 `
 
@@ -108,7 +112,7 @@ function Header() {
         </HeaderNavigation>
         <ButtonsContainer>
           <Button>Log in</Button>
-          <Button>Sign up</Button>
+          <OutlinedButton>Sign up</OutlinedButton>
         </ButtonsContainer>
       </BurgerMenuContainer>
       <HeaderBurger open={isOpen}>

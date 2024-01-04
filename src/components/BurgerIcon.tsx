@@ -9,11 +9,14 @@ const Burger = styled.div<{ open: boolean }>`
   border-radius: 2px;
   cursor: pointer;
   z-index: 1000;
-  background-color: #fff;
+  background-color: rgba(255,255,255,1);
+  transition: all 0.2s ease-in-out;
 
-  &:before,
-  &:after {
+
+  &::before,
+  &::after {
     content: '';
+    opacity:1;
     position: absolute;
     width: 30px;
     height: 3px;
@@ -22,25 +25,24 @@ const Burger = styled.div<{ open: boolean }>`
     transition: all 0.3s ease-in-out;
   }
 
-  &:after {
+  &::after {
     top: 10px;
     left:0;
   }
 
-  &:before {
+  &::before {
     top: -10px;
     left:0;
   }
 
   &[open] {
-    
-    height: 0px;
+    background-color: rgba(255,255,255,0);
 
-    &:after {
+    &::after {
       transform: translateY(-10px)  rotate(-45deg);
     }
 
-    &:before {
+    &::before { 
       transform: translateY(10px) rotate(45deg);
     }
   }
