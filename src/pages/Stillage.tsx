@@ -6,7 +6,7 @@ import StillageHeading from '@components/stillage/StillageHeading'
 import GreyStillageBox from '@components/stillage/GreyStillageBox'
 import StillageList from '@components/stillage/StillageList'
 import StillageWrapper from '@components/stillage/StillageWrapper'
-import FilterBtn from '@components/FilterBtn'
+import FilterWithShowBtn from '@components/FilterWithShowBtn'
 
 function Stillage() {
   return (
@@ -14,7 +14,7 @@ function Stillage() {
       <StillageWrapper>
         <StillageHeadingRow>
           <StillageHeading>Stillage</StillageHeading>
-          <FilterBtn />
+          <FilterWithShowBtn />
         </StillageHeadingRow>
         <GreyStillageBox>
           <StillageList />

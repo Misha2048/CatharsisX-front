@@ -3,7 +3,11 @@ import { styled } from '@linaria/react'
 
 import settingsIcon from '@assets/settings-icon.svg'
 
-const StyledFilterBtn = styled.button`
+interface Props {
+  onClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
+}
+
+const StyledShowFilterBtn = styled.button`
   font-family: 'Inter', sans-serif;
   color: #fff;
   font-size: 24px;
@@ -22,13 +26,13 @@ const StyledFilterBtn = styled.button`
   }
 `
 
-function FilterBtn() {
+function ShowFilterBtn({ onClick: showFilter }: Props) {
   return (
-    <StyledFilterBtn>
+    <StyledShowFilterBtn onClick={showFilter}>
       <img src={settingsIcon} alt='' />
       Filter
-    </StyledFilterBtn>
+    </StyledShowFilterBtn>
   )
 }
 
-export default FilterBtn
+export default ShowFilterBtn
