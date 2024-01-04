@@ -20,7 +20,7 @@ const StyledOutlinedButton = styled.button`
   width: 100%;
   padding: 11px 0;
   border-radius: 8px;
-  background:none;
+  background: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
   &.disabled {
@@ -35,4 +35,4 @@ const OutlinedButton: React.FC<OutlinedButtonProps> = ({ children, onClick }) =>
   return <StyledOutlinedButton onClick={onClick}>{children}</StyledOutlinedButton>
 }
 
-export default OutlinedButton;
+export default OutlinedButton

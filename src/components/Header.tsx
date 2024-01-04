@@ -83,9 +83,9 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     padding: 30px 15px;
   }
 `
-const HeaderBurger = styled.div<{open:boolean}>`
-  display:none;
-  &[open]{
+const HeaderBurger = styled.div<{ open: boolean }>`
+  display: none;
+  &[open] {
     position: absolute;
     top: 30px;
     right: 30px;
