@@ -1,13 +1,15 @@
-import axiosInstance from './axiosInstanse'
-import { dispatchSetTokens } from '../helpers/tokensHelper'
+import axiosInstance from '@api/axiosInstanse'
+import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
   IForgotPasswordRequest,
   ILoginRequest,
   INewPasswordRequest,
+  IShelfsRequest,
+  IShelfsResponse,
   ISignUpRequest,
   ITokensResponse,
   IUsersMe,
-} from './intefaces'
+} from '@api/intefaces'
 
 export const api = {
   users: {
@@ -60,13 +62,15 @@ export const api = {
         })
         .then((response) => response.data as ITokensResponse)
     },
-        newPassword: async (options: INewPasswordRequest): Promise<ITokensResponse> => {
-            return axiosInstance.request({
-                method: 'POST',
-                url: '/auth/new-password',
-                data: options
-            }).then(response => response.data as ITokensResponse);
-        },
+    newPassword: async (options: INewPasswordRequest): Promise<ITokensResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/auth/new-password',
+          data: options,
+        })
+        .then((response) => response.data as ITokensResponse)
+    },
     logout: async (): Promise<null> => {
       return axiosInstance.request({
         method: 'GET',
@@ -94,4 +98,14 @@ export const api = {
 
     return funcToCall
   })(),
+
+  shelves: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
+    return axiosInstance
+      .request({
+        method: 'GET',
+        url: '/shelfs',
+        data: options,
+      })
+      .then((response) => response.data as IShelfsResponse[])
+  },
 }
