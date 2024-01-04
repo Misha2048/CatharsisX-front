@@ -18,8 +18,6 @@ function App() {
       <Route path='/signup' element={<SignUp />} />
       <Route path='/forgot-password' element={<ForgotPasswordForm />} />
       <Route path={`/password-reset/:id`} element={<ResetPassworForm />} />
-      <Route path={`/footer`} element={<Footer />} />
-      <Route path={`/header`} element={<Header />} />
       <Route path='/stillage/:id' element={<Stillage />} />
     </Routes>
   )
