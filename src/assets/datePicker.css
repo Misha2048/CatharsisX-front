@@ -1,0 +1,70 @@
+/* Container */
+div.MuiFormControl-root.MuiTextField-root {
+  display: block;
+  background-color: #fff;
+  border-radius: 5px;
+  min-width: 100px;
+  max-width: 130px;
+}
+
+@media screen and (min-width: 425px) {
+  div.MuiFormControl-root.MuiTextField-root {
+    min-width: 124px;
+  }
+}
+
+/* Flex container */
+div.MuiInputBase-root.MuiOutlinedInput-root {
+  font-family: "Inter", sans-serif;
+  padding-right: 16px;
+  height: 34px;
+}
+
+input.MuiInputBase-input.MuiOutlinedInput-input {
+  text-align: center;
+  padding: 8px 0px 8px 16px;
+  border-radius: 5px;
+  color: #000;
+  background-color: #fff;
+  font-family: "Inter", sans-serif;
+  font-size: 12px;
+  line-height: 1;
+  position: relative;
+  /* width: 231px; */
+  display: flex;
+  /* height: 56px; */
+  border: none;
+}
+
+/* Button container */
+div.MuiInputAdornment-root.MuiInputAdornment-positionEnd {
+  width: 34px;
+  height: auto;
+  margin-left: 2px;
+}
+
+button.MuiButtonBase-root {
+  padding: 6px;
+}
+
+/* svg */
+button.MuiButtonBase-root svg {
+  color: #000;
+  width: 22px;
+  height: 22px;
+  margin: 0;
+}
+
+fieldset.MuiOutlinedInput-notchedOutline {
+  display: none;
+}
+
+/* A date in the calendar */
+button.MuiButtonBase-root.Mui-selected {
+  background-color: #3ec290 !important;
+}
+
+/* Selected year */
+button.MuiPickersYear-yearButton.Mui-selected {
+  background-color: #3ec290 !important;
+}
