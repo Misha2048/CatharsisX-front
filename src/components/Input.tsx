@@ -1,23 +1,21 @@
-import React from "react";
-import {whiteColor} from './colors'
-import { styled } from "@linaria/react";
+import React from 'react'
+import { whiteColor } from './colors'
+import { styled } from '@linaria/react'
 //////////////////////
 // INPUT FIELD
 //////////////////////
 
 // Interface to create functional component for input field
-interface InputProps{
-    onChange:(e: React.ChangeEvent<HTMLInputElement>)=>void;
-    label:string;
-    value: string;
-    name: string;
-    type:string;
-    required?: boolean;
-    maxLength?: number;
-    minLength?: number;
-  }
-
-
+interface InputProps {
+  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  label: string
+  value: string
+  name: string
+  type: string
+  required?: boolean
+  maxLength?: number
+  minLength?: number
+}
 
 const StyledInputField = styled.input`
   position:relative;
@@ -54,22 +52,20 @@ const StyledInputField = styled.input`
   //    }
   //   }
   }
-  `;
+  `
 
-
-const Input:React.FC<InputProps> = (
-    {
-      label,
-      name,
-      type,
-      value,
-      onChange,
-      required=false,
-      maxLength=30,
-      minLength=0
-    }
-    )=>{
-return <StyledInputField
+const Input: React.FC<InputProps> = ({
+  label,
+  name,
+  type,
+  value,
+  onChange,
+  required = false,
+  maxLength = 30,
+  minLength = 0,
+}) => {
+  return (
+    <StyledInputField
       type={type}
       name={name}
       id={name}
@@ -80,5 +76,6 @@ return <StyledInputField
       minLength={minLength}
       placeholder={label}
     />
-};
-export default Input;
+  )
+}
+export default Input
