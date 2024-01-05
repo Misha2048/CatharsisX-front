@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react'
 
-const FilterBtn = styled.button`
+const ModalWindowBtn = styled.button`
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -10,4 +10,4 @@ const FilterBtn = styled.button`
   padding: 8px 12px;
 `
 
-export default FilterBtn
+export default ModalWindowBtn

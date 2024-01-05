@@ -12,7 +12,7 @@ import FilterText from '@components/filter/FilterText'
 import DateInput from '@components/DateInput'
 import FilterButtonsRow from '@components/filter/FilterButtonsRow'
 import BlackOverlay from '@components/BlackOverlay'
-import FilterBtn from '@components/filter/FilterBtn'
+import ModalWindowBtn from '@components/ModalWindowBtn'
 import dayjs, { Dayjs } from 'dayjs'
 import '@assets/datePicker.css'
 
@@ -62,7 +62,7 @@ function Filter({ isShow, setIsShow }: Props) {
   }, [])
 
   const handleSubmit = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
       let requestBody = {}
       if (formData.nameCheckbox) {
@@ -102,7 +102,7 @@ function Filter({ isShow, setIsShow }: Props) {
           <CloseBtn size='small' onClick={hideFilter} />
         </CloseBtnContainer>
         <FilterHeading>Filter by:</FilterHeading>
-        <FilterForm>
+        <FilterForm onSubmit={handleSubmit}>
           <FilterInputsContainer centered={true}>
             <Checkbox name='nameCheckbox' checked={formData.nameCheckbox} onChange={handleChange} />
             <Input
@@ -111,6 +111,7 @@ function Filter({ isShow, setIsShow }: Props) {
               type='text'
               minLength={1}
               maxLength={50}
+              required={formData.nameCheckbox}
               value={formData.shelfName}
               onChange={handleChange}
             />
@@ -158,8 +159,8 @@ function Filter({ isShow, setIsShow }: Props) {
             </div>
           </FilterInputsContainer>
           <FilterButtonsRow>
-            <FilterBtn onClick={handleSubmit}>Apply</FilterBtn>
-            <FilterBtn onClick={resetFormData}>Reset</FilterBtn>
+            <ModalWindowBtn type='submit'>Apply</ModalWindowBtn>
+            <ModalWindowBtn onClick={resetFormData}>Reset</ModalWindowBtn>
           </FilterButtonsRow>
         </FilterForm>
       </FilterBody>
