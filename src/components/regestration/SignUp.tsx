@@ -33,7 +33,11 @@ function SignUp() {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    api.auth.signUp(formDate).then((data) => console.log(data))
+    api.auth.signUp(formDate).then((data) => {
+      if (process.env.NODE_ENV !== 'production') {
+        console.log(data)
+      }
+    })
 
     setFormDate({
       first_name: '',
