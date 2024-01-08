@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
+import { PropsWithChildren } from 'react'
 
-const styles = `
+export const styles = `
   @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
 
   /*---------------------------*/
@@ -26,13 +27,16 @@ const styles = `
   /*------------------------------------------------------*/
 
   body{font-family: 'Inter', sans-serif;}
+
+  .global-styles {width:100%;height:100%;}
 `
 
-export const GlobalStyles = styled.div`
+const StyledContainer = styled.div`
   :global() {
     ${styles}
   }
-
-  width: 100%;
-  height: 100%;
 `
+
+export function GlobalStyles({ children }: PropsWithChildren) {
+  return <StyledContainer className='global-styles'>{children}</StyledContainer>
+}
