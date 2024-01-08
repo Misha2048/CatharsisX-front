@@ -15,7 +15,7 @@ div.MuiFormControl-root.MuiTextField-root {
 
 /* Flex container */
 div.MuiInputBase-root.MuiOutlinedInput-root {
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   padding-right: 16px;
   height: 34px;
 }
@@ -26,7 +26,7 @@ input.MuiInputBase-input.MuiOutlinedInput-input {
   border-radius: 5px;
   color: #000;
   background-color: #fff;
-  font-family: "Inter", sans-serif;
+  font-family: 'Inter', sans-serif;
   font-size: 12px;
   line-height: 1;
   position: relative;
