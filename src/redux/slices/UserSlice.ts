@@ -1,21 +1,23 @@
 
 import { createSlice } from '@reduxjs/toolkit';
 
-export interface UserState {
-    [key: string]: string | boolean | null;
-    id: string | null;
-    first_name: string | null;
-    last_name: string | null;
-    email: string | null;
-    emailVerified: boolean;
+// remake slice 
+
+export interface IUserState {
+    [key: string]: any;
+    id?: string | null;
+    first_name?: string | null;
+    last_name?: string | null;
+    email?: string | null;
+    emailVerified?: boolean;
   }
 
   export interface PropertyType {
-    field: keyof UserState;
+    field: keyof IUserState;
     value: string | boolean | null;
   }
 
-  const initialState: UserState = {
+  const initialState: IUserState = {
     id: null,
     first_name: null,
     last_name: null,
@@ -27,13 +29,19 @@ export interface UserState {
     name: 'user',
     initialState,
     reducers: {
-      setValue: (state, action: {payload: PropertyType, type: string}) => {  
-        if (action.payload.value === undefined) {
-          return;
+      setValue:(state, action: {payload: IUserState, type: string}) =>{
+        for (let [key, value] of Object.entries(action.payload)){
+          if (action.payload[key] !== undefined) {
+            state[key] = value;
         }
-        if (state[action.payload.field] !== undefined) {
-          state[action.payload.field] = action.payload.value;
-        }
+      }
+      // setValue: (state, action: {payload: PropertyType, type: string}) => {  
+      //   if (action.payload.value === undefined) {
+      //     return;
+      //   }
+      //   if (state[action.payload.field] !== undefined) {
+      //     state[action.payload.field] = action.payload.value;
+      //   }
       },
     },
   });
