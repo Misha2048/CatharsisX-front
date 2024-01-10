@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
-import React, { useState } from 'react'
+import { useState } from 'react'
+import { Outlet } from 'react-router-dom'
+
 import Logo from './Logo'
 import SearchField from './SearchField'
 import Button from './Button'
@@ -98,27 +100,30 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
   return (
-    <HeaderContainer open={isOpen}>
-      <Logo></Logo>
-      <BurgerMenuContainer open={isOpen}>
-        <SearchField></SearchField>
-        <HeaderNavigation>
-          <HeaderLink>Forum</HeaderLink>
-          <HeaderLink>Library</HeaderLink>
-          <HeaderLink>My Materials</HeaderLink>
-          <HeaderLink>Purchases</HeaderLink>
-          <HeaderLink>Price</HeaderLink>
-          <HeaderLink>Chat</HeaderLink>
-        </HeaderNavigation>
-        <ButtonsContainer>
-          <Button>Log in</Button>
-          <OutlinedButton>Sign up</OutlinedButton>
-        </ButtonsContainer>
-      </BurgerMenuContainer>
-      <HeaderBurger open={isOpen}>
-        <BurgerIcon open={isOpen} onClick={setIsOpen} />
-      </HeaderBurger>
-    </HeaderContainer>
+    <>
+      <HeaderContainer open={isOpen}>
+        <Logo></Logo>
+        <BurgerMenuContainer open={isOpen}>
+          <SearchField></SearchField>
+          <HeaderNavigation>
+            <HeaderLink>Forum</HeaderLink>
+            <HeaderLink>Library</HeaderLink>
+            <HeaderLink>My Materials</HeaderLink>
+            <HeaderLink>Purchases</HeaderLink>
+            <HeaderLink>Price</HeaderLink>
+            <HeaderLink>Chat</HeaderLink>
+          </HeaderNavigation>
+          <ButtonsContainer>
+            <Button>Log in</Button>
+            <OutlinedButton>Sign up</OutlinedButton>
+          </ButtonsContainer>
+        </BurgerMenuContainer>
+        <HeaderBurger open={isOpen}>
+          <BurgerIcon open={isOpen} onClick={setIsOpen} />
+        </HeaderBurger>
+      </HeaderContainer>
+      <Outlet />
+    </>
   )
 }
 

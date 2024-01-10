@@ -11,7 +11,7 @@ const StyledMainScreen = styled.section`
   font-family: 'Inter', sans-serif;
   background-color: #000;
   width: 100%;
-  min-height: calc(100vh - 84px);
+  min-height: calc(100vh - 79px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -20,8 +20,10 @@ const StyledMainScreen = styled.section`
   @media screen and (min-width: 768px) {
     padding: 40px 64px 60px 64px;
   }
+  @media screen and (min-width: 769px) {
+    min-height: calc(100vh - 107.59px);
+  }
   @media screen and (min-width: 1024px) {
-    min-height: calc(100vh - 100px);
     padding: 40px 64px;
     flex-direction: row;
   }
