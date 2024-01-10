@@ -5,8 +5,8 @@ import { Dispatch } from 'redux'
 // Change signatures DONE
 async function getEmailStatusAndChangeStore(dispatch: Dispatch) {
   try {
-    const responseDataFromUsersMe = await api.users.me()
-    const isEmailVerified = responseDataFromUsersMe.email_verified
+    const user = await api.users.me()
+    const isEmailVerified = user.email_verified
 
     if (isEmailVerified) {
       dispatch(setValue({emailVerified: true}))
