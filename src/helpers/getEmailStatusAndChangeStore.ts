@@ -5,8 +5,8 @@ import { Dispatch } from 'redux'
 // Change signatures DONE
 async function getEmailStatusAndChangeStore(dispatch: Dispatch) {
   try {
-    const responseFromMe = await api.users.me()
-    const isEmailVerified = responseFromMe.email_verified
+    const responseDataFromUsersMe = await api.users.me()
+    const isEmailVerified = responseDataFromUsersMe.email_verified
 
     if (isEmailVerified) {
       dispatch(setValue({emailVerified: true}))
@@ -16,7 +16,7 @@ async function getEmailStatusAndChangeStore(dispatch: Dispatch) {
 
     return isEmailVerified
   } catch (error) {
-    console.error('Ошибка при выполнении запроса:', error)
+    console.error('An error during completing request', error)
     throw error
   }
 }
