@@ -12,7 +12,7 @@ const UploadFileBody = styled.div<Props>`
   background-color: #333;
   border-radius: 16px;
   position: fixed;
-  top: ${(props) => (props.show ? '50%' : 'calc(50% + 12px)')};
+  top: ${(props) => (props.show ? '50%' : 'calc(50% + 24px)')};
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 5;
