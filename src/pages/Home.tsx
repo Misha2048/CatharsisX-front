@@ -1,20 +1,30 @@
-import React from 'react';
-import { styled } from '@linaria/react';
+import React, { useCallback, useRef } from 'react'
 
-const StyledHome = styled.div`
-  width: 100vw;
-  height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-family: 'Inter', sans-serif;
-  font-size: 48px;
-  color: #fff;
-  background-color: #282828;
-`;
+import HomeMainScreen from '@components/home/HomeMainScreen'
+import HomeAdvantages from '@components/home/HomeAdvantages'
+import HomeReviews from '@components/home/HomeReviews'
+import SignUp from '@components/regestration/SignUp'
+import HomeSignUpContainer from '@components/home/HomeSignUpContainer'
+import Footer from '@components/Footer'
 
 function Home() {
-  return <StyledHome>Welcome!</StyledHome>;
+  const signUpRef = useRef<HTMLElement | null>(null)
+
+  const scrollToSignUp = useCallback(() => {
+    signUpRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [])
+
+  return (
+    <main>
+      <HomeMainScreen onButtonClick={scrollToSignUp} />
+      <HomeAdvantages />
+      <HomeReviews />
+      <HomeSignUpContainer ref={signUpRef}>
+        <SignUp />
+      </HomeSignUpContainer>
+      <Footer />
+    </main>
+  )
 }
 
-export default Home;
+export default Home
