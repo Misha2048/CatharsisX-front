@@ -1,6 +1,8 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
+  IFilesRequest,
+  IFilesResponse,
   IForgotPasswordRequest,
   ILoginRequest,
   INewPasswordRequest,
@@ -107,5 +109,22 @@ export const api = {
         data: options,
       })
       .then((response) => response.data as IShelfsResponse[])
+  },
+
+  files: {
+    upload: async (options: IFilesRequest): Promise<IFilesResponse> => {
+      const formData = new FormData()
+      formData.append('file', options.file)
+      formData.append('filename', options.fileName)
+      formData.append('shelf_id', options.shelfId)
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/files/upload',
+          data: formData,
+          onUploadProgress: options.onUploadProgress,
+        })
+        .then((response) => response.data as IFilesResponse)
+    },
   },
 }

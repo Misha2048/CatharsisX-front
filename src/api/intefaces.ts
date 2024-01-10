@@ -1,3 +1,5 @@
+import { AxiosProgressEvent } from 'axios'
+
 export interface IUsersMe {
   id: string
   first_name: string
@@ -46,4 +48,16 @@ export interface IShelfsResponse {
   name: string
   last_upload_at: string
   created_at: string
+}
+
+export interface IFilesRequest {
+  file: File
+  shelfId: string
+  fileName: string
+  onUploadProgress: (progressEvent: AxiosProgressEvent) => void
+}
+
+export interface IFilesResponse {
+  message?: string
+  error?: string
 }
