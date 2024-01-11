@@ -35,10 +35,10 @@ export interface INewPasswordRequest {
 }
 
 export interface IShelfsRequest {
-  stillage?: string
+  stillage: string
   name?: string
-  last_upload_at?: string
-  created_at?: string
+  last_upload_at?: string[]
+  created_at?: string[]
 }
 
 export interface IShelfsResponse {
