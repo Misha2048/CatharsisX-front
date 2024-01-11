@@ -1,4 +1,7 @@
 import React, { useCallback, useState } from 'react'
+import dayjs, { Dayjs } from 'dayjs'
+import { useDispatch } from 'react-redux'
+import { useParams } from 'react-router-dom'
 
 import FilterBody from '@components/filter/FilterBody'
 import FilterHeading from '@components/filter/FilterHeading'
@@ -13,7 +16,9 @@ import DateInput from '@components/DateInput'
 import FilterButtonsRow from '@components/filter/FilterButtonsRow'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowBtn from '@components/ModalWindowBtn'
-import dayjs, { Dayjs } from 'dayjs'
+import { setStillageList } from '@redux/slices/stillageSlice'
+import { api } from '@api/index'
+import { IShelfsRequest } from '@api/intefaces'
 import '@assets/datePicker.css'
 
 interface Props {
@@ -40,6 +45,8 @@ const initialFormData = {
 }
 
 function Filter({ isShow, setIsShow }: Props) {
+  const dispatch = useDispatch()
+  const { id: stillageId } = useParams()
   const [formData, setFormData] = useState(initialFormData)
 
   const hideFilter = useCallback(() => {
@@ -62,29 +69,26 @@ function Filter({ isShow, setIsShow }: Props) {
   }, [])
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      let requestBody = {}
+      const requestBody: IShelfsRequest = { stillage: stillageId as string }
       if (formData.nameCheckbox) {
-        requestBody = { name: formData.shelfName }
+        requestBody.name = formData.shelfName
       }
       if (formData.uploadDateCheckbox) {
-        requestBody = {
-          ...requestBody,
-          uploadDateFrom: formData.uploadDateFrom.format('DD/MM/YYYY'),
-          uploadDateTo: formData.uploadDateTo.format('DD/MM/YYYY'),
-        }
+        requestBody.last_upload_at = [
+          formData.uploadDateFrom.format('YYYY-MM-DD'),
+          formData.uploadDateTo.format('YYYY-MM-DD'),
+        ]
       }
       if (formData.creationDateCheckbox) {
-        requestBody = {
-          ...requestBody,
-          creationDateFrom: formData.creationDateFrom.format('DD/MM/YYYY'),
-          creationDateTo: formData.creationDateTo.format('DD/MM/YYYY'),
-        }
+        requestBody.created_at = [
+          formData.creationDateFrom.format('YYYY-MM-DD'),
+          formData.creationDateTo.format('YYYY-MM-DD'),
+        ]
       }
-      console.log(requestBody) // TODO delete this line later
-      // const resp = await api.shelf.filter(requestBody);
-      // dispatch(setStillageList(resp))
+      const resp = await api.shelves(requestBody)
+      dispatch(setStillageList(resp))
 
       // set the initial form data after the filter's been hidden
       setTimeout(() => {
@@ -92,7 +96,7 @@ function Filter({ isShow, setIsShow }: Props) {
       }, 300)
       hideFilter()
     },
-    [formData],
+    [formData, stillageId],
   )
 
   return (
