@@ -6,6 +6,8 @@ import {
   IForgotPasswordRequest,
   ILoginRequest,
   INewPasswordRequest,
+  INewUniversityRequest,
+  INewUniversityResponse,
   IShelfsRequest,
   IShelfsResponse,
   ISignUpRequest,
@@ -125,6 +127,20 @@ export const api = {
           onUploadProgress: options.onUploadProgress,
         })
         .then((response) => response.data as IFilesResponse)
+    },
+  },
+
+  mail: {
+    newUniversityLetter: async (
+      options: INewUniversityRequest,
+    ): Promise<INewUniversityResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/mail/new-university-letter',
+          data: options,
+        })
+        .then((response) => response.data as INewUniversityResponse)
     },
   },
 }
