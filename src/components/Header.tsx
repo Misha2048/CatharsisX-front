@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react'
-import { useState } from 'react'
-import { Outlet } from 'react-router-dom'
+import { useCallback, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
 
 import Logo from './Logo'
 import SearchField from './SearchField'
@@ -57,9 +57,21 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
       flex-direction: column;
     }
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: none;
   }
+  @media only screen and (min-width: 821px) {
+    display: ${(props) => (props.open ? 'flex' : 'contents')};
+  }
+`
+
+const BackgroundContainer = styled.div`
+  background-color: #000;
+`
+
+const MaxWidthContainer = styled.div`
+  max-width: 1440px;
+  margin: 0px auto;
 `
 
 const HeaderContainer = styled.header<{ open: boolean }>`
@@ -92,36 +104,55 @@ const HeaderBurger = styled.div<{ open: boolean }>`
     top: 30px;
     right: 15px;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: block;
+  }
+  @media only screen and (min-width: 821px) {
+    display: ${(props) => (props.open ? 'block' : 'none')};
   }
 `
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
+
+  const redirectToLogin = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
+    navigate('/login')
+  }, [])
+
+  const redirectToSignup = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
+    navigate('/signup')
+  }, [])
+
   return (
     <>
-      <HeaderContainer open={isOpen}>
-        <Logo></Logo>
-        <BurgerMenuContainer open={isOpen}>
-          <SearchField></SearchField>
-          <HeaderNavigation>
-            <HeaderLink>Forum</HeaderLink>
-            <HeaderLink>Library</HeaderLink>
-            <HeaderLink>My Materials</HeaderLink>
-            <HeaderLink>Purchases</HeaderLink>
-            <HeaderLink>Price</HeaderLink>
-            <HeaderLink>Chat</HeaderLink>
-          </HeaderNavigation>
-          <ButtonsContainer>
-            <Button>Log in</Button>
-            <OutlinedButton>Sign up</OutlinedButton>
-          </ButtonsContainer>
-        </BurgerMenuContainer>
-        <HeaderBurger open={isOpen}>
-          <BurgerIcon open={isOpen} onClick={setIsOpen} />
-        </HeaderBurger>
-      </HeaderContainer>
+      <BackgroundContainer>
+        <MaxWidthContainer>
+          <HeaderContainer open={isOpen}>
+            <Logo></Logo>
+            <BurgerMenuContainer open={isOpen}>
+              <SearchField></SearchField>
+              <HeaderNavigation>
+                <HeaderLink>Forum</HeaderLink>
+                <HeaderLink>Library</HeaderLink>
+                <HeaderLink>My Materials</HeaderLink>
+                <HeaderLink>Purchases</HeaderLink>
+                <HeaderLink>Price</HeaderLink>
+                <HeaderLink>Chat</HeaderLink>
+              </HeaderNavigation>
+              <ButtonsContainer>
+                <Button onClick={redirectToLogin}>Log in</Button>
+                <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
+              </ButtonsContainer>
+            </BurgerMenuContainer>
+            <HeaderBurger open={isOpen}>
+              <BurgerIcon open={isOpen} setOpen={setIsOpen} />
+            </HeaderBurger>
+          </HeaderContainer>
+        </MaxWidthContainer>
+      </BackgroundContainer>
       <Outlet />
     </>
   )

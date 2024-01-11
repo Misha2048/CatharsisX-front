@@ -13,7 +13,7 @@ const StillageContainer = styled.div`
   @media screen and (min-width: 768px) {
     padding: 20px 32px 32px 32px;
   }
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 821px) {
     min-height: calc(100vh - 107.59px);
   }
   @media screen and (min-width: 1440px) {
