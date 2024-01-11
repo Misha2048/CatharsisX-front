@@ -34,9 +34,10 @@ const DropzoneContainer = styled.div`
 const AddFileIcon = styled.img`
   width: 50px;
   height: 50px;
+  pointer-events: none;
 `
-// if we specify which files to accept, we can only setup styles for drag rejection (all files are "rejected" on drag)
-const rejectStyle = {
+
+const focusedStyle = {
   backgroundColor: '#4f4f4f',
 }
 
@@ -88,7 +89,7 @@ function UploadFileDropzone({ file, setFile }: Props) {
     })
   }, [])
 
-  const { getRootProps, getInputProps, open, isDragReject } = useDropzone({
+  const { getRootProps, getInputProps, open, isDragAccept, isDragReject } = useDropzone({
     onDrop,
     noClick: true,
     multiple: false,
@@ -96,11 +97,13 @@ function UploadFileDropzone({ file, setFile }: Props) {
     accept: acceptFiles,
   })
 
+  // styles are the same because some browsers can't detect whether the files are accepted or rejected
   const style = useMemo(
     () => ({
-      ...(isDragReject ? rejectStyle : {}),
+      ...(isDragAccept ? focusedStyle : {}),
+      ...(isDragReject ? focusedStyle : {}),
     }),
-    [isDragReject],
+    [isDragReject, isDragAccept],
   )
 
   return (
