@@ -27,6 +27,7 @@ export const styles = `
   /*------------------------------------------------------*/
 
   body{font-family: 'Inter', sans-serif;}
+  body._lock{overflow: hidden;}
 
   .global-styles {width:100%;height:100%;}
 `

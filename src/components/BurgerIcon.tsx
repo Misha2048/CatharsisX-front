@@ -1,5 +1,10 @@
-import React from 'react'
 import { styled } from '@linaria/react'
+import { useCallback } from 'react'
+
+interface Props {
+  open: boolean
+  setOpen: React.Dispatch<React.SetStateAction<boolean>>
+}
 
 const Burger = styled.div<{ open: boolean }>`
   position: relative;
@@ -46,12 +51,25 @@ const Burger = styled.div<{ open: boolean }>`
     }
   }
 
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: block;
   }
+  @media only screen and (min-width: 821px) {
+    display: ${(props) => (props.open ? 'block' : 'none')};
+  }
 `
-function BurgerIcon({ open, onClick }: any) {
-  return <Burger onClick={() => onClick(!open)} open={open} />
+function BurgerIcon({ open, setOpen }: Props) {
+  const handleClick = useCallback(
+    (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
+      event.preventDefault()
+      const body = document.querySelector('body') as HTMLBodyElement
+      body.classList.toggle('_lock')
+      setOpen(!open)
+    },
+    [open],
+  )
+
+  return <Burger onClick={handleClick} open={open} />
 }
 
 export default BurgerIcon

@@ -20,7 +20,7 @@ const StyledMainScreen = styled.section`
   @media screen and (min-width: 768px) {
     padding: 40px 64px 60px 64px;
   }
-  @media screen and (min-width: 769px) {
+  @media screen and (min-width: 821px) {
     min-height: calc(100vh - 107.59px);
   }
   @media screen and (min-width: 1024px) {
