@@ -12,7 +12,7 @@ import Input from '@components/Input'
 import ModalWindowBtn from '@components/ModalWindowBtn'
 import ToolTip from '@components/ToolTip'
 import UploadFileText from '@components/uploadFile/UploadFileText'
-import { getFileName } from '@helpers/fileHelper'
+import { getFileNameAndSize } from '@helpers/fileHelper'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
 
@@ -40,6 +40,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
     (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       setTimeout(() => {
+        setFile(null)
         setFileName('')
         setIsLoading(false)
         setPercentUploaded(0)
@@ -60,7 +61,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
     if (fileName) {
       return fileName
     }
-    return getFileName(file as File)
+    return getFileNameAndSize(file as File)
   }, [shelfId, file, fileName])
 
   const submitForm = useCallback(
@@ -109,7 +110,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
           <UploadFileTitle>Upload file</UploadFileTitle>
           {!isLoading ? (
             <>
-              <UploadFileDropzone setFile={setFile} />
+              <UploadFileDropzone file={file} setFile={setFile} />
               <Input
                 label='File name (optional)'
                 type='text'
