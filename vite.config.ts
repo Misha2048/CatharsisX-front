@@ -25,6 +25,7 @@ export default defineConfig({
       '@helpers': '/src/helpers/',
       '@pages': '/src/pages/',
       '@redux': '/src/redux/',
+      '@utils': '/src/utils/',
     },
   },
 })
