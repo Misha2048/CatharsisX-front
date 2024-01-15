@@ -11,6 +11,7 @@ export interface ISignUpRequest {
   last_name: string
   email: string
   password: string
+  university_id: string
 }
 
 export interface ITokensResponse {

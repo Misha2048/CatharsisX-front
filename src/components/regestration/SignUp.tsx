@@ -1,4 +1,5 @@
-import React, { useState } from 'react'
+/* eslint-disable no-unsafe-optional-chaining */
+import React, { useEffect, useState } from 'react'
 import Input from '../Input'
 import Button from '../Button'
 import CenteredContainer from '../CenteredContainer'
@@ -13,19 +14,35 @@ import Logo from '../Logo'
 import { api } from '../../api'
 import { ISignUpRequest } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
+import AutoComplete from '@components/AutoComplete'
+// import { text } from 'stream/consumers'
 
 function SignUp() {
   //Referencing to SignUpFormState interface
+  const [universities, setUniversities] = useState([''])
+  // const [university,setUniversity] = useState({})
+  // const [options,setOptions] = useState(universities)
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
     last_name: '',
     email: '',
     password: '',
+    university_id: '',
   })
+
+  useEffect(() => {
+    const universitiesList = async () => {
+      const unilist = await api.universities.getUniversities().then((data) => data)
+      setUniversities(unilist)
+      // setOptions(unilist.map(uniObj=>uniObj.name))
+      console.log(unilist)
+    }
+    universitiesList()
+  }, [])
 
   //Getting key/value from input to update formDate
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target
+    const { name, value } = e?.target
     setFormDate((previousData) => ({ ...previousData, [name]: value }))
   }
 
@@ -33,17 +50,20 @@ function SignUp() {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    api.auth.signUp(formDate).then((data) => {
-      if (process.env.NODE_ENV !== 'production') {
-        console.log(data)
-      }
-    })
+    // api.auth.signUp(formDate).then((data) => {
+    //   if (process.env.NODE_ENV !== 'production') {
+    //     console.log(data)
+    //   }
+    // })
+
+    console.log(formDate)
 
     setFormDate({
       first_name: '',
       last_name: '',
       email: '',
       password: '',
+      university_id: '',
     })
   }
 
@@ -93,6 +113,15 @@ function SignUp() {
               minLength={8}
               required
             />
+            <AutoComplete
+              options={universities}
+              value={formDate.university_id}
+              label='University'
+              name='university_id'
+              type='text'
+              onChange={handleChange}
+              required
+            ></AutoComplete>
             <Button>Sign up</Button>
           </Form>
         </MainRegistryContent>

@@ -7,11 +7,12 @@ import { styled } from '@linaria/react'
 
 // Interface to create functional component for input field
 interface InputProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void
   label: string
   value: string
   name: string
-  type: string
+  type?: string
   required?: boolean
   maxLength?: number
   minLength?: number
@@ -37,20 +38,6 @@ const StyledInputField = styled.input`
   letter-spacing: 0.42px;
   }
 
-  // @media only screen and (max-width: 768px){
-  //  padding:8px 0;
-  //  padding-left:10px;
-  //  &::placeholder{
-  //   font-size:10px;
-  //  }
-
-  //  @media only screen and (max-height: 450px) and (orientation:landscape){    
-  //   padding: 5px 0;
-  //   padding-left:10px;
-  //   &::placeholder{
-  //     font-size:8px;
-  //    }
-  //   }
   }
   `
 

@@ -78,7 +78,16 @@ export const api = {
       })
     },
   },
-
+  universities: {
+    getUniversities: async (): Promise<Array<string>> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/universities',
+        })
+        .then((response) => response.data as Array<string>)
+    },
+  },
   emailVerify: (() => {
     const funcToCall = async (): Promise<null> => {
       return axiosInstance
