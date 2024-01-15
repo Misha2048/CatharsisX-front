@@ -61,3 +61,11 @@ export interface IFilesResponse {
   message?: string
   error?: string
 }
+
+export interface INewUniversityRequest {
+  name: string
+}
+
+export interface INewUniversityResponse {
+  message: string
+}

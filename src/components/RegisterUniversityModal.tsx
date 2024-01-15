@@ -8,6 +8,7 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import AddUniversityMessage from '@components/registerUniversity/AddUniversityMessage'
 import AddUniversityForm from '@components/registerUniversity/AddUniversityForm'
 import AddUniversityHeading from '@components/registerUniversity/AddUniversityHeading'
+import { api } from '@api/index'
 
 interface Props {
   isShow: boolean
@@ -30,12 +31,9 @@ function RegisterUniversityModal({ isShow, setIsShow }: Props) {
   }, [])
 
   const handleSubmit = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      console.log(universityName) // TODO delete this line later
-
-      // const resp = await api.university.add(universityName);
-      // if(resp.ok) {
+      await api.mail.newUniversityLetter({ name: universityName })
       setSuccessMessage('Thank you, we will process your request soon.')
       setUniversityName('')
     },
