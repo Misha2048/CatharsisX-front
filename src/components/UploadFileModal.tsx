@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch } from 'react-redux'
 import { AxiosProgressEvent } from 'axios'
 
@@ -29,6 +29,12 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
   const [percentUploaded, setPercentUploaded] = useState(0)
   const [finishMessage, setFinishMessage] = useState('')
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (percentUploaded === 100) {
+      setFinishMessage('The content of the file is being checked...')
+    }
+  }, [percentUploaded])
 
   const handleInputChange = useCallback(
     (event: React.ChangeEvent<HTMLInputElement>) => {
