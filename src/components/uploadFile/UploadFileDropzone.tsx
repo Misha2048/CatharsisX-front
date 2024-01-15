@@ -1,14 +1,14 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FileRejection, useDropzone } from 'react-dropzone'
+import { useDispatch } from 'react-redux'
 
-import addFileIcon from '@assets/add-file-icon.svg'
 import UploadFileText from '@components/uploadFile/UploadFileText'
 import DropzoneBtn from '@components/uploadFile/DropzoneBtn'
-import { useDispatch } from 'react-redux'
 import { setHint } from '@redux/slices/hintSlice'
 import { getFileExtensionUppercase, getFileNameAndSize } from '@helpers/fileHelper'
-import DropzoneSmallText from './DropzoneSmallText'
+import DropzoneSmallText from '@components/uploadFile/DropzoneSmallText'
+import addFileIcon from '@assets/add-file-icon.png'
 
 interface Props {
   file: File | null
@@ -31,10 +31,10 @@ const DropzoneContainer = styled.div`
   }
 `
 
-const AddFileIcon = styled.img`
+const AddFileIcon = styled.div`
   width: 50px;
   height: 50px;
-  pointer-events: none;
+  background: url(${addFileIcon}) center/contain no-repeat;
 `
 
 const focusedStyle = {
@@ -109,7 +109,7 @@ function UploadFileDropzone({ file, setFile }: Props) {
   return (
     <DropzoneContainer {...getRootProps({ style })}>
       <input {...getInputProps()} />
-      <AddFileIcon src={addFileIcon} alt='' />
+      <AddFileIcon />
       <UploadFileText>{message}</UploadFileText>
       <DropzoneBtn type='button' onClick={open}>
         Browse File

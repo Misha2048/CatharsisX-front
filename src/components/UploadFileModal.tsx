@@ -27,6 +27,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
   const [fileName, setFileName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [percentUploaded, setPercentUploaded] = useState(0)
+  const [finishMessage, setFinishMessage] = useState('')
   const dispatch = useDispatch()
 
   const handleInputChange = useCallback(
@@ -80,7 +81,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       }
       const res = await api.files.upload(data)
       if (res.error) {
-        setPercentUploaded(0)
+        setFinishMessage("File wasn't uploaded")
         dispatch(
           setHint({
             message:
@@ -90,11 +91,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
         )
       }
       if (res.message) {
-        dispatch(
-          setHint({
-            message: 'File was uploaded successfully!',
-          }),
-        )
+        setFinishMessage("File's been uploaded successfully!")
       }
     },
     [shelfId, file, fileName],
@@ -123,7 +120,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
           ) : (
             <div>
               <UploadFileText>{showFileName()}</UploadFileText>
-              <UploadFileText>{`${percentUploaded}% uploaded`}</UploadFileText>
+              <UploadFileText>{finishMessage || `Sending... ${percentUploaded}%`}</UploadFileText>
             </div>
           )}
         </UploadFileForm>
