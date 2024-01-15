@@ -108,7 +108,7 @@ export const api = {
       .request({
         method: 'GET',
         url: '/shelfs',
-        data: options,
+        params: options,
       })
       .then((response) => response.data as IShelfsResponse[])
   },
