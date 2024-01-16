@@ -50,6 +50,15 @@ export interface IShelfsResponse {
   created_at: string
 }
 
+export interface IDeleteShelvesRequest {
+  id: string
+}
+
+export interface IDeleteShelvesResponse {
+  message: string
+  error?: string
+}
+
 export interface IFilesRequest {
   file: File
   shelfId: string

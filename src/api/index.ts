@@ -1,6 +1,8 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
+  IDeleteShelvesRequest,
+  IDeleteShelvesResponse,
   IFilesRequest,
   IFilesResponse,
   IForgotPasswordRequest,
@@ -103,14 +105,24 @@ export const api = {
     return funcToCall
   })(),
 
-  shelves: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
-    return axiosInstance
-      .request({
-        method: 'GET',
-        url: '/shelfs',
-        params: options,
-      })
-      .then((response) => response.data as IShelfsResponse[])
+  shelves: {
+    get: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/shelfs',
+          params: options,
+        })
+        .then((response) => response.data as IShelfsResponse[])
+    },
+    delete: async (options: IDeleteShelvesRequest): Promise<IDeleteShelvesResponse> => {
+      return axiosInstance
+        .request({
+          method: 'DELETE',
+          url: `/shelfs/${options.id}`,
+        })
+        .then((response) => response.data as IDeleteShelvesResponse)
+    },
   },
 
   files: {
