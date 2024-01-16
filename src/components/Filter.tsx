@@ -87,7 +87,7 @@ function Filter({ isShow, setIsShow }: Props) {
           formData.creationDateTo.format('YYYY-MM-DD'),
         ]
       }
-      const resp = await api.shelves(requestBody)
+      const resp = await api.shelves.get(requestBody)
       dispatch(setStillageList(resp))
 
       // set the initial form data after the filter's been hidden

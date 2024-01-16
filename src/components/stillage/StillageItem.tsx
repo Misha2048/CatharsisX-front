@@ -1,14 +1,12 @@
 import React, { PropsWithChildren, useCallback } from 'react'
 import { styled } from '@linaria/react'
-import { useDispatch } from 'react-redux'
 
 import folderIcon from '@assets/folder-icon.svg'
 import editIcon from '@assets/edit-icon.svg'
 import trashIcon from '@assets/trash-icon.svg'
-import { removeStillageItem } from '@redux/slices/stillageSlice'
 
 interface PropsType extends PropsWithChildren {
-  id: string
+  showDeleteModal: () => void
 }
 
 const StyledItem = styled.li`
@@ -49,14 +47,14 @@ const StyledItem = styled.li`
   }
 `
 
-function StillageItem({ children, id }: PropsType) {
-  const dispatch = useDispatch()
-
-  const deleteShelf = useCallback(() => {
-    // const resp = await api.shelf.delete(key);
-    // if (resp.ok) {
-    dispatch(removeStillageItem(id))
-  }, [id])
+function StillageItem({ children, showDeleteModal }: PropsType) {
+  const handleDeleteClick = useCallback(
+    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+      event.preventDefault()
+      showDeleteModal()
+    },
+    [showDeleteModal],
+  )
 
   return (
     <StyledItem>
@@ -65,7 +63,7 @@ function StillageItem({ children, id }: PropsType) {
       <button>
         <img src={editIcon} alt='Rename' />
       </button>
-      <button onClick={deleteShelf}>
+      <button onClick={handleDeleteClick}>
         <img src={trashIcon} alt='Delete' />
       </button>
     </StyledItem>
