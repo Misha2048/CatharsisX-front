@@ -17,6 +17,9 @@ const HeaderNavigation = styled.nav`
   @media only screen and (max-width: 1024px) {
     gap: 15px;
   }
+  @media only screen and (max-height: 360px) {
+    gap: 8px;
+  }
 `
 const HeaderLink = styled.button`
   color: #fff;
@@ -37,6 +40,9 @@ const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
   flex: 0 0 140px;
+  @media only screen and (max-height: 360px) {
+    gap: 5px;
+  }
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
   display: contents;
@@ -49,6 +55,7 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
     gap: 15px;
     width: 200px;
     height: 100vh;
+
     ${HeaderNavigation} {
       flex-direction: column;
     }
@@ -86,13 +93,14 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   &[open] {
     width: 100%;
     position: fixed;
+    left: 0;
+    top: 0;
     justify-content: center;
-
+    z-index: 1000;
     & > img {
       display: none;
     }
   }
-
   @media only screen and (max-width: 1024px) {
     padding: 30px 15px;
   }
@@ -115,7 +123,6 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
   const navigate = useNavigate()
-
   const redirectToLogin = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     event.preventDefault()
     navigate('/login')
