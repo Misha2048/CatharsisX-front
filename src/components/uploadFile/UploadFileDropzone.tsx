@@ -1,14 +1,14 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import { FileRejection, useDropzone } from 'react-dropzone'
+import { useDispatch } from 'react-redux'
 
-import addFileIcon from '@assets/add-file-icon.svg'
 import UploadFileText from '@components/uploadFile/UploadFileText'
 import DropzoneBtn from '@components/uploadFile/DropzoneBtn'
-import { useDispatch } from 'react-redux'
 import { setHint } from '@redux/slices/hintSlice'
 import { getFileExtensionUppercase, getFileNameAndSize } from '@helpers/fileHelper'
-import DropzoneSmallText from './DropzoneSmallText'
+import DropzoneSmallText from '@components/uploadFile/DropzoneSmallText'
+import addFileIcon from '@assets/add-file-icon.png'
 
 interface Props {
   file: File | null
@@ -31,12 +31,13 @@ const DropzoneContainer = styled.div`
   }
 `
 
-const AddFileIcon = styled.img`
+const AddFileIcon = styled.div`
   width: 50px;
   height: 50px;
+  background: url(${addFileIcon}) center/contain no-repeat;
 `
-// if we specify which files to accept, we can only setup styles for drag rejection (all files are "rejected" on drag)
-const rejectStyle = {
+
+const focusedStyle = {
   backgroundColor: '#4f4f4f',
 }
 
@@ -88,7 +89,7 @@ function UploadFileDropzone({ file, setFile }: Props) {
     })
   }, [])
 
-  const { getRootProps, getInputProps, open, isDragReject } = useDropzone({
+  const { getRootProps, getInputProps, open, isDragAccept, isDragReject } = useDropzone({
     onDrop,
     noClick: true,
     multiple: false,
@@ -96,17 +97,19 @@ function UploadFileDropzone({ file, setFile }: Props) {
     accept: acceptFiles,
   })
 
+  // styles are the same because some browsers can't detect whether the files are accepted or rejected
   const style = useMemo(
     () => ({
-      ...(isDragReject ? rejectStyle : {}),
+      ...(isDragAccept ? focusedStyle : {}),
+      ...(isDragReject ? focusedStyle : {}),
     }),
-    [isDragReject],
+    [isDragReject, isDragAccept],
   )
 
   return (
     <DropzoneContainer {...getRootProps({ style })}>
       <input {...getInputProps()} />
-      <AddFileIcon src={addFileIcon} alt='' />
+      <AddFileIcon />
       <UploadFileText>{message}</UploadFileText>
       <DropzoneBtn type='button' onClick={open}>
         Browse File

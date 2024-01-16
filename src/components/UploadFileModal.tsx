@@ -1,6 +1,5 @@
 import { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux'
-import { AxiosProgressEvent } from 'axios'
 
 import UploadFileBody from '@components/uploadFile/UploadFileBody'
 import UploadFileForm from '@components/uploadFile/UploadFileForm'
@@ -15,6 +14,8 @@ import UploadFileText from '@components/uploadFile/UploadFileText'
 import { getFileNameAndSize } from '@helpers/fileHelper'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
+import ModalWindowSpinner from '@components/ModalWindowSpinner'
+import UploadFileSpinnerRow from '@components/uploadFile/UploadFileSpinnerRow'
 
 interface Props {
   shelfId: string
@@ -26,7 +27,8 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
   const [file, setFile] = useState<File | null>(null)
   const [fileName, setFileName] = useState('')
   const [isLoading, setIsLoading] = useState(false)
-  const [percentUploaded, setPercentUploaded] = useState(0)
+  const [isFinishedLoading, setIsFinishedLoading] = useState(false)
+  const [finishMessage, setFinishMessage] = useState('')
   const dispatch = useDispatch()
 
   const handleInputChange = useCallback(
@@ -43,16 +45,9 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
         setFile(null)
         setFileName('')
         setIsLoading(false)
-        setPercentUploaded(0)
+        setIsFinishedLoading(false)
       }, 300)
       setIsShow(false)
-    },
-    [shelfId],
-  )
-
-  const onUploadProgress = useCallback(
-    (progressEvent: AxiosProgressEvent) => {
-      setPercentUploaded(Math.round((progressEvent.loaded * 100) / progressEvent.total!))
     },
     [shelfId],
   )
@@ -76,11 +71,11 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
         file,
         shelfId,
         fileName: name,
-        onUploadProgress,
       }
       const res = await api.files.upload(data)
+      setIsFinishedLoading(true)
       if (res.error) {
-        setPercentUploaded(0)
+        setFinishMessage("File wasn't uploaded")
         dispatch(
           setHint({
             message:
@@ -90,11 +85,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
         )
       }
       if (res.message) {
-        dispatch(
-          setHint({
-            message: 'File was uploaded successfully!',
-          }),
-        )
+        setFinishMessage("File's been uploaded successfully!")
       }
     },
     [shelfId, file, fileName],
@@ -120,11 +111,19 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
               />
               <ModalWindowBtn type='submit'>Upload</ModalWindowBtn>
             </>
-          ) : (
-            <div>
+          ) : isFinishedLoading ? (
+            <>
               <UploadFileText>{showFileName()}</UploadFileText>
-              <UploadFileText>{`${percentUploaded}% uploaded`}</UploadFileText>
-            </div>
+              <UploadFileText>{finishMessage}</UploadFileText>
+            </>
+          ) : (
+            <>
+              <UploadFileText>{showFileName()}</UploadFileText>
+              <UploadFileSpinnerRow>
+                <ModalWindowSpinner />
+                <UploadFileText>{'Uploading...'}</UploadFileText>
+              </UploadFileSpinnerRow>
+            </>
           )}
         </UploadFileForm>
       </UploadFileBody>
