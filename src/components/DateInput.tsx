@@ -26,7 +26,7 @@ function DateInput({ name, value, setDate }: Props) {
 
   return (
     <DatePicker
-      format='DD/MM/YYYY'
+      format='DD.MM.YYYY'
       name={name}
       value={value}
       onChange={setNewDate}
