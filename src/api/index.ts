@@ -122,7 +122,6 @@ export const api = {
           method: 'POST',
           url: '/files/upload',
           data: formData,
-          onUploadProgress: options.onUploadProgress,
         })
         .then((response) => response.data as IFilesResponse)
     },
