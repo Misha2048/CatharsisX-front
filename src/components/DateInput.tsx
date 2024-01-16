@@ -24,7 +24,15 @@ function DateInput({ name, value, setDate }: Props) {
     [name],
   )
 
-  return <DatePicker name={name} value={value} onChange={setNewDate} minDate={minDate} />
+  return (
+    <DatePicker
+      format='DD/MM/YYYY'
+      name={name}
+      value={value}
+      onChange={setNewDate}
+      minDate={minDate}
+    />
+  )
 }
 
 export default DateInput
