@@ -23,8 +23,9 @@ const StyledMainScreen = styled.section`
   @media screen and (min-width: 821px) {
     min-height: calc(100vh - 107.59px);
   }
-  @media screen and (min-width: 1024px) {
+  @media screen and (min-width: 1024px) and (orientation: portrait) {
     padding: 40px 64px;
+    min-height: 50vh;
     flex-direction: row;
   }
   @media screen and (min-width: 1440px) {
