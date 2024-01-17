@@ -73,7 +73,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
 }) => {
   const autoCompleteRef = useRef<any>()
   const [input, setInput] = useState(value)
-  const [showSuggestions, setShowSuggestions] = useState(true)
+  const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestions = options.filter((option: string) =>
     option.toLowerCase().includes(input.toLowerCase()),
   )

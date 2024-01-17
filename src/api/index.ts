@@ -8,6 +8,7 @@ import {
   IShelfsResponse,
   ISignUpRequest,
   ITokensResponse,
+  IUniversity,
   IUsersMe,
 } from '@api/intefaces'
 
@@ -79,13 +80,13 @@ export const api = {
     },
   },
   universities: {
-    getUniversities: async (): Promise<Array<string>> => {
+    getUniversities: async (): Promise<Array<IUniversity>> => {
       return axiosInstance
         .request({
           method: 'GET',
           url: '/universities',
         })
-        .then((response) => response.data as Array<string>)
+        .then((response) => response.data as Array<IUniversity>)
     },
   },
   emailVerify: (() => {

@@ -48,3 +48,7 @@ export interface IShelfsResponse {
   last_upload_at: string
   created_at: string
 }
+export interface IUniversity {
+  id: string
+  name: string
+}

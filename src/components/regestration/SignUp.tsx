@@ -12,16 +12,12 @@ import { Title, DisplayTitle } from '../Titles'
 import AdditionalRegistryContent from './AdditionalRegistryContent'
 import Logo from '../Logo'
 import { api } from '../../api'
-import { ISignUpRequest } from '../../api/intefaces'
+import { ISignUpRequest, IUniversity } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
 import AutoComplete from '@components/AutoComplete'
-// import { text } from 'stream/consumers'
 
 function SignUp() {
-  //Referencing to SignUpFormState interface
-  const [universities, setUniversities] = useState([''])
-  // const [university,setUniversity] = useState({})
-  // const [options,setOptions] = useState(universities)
+  const [universities, setUniversities] = useState<Array<IUniversity>>([])
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
     last_name: '',
@@ -34,7 +30,6 @@ function SignUp() {
     const universitiesList = async () => {
       const unilist = await api.universities.getUniversities().then((data) => data)
       setUniversities(unilist)
-      // setOptions(unilist.map(uniObj=>uniObj.name))
       console.log(unilist)
     }
     universitiesList()
@@ -50,21 +45,31 @@ function SignUp() {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    // api.auth.signUp(formDate).then((data) => {
-    //   if (process.env.NODE_ENV !== 'production') {
-    //     console.log(data)
-    //   }
-    // })
+    if (nameExists(universities, formDate.university_id)) {
+      const uniID = getIdByName(universities, formDate.university_id)
 
-    console.log(formDate)
+      console.log(uniID)
+      setFormDate((previousData) => ({
+        ...previousData,
+        university_id: `${uniID}`,
+      }))
 
-    setFormDate({
-      first_name: '',
-      last_name: '',
-      email: '',
-      password: '',
-      university_id: '',
-    })
+      // api.auth.signUp(formDate).then((data) => {
+      //   if (process.env.NODE_ENV !== 'production') {
+      //     console.log(data)
+      //   }
+      // })
+
+      console.log(formDate)
+
+      setFormDate({
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        university_id: '',
+      })
+    }
   }
 
   return (
@@ -114,7 +119,7 @@ function SignUp() {
               required
             />
             <AutoComplete
-              options={universities}
+              options={universities.map((uni) => uni.name)}
               value={formDate.university_id}
               label='University'
               name='university_id'
@@ -132,3 +137,11 @@ function SignUp() {
 }
 
 export default SignUp
+
+function getIdByName(data: Array<IUniversity>, name: string) {
+  return data.find((item) => item.name === name)?.id || ''
+}
+
+function nameExists(data: Array<IUniversity>, name: string) {
+  return data.some((item) => item.name === name)
+}
