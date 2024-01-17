@@ -107,12 +107,12 @@ const AutoComplete: React.FC<IAutoComplete> = ({
     return () => {
       document.removeEventListener('click', handleClick)
     }
-  }, [value, input])
+  }, [value])
 
   return (
     <AutoCompleteContainer ref={autoCompleteRef}>
       <AutoCompleteInput
-        value={input}
+        value={value}
         onChange={handleChange}
         placeholder={label}
         name={name}
@@ -124,8 +124,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
         <AutoCompleteList>
           {suggestions.map((suggestion: string) => (
             <AutoCompleteListComponent
-              onClick={(e: never) => {
-                handleChange(e)
+              onClick={() => {
                 handleSuggestionClick(suggestion)
               }}
               value={suggestion}

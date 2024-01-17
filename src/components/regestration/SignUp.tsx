@@ -37,8 +37,10 @@ function SignUp() {
 
   //Getting key/value from input to update formDate
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e?.target
-    setFormDate((previousData) => ({ ...previousData, [name]: value }))
+    const { name, value } = e.target
+    if (name !== undefined) {
+      setFormDate((previousData) => ({ ...previousData, [name]: value }))
+    }
   }
 
   // Send formDate to server
@@ -47,20 +49,9 @@ function SignUp() {
 
     if (nameExists(universities, formDate.university_id)) {
       const uniID = getIdByName(universities, formDate.university_id)
+      formDate.university_id = uniID
 
-      console.log(uniID)
-      setFormDate((previousData) => ({
-        ...previousData,
-        university_id: `${uniID}`,
-      }))
-
-      // api.auth.signUp(formDate).then((data) => {
-      //   if (process.env.NODE_ENV !== 'production') {
-      //     console.log(data)
-      //   }
-      // })
-
-      console.log(formDate)
+      api.auth.signUp(formDate).then((data) => console.log(data))
 
       setFormDate({
         first_name: '',
