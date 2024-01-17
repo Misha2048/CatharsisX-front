@@ -13,7 +13,7 @@ const Burger = styled.div<{ open: boolean }>`
   height: 3px;
   border-radius: 2px;
   cursor: pointer;
-  z-index: 1000;
+  z-index: 100;
   background-color: rgba(255, 255, 255, 1);
   transition: all 0.2s ease-in-out;
 
