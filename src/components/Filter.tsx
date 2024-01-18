@@ -1,7 +1,5 @@
 import React, { useCallback, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
-import { useDispatch } from 'react-redux'
-import { useParams } from 'react-router-dom'
 
 import FilterBody from '@components/filter/FilterBody'
 import FilterHeading from '@components/filter/FilterHeading'
@@ -16,14 +14,15 @@ import DateInput from '@components/DateInput'
 import FilterButtonsRow from '@components/filter/FilterButtonsRow'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowBtn from '@components/ModalWindowBtn'
-import { setStillageList } from '@redux/slices/stillageSlice'
-import { api } from '@api/index'
-import { IShelfsRequest } from '@api/intefaces'
+import { RequestParams } from '@helpers/filterTypes'
 import '@assets/datePicker.css'
 
 interface Props {
   isShow: boolean
   setIsShow: (value: boolean) => void
+  fetchData: (RequestParams: RequestParams) => Promise<void>
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  additionalParams?: { [key: string]: any }
 }
 
 interface SetDateParams {
@@ -44,9 +43,7 @@ const initialFormData = {
   creationDateCheckbox: false,
 }
 
-function Filter({ isShow, setIsShow }: Props) {
-  const dispatch = useDispatch()
-  const { id: stillageId } = useParams()
+function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
   const [formData, setFormData] = useState(initialFormData)
 
   const hideFilter = useCallback(() => {
@@ -71,7 +68,7 @@ function Filter({ isShow, setIsShow }: Props) {
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      const requestBody: IShelfsRequest = { stillage: stillageId as string }
+      const requestBody: RequestParams = additionalParams ? { ...additionalParams } : {}
       if (formData.nameCheckbox) {
         requestBody.name = formData.shelfName
       }
@@ -87,8 +84,8 @@ function Filter({ isShow, setIsShow }: Props) {
           formData.creationDateTo.format('YYYY-MM-DD'),
         ]
       }
-      const resp = await api.shelves.get(requestBody)
-      dispatch(setStillageList(resp))
+
+      fetchData(requestBody)
 
       // set the initial form data after the filter's been hidden
       setTimeout(() => {
@@ -96,7 +93,7 @@ function Filter({ isShow, setIsShow }: Props) {
       }, 300)
       hideFilter()
     },
-    [formData, stillageId],
+    [formData, additionalParams, fetchData],
   )
 
   return (
