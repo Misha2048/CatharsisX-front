@@ -75,3 +75,27 @@ export interface INewUniversityRequest {
 export interface INewUniversityResponse {
   message: string
 }
+
+export interface IStillagesRequest {
+  name?: string
+  last_upload_at?: string[]
+  created_at?: string[]
+}
+
+export interface IStillagesResponse {
+  id: string
+  userId: string
+  name: string
+  created_at: string
+  last_upload_at: string
+  university_id: string
+  liked?: boolean
+}
+
+export interface IStillagesLikeRequest {
+  id: string
+}
+
+export interface IStillagesLikeResponse {
+  status: number
+}
