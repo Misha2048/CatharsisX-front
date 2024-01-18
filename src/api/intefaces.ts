@@ -34,10 +34,10 @@ export interface INewPasswordRequest {
 }
 
 export interface IShelfsRequest {
-  stillage?: string
+  stillage: string
   name?: string
-  last_upload_at?: string
-  created_at?: string
+  last_upload_at?: string[]
+  created_at?: string[]
 }
 
 export interface IShelfsResponse {
@@ -51,4 +51,32 @@ export interface IShelfsResponse {
 export interface IUniversity {
   id: string
   name: string
+}
+
+export interface IDeleteShelvesRequest {
+  id: string
+}
+
+export interface IDeleteShelvesResponse {
+  message: string
+  error?: string
+}
+
+export interface IFilesRequest {
+  file: File
+  shelfId: string
+  fileName: string
+}
+
+export interface IFilesResponse {
+  message?: string
+  error?: string
+}
+
+export interface INewUniversityRequest {
+  name: string
+}
+
+export interface INewUniversityResponse {
+  message: string
 }

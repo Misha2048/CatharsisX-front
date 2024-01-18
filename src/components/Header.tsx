@@ -1,5 +1,7 @@
 import { styled } from '@linaria/react'
-import React, { useState } from 'react'
+import { useCallback, useState } from 'react'
+import { Outlet, useNavigate } from 'react-router-dom'
+
 import Logo from './Logo'
 import SearchField from './SearchField'
 import Button from './Button'
@@ -14,6 +16,9 @@ const HeaderNavigation = styled.nav`
 
   @media only screen and (max-width: 1024px) {
     gap: 15px;
+  }
+  @media only screen and (max-height: 360px) {
+    gap: 8px;
   }
 `
 const HeaderLink = styled.button`
@@ -35,6 +40,9 @@ const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
   flex: 0 0 140px;
+  @media only screen and (max-height: 360px) {
+    gap: 5px;
+  }
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
   display: contents;
@@ -47,6 +55,7 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
     gap: 15px;
     width: 200px;
     height: 100vh;
+
     ${HeaderNavigation} {
       flex-direction: column;
     }
@@ -55,9 +64,21 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
       flex-direction: column;
     }
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: none;
   }
+  @media only screen and (min-width: 821px) {
+    display: ${(props) => (props.open ? 'flex' : 'contents')};
+  }
+`
+
+const BackgroundContainer = styled.div`
+  background-color: #000;
+`
+
+const MaxWidthContainer = styled.div`
+  max-width: 1440px;
+  margin: 0px auto;
 `
 
 const HeaderContainer = styled.header<{ open: boolean }>`
@@ -72,13 +93,14 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   &[open] {
     width: 100%;
     position: fixed;
+    left: 0;
+    top: 0;
     justify-content: center;
-
+    z-index: 1000;
     & > img {
       display: none;
     }
   }
-
   @media only screen and (max-width: 1024px) {
     padding: 30px 15px;
   }
@@ -90,35 +112,56 @@ const HeaderBurger = styled.div<{ open: boolean }>`
     top: 30px;
     right: 15px;
   }
-  @media only screen and (max-width: 768px) {
+  @media only screen and (max-width: 820px) {
     display: block;
+  }
+  @media only screen and (min-width: 821px) {
+    display: ${(props) => (props.open ? 'block' : 'none')};
   }
 `
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const navigate = useNavigate()
+  const redirectToLogin = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
+    navigate('/login')
+  }, [])
+
+  const redirectToSignup = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    event.preventDefault()
+    navigate('/signup')
+  }, [])
+
   return (
-    <HeaderContainer open={isOpen}>
-      <Logo></Logo>
-      <BurgerMenuContainer open={isOpen}>
-        <SearchField></SearchField>
-        <HeaderNavigation>
-          <HeaderLink>Forum</HeaderLink>
-          <HeaderLink>Library</HeaderLink>
-          <HeaderLink>My Materials</HeaderLink>
-          <HeaderLink>Purchases</HeaderLink>
-          <HeaderLink>Price</HeaderLink>
-          <HeaderLink>Chat</HeaderLink>
-        </HeaderNavigation>
-        <ButtonsContainer>
-          <Button>Log in</Button>
-          <OutlinedButton>Sign up</OutlinedButton>
-        </ButtonsContainer>
-      </BurgerMenuContainer>
-      <HeaderBurger open={isOpen}>
-        <BurgerIcon open={isOpen} onClick={setIsOpen} />
-      </HeaderBurger>
-    </HeaderContainer>
+    <>
+      <BackgroundContainer>
+        <MaxWidthContainer>
+          <HeaderContainer open={isOpen}>
+            <Logo></Logo>
+            <BurgerMenuContainer open={isOpen}>
+              <SearchField></SearchField>
+              <HeaderNavigation>
+                <HeaderLink>Forum</HeaderLink>
+                <HeaderLink>Library</HeaderLink>
+                <HeaderLink>My Materials</HeaderLink>
+                <HeaderLink>Purchases</HeaderLink>
+                <HeaderLink>Price</HeaderLink>
+                <HeaderLink>Chat</HeaderLink>
+              </HeaderNavigation>
+              <ButtonsContainer>
+                <Button onClick={redirectToLogin}>Log in</Button>
+                <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
+              </ButtonsContainer>
+            </BurgerMenuContainer>
+            <HeaderBurger open={isOpen}>
+              <BurgerIcon open={isOpen} setOpen={setIsOpen} />
+            </HeaderBurger>
+          </HeaderContainer>
+        </MaxWidthContainer>
+      </BackgroundContainer>
+      <Outlet />
+    </>
   )
 }
 

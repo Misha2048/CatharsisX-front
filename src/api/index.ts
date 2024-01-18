@@ -1,9 +1,15 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
+  IDeleteShelvesRequest,
+  IDeleteShelvesResponse,
+  IFilesRequest,
+  IFilesResponse,
   IForgotPasswordRequest,
   ILoginRequest,
   INewPasswordRequest,
+  INewUniversityRequest,
+  INewUniversityResponse,
   IShelfsRequest,
   IShelfsResponse,
   ISignUpRequest,
@@ -109,13 +115,53 @@ export const api = {
     return funcToCall
   })(),
 
-  shelves: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
-    return axiosInstance
-      .request({
-        method: 'GET',
-        url: '/shelfs',
-        data: options,
-      })
-      .then((response) => response.data as IShelfsResponse[])
+  shelves: {
+    get: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/shelfs',
+          params: options,
+        })
+        .then((response) => response.data as IShelfsResponse[])
+    },
+    delete: async (options: IDeleteShelvesRequest): Promise<IDeleteShelvesResponse> => {
+      return axiosInstance
+        .request({
+          method: 'DELETE',
+          url: `/shelfs/${options.id}`,
+        })
+        .then((response) => response.data as IDeleteShelvesResponse)
+    },
+  },
+
+  files: {
+    upload: async (options: IFilesRequest): Promise<IFilesResponse> => {
+      const formData = new FormData()
+      formData.append('file', options.file)
+      formData.append('filename', options.fileName)
+      formData.append('shelf_id', options.shelfId)
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/files/upload',
+          data: formData,
+        })
+        .then((response) => response.data as IFilesResponse)
+    },
+  },
+
+  mail: {
+    newUniversityLetter: async (
+      options: INewUniversityRequest,
+    ): Promise<INewUniversityResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/mail/new-university-letter',
+          data: options,
+        })
+        .then((response) => response.data as INewUniversityResponse)
+    },
   },
 }

@@ -23,6 +23,7 @@ const GreyContainerBox = styled.div`
     flex-direction: column;
     align-items: center;
     width: 350px;
+    padding: 40px 0px;
     scroll: none;
   }
 

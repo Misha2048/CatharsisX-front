@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { styled } from '@linaria/react'
 import { useDispatch, useSelector } from 'react-redux'
 import { useParams } from 'react-router-dom'
@@ -7,6 +7,7 @@ import StillageItem from '@components/stillage/StillageItem'
 import { RootState } from '@redux/store'
 import { clearStillageList, setStillageList } from '@redux/slices/stillageSlice'
 import { api } from '@api/index'
+import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
 
 const StyledList = styled.ul`
   display: flex;
@@ -28,9 +29,13 @@ const StyledList = styled.ul`
 function StillageList() {
   const { id: stillageId } = useParams()
   const dispatch = useDispatch()
+  const shelvesList = useSelector((state: RootState) => state.stillage.list)
+  const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
+  const [shelfName, setShelfName] = useState('')
+  const [shelfId, setShelfId] = useState('')
 
   const fetchData = useCallback(async () => {
-    const shelves = await api.shelves({ stillage: stillageId })
+    const shelves = await api.shelves.get({ stillage: stillageId as string })
     if (Array.isArray(shelves)) {
       dispatch(setStillageList(shelves))
     }
@@ -38,23 +43,40 @@ function StillageList() {
 
   useEffect(() => {
     fetchData()
-
     return () => {
       dispatch(clearStillageList())
     }
   }, [])
 
-  const shelvesList = useSelector((state: RootState) => state.stillage.list)
+  const showDeleteModal = useCallback(
+    (shelfId: string, shelfName: string) => {
+      setShelfId(shelfId)
+      setShelfName(shelfName)
+      setIsShowDeleteModal(true)
+    },
+    [stillageId],
+  )
 
   return (
-    <StyledList>
-      {shelvesList &&
-        shelvesList.map((shelf) => (
-          <StillageItem key={shelf.id} id={shelf.id}>
-            {shelf.name}
-          </StillageItem>
-        ))}
-    </StyledList>
+    <>
+      <StyledList>
+        {shelvesList &&
+          shelvesList.map((shelf) => (
+            <StillageItem
+              key={shelf.id}
+              showDeleteModal={() => showDeleteModal(shelf.id, shelf.name)}
+            >
+              {shelf.name}
+            </StillageItem>
+          ))}
+      </StyledList>
+      <DeleteShelfModal
+        isShow={isShowDeleteModal}
+        setIsShow={setIsShowDeleteModal}
+        shelfName={shelfName}
+        shelfId={shelfId}
+      />
+    </>
   )
 }
 
