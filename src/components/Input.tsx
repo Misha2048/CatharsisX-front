@@ -1,11 +1,7 @@
 import React from 'react'
 import { whiteColor } from './colors'
 import { styled } from '@linaria/react'
-//////////////////////
-// INPUT FIELD
-//////////////////////
 
-// Interface to create functional component for input field
 interface InputProps {
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   label: string
@@ -15,44 +11,29 @@ interface InputProps {
   required?: boolean
   maxLength?: number
   minLength?: number
+  width?: string
 }
 
 const StyledInputField = styled.input`
-  position:relative;
-  display:block;
-  width:calc(100%-10px);
+  position: relative;
+  display: block;
+  width: ${(props) => props.width || '100%'};
   border: 1px solid ${whiteColor};
-  padding:10px 0;
-  padding-left:10px;
+  padding: 10px 0;
+  padding-left: 10px;
   border-radius: 5px;
   transition: border-color 0.3s ease-out;
-  
-  &::placeholder{
-  color: #000;
-  opacity:70%;
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 300;
-  line-height: 10px;
-  letter-spacing: 0.42px;
-  }
 
-  // @media only screen and (max-width: 768px){
-  //  padding:8px 0;
-  //  padding-left:10px;
-  //  &::placeholder{
-  //   font-size:10px;
-  //  }
-
-  //  @media only screen and (max-height: 450px) and (orientation:landscape){    
-  //   padding: 5px 0;
-  //   padding-left:10px;
-  //   &::placeholder{
-  //     font-size:8px;
-  //    }
-  //   }
+  &::placeholder {
+    color: #000;
+    opacity: 70%;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 10px;
+    letter-spacing: 0.42px;
   }
-  `
+`
 
 const Input: React.FC<InputProps> = ({
   label,
@@ -60,6 +41,7 @@ const Input: React.FC<InputProps> = ({
   type,
   value,
   onChange,
+  width,
   required = false,
   maxLength = 30,
   minLength = 0,
@@ -75,7 +57,9 @@ const Input: React.FC<InputProps> = ({
       maxLength={maxLength}
       minLength={minLength}
       placeholder={label}
+      width={width}
     />
   )
 }
+
 export default Input
