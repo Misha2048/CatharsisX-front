@@ -17,7 +17,7 @@ interface InputProps {
 const StyledInputField = styled.input`
   position: relative;
   display: block;
-  width: ${(props) => props.width || 'calc(100% - 10px)'};
+  width: ${(props) => props.width || '100%'};
   border: 1px solid ${whiteColor};
   padding: 10px 0;
   padding-left: 10px;
