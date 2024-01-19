@@ -44,7 +44,6 @@ const StarBtn = styled.button`
 const Title = styled.h3`
   min-height: 35px;
   margin-bottom: -3px;
-  // max-height: 100%;
   max-width: 170px;
   color: #fff;
   font-family: 'Inter', sans-serif;
