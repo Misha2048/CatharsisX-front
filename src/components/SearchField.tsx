@@ -1,6 +1,5 @@
 import { css } from '@linaria/core'
 import searchIcon from '../assets/searchIcon.png'
-import React from 'react'
 
 const SearchFieldStyle = css`
   display: flex;
@@ -14,6 +13,7 @@ const SearchFieldStyle = css`
   background: #333;
 
   & > input {
+    width: 100%;
     color: #fff;
     background: none;
   }
