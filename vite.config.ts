@@ -26,6 +26,7 @@ export default defineConfig({
       '@pages': '/src/pages/',
       '@redux': '/src/redux/',
       '@utils': '/src/utils/',
+      '@const': '/src/const.ts',
     },
   },
 })

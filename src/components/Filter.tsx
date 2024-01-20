@@ -1,5 +1,6 @@
 import React, { useCallback, useState } from 'react'
 import dayjs, { Dayjs } from 'dayjs'
+import { useDispatch } from 'react-redux'
 
 import FilterBody from '@components/filter/FilterBody'
 import FilterHeading from '@components/filter/FilterHeading'
@@ -14,6 +15,9 @@ import DateInput from '@components/DateInput'
 import FilterButtonsRow from '@components/filter/FilterButtonsRow'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowBtn from '@components/ModalWindowBtn'
+import ToolTip from '@components/ToolTip'
+import { setHint } from '@redux/slices/hintSlice'
+import { maxDate, minDate } from '@const'
 import { RequestParams } from '@helpers/filterTypes'
 import '@assets/datePicker.css'
 
@@ -32,6 +36,14 @@ interface SetDateParams {
 
 const todayDate = dayjs()
 
+function isDateValid(date: Dayjs) {
+  return !date.isBefore(minDate) && !date.isAfter(maxDate) && date.isValid()
+}
+
+const invalidDateError = `Invalid date! The minimum date is ${minDate.format(
+  'DD.MM.YYYY',
+)}, and the maximum date is ${maxDate.format('DD.MM.YYYY')}.`
+
 const initialFormData = {
   shelfName: '',
   uploadDateFrom: todayDate,
@@ -45,6 +57,7 @@ const initialFormData = {
 
 function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
   const [formData, setFormData] = useState(initialFormData)
+  const dispatch = useDispatch()
 
   const hideFilter = useCallback(() => {
     setIsShow(false)
@@ -73,12 +86,18 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         requestBody.name = formData.shelfName
       }
       if (formData.uploadDateCheckbox) {
+        if (!isDateValid(formData.uploadDateFrom) || !isDateValid(formData.uploadDateTo)) {
+          return dispatch(setHint({ message: invalidDateError }))
+        }
         requestBody.last_upload_at = [
           formData.uploadDateFrom.format('YYYY-MM-DD'),
           formData.uploadDateTo.format('YYYY-MM-DD'),
         ]
       }
       if (formData.creationDateCheckbox) {
+        if (!isDateValid(formData.creationDateFrom) || !isDateValid(formData.creationDateTo)) {
+          return dispatch(setHint({ message: invalidDateError }))
+        }
         requestBody.created_at = [
           formData.creationDateFrom.format('YYYY-MM-DD'),
           formData.creationDateTo.format('YYYY-MM-DD'),
@@ -166,6 +185,7 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         </FilterForm>
       </FilterBody>
       <BlackOverlay show={isShow} onClick={hideFilter} />
+      <ToolTip />
     </>
   )
 }
