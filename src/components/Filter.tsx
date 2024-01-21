@@ -40,7 +40,7 @@ function isDateValid(date: Dayjs) {
   return !date.isBefore(minDate) && !date.isAfter(maxDate) && date.isValid()
 }
 
-const validDatesMessage = `The minimum date is ${minDate.format(
+const validDateDescription = `The minimum date is ${minDate.format(
   'DD.MM.YYYY',
 )}, and the maximum date is ${maxDate.format('DD.MM.YYYY')}.`
 
@@ -89,14 +89,14 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         if (!isDateValid(formData.uploadDateFrom)) {
           return dispatch(
             setHint({
-              message: `Invalid start date for the upload date interval! ${validDatesMessage}`,
+              message: `Invalid start date for the upload date interval! ${validDateDescription}`,
             }),
           )
         }
         if (!isDateValid(formData.uploadDateTo)) {
           return dispatch(
             setHint({
-              message: `Invalid end date for the upload date interval! ${validDatesMessage}`,
+              message: `Invalid end date for the upload date interval! ${validDateDescription}`,
             }),
           )
         }
@@ -109,14 +109,14 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         if (!isDateValid(formData.creationDateFrom)) {
           return dispatch(
             setHint({
-              message: `Invalid start date for the creation date interval! ${validDatesMessage}`,
+              message: `Invalid start date for the creation date interval! ${validDateDescription}`,
             }),
           )
         }
         if (!isDateValid(formData.creationDateTo)) {
           return dispatch(
             setHint({
-              message: `Invalid end date for the creation date interval! ${validDatesMessage}`,
+              message: `Invalid end date for the creation date interval! ${validDateDescription}`,
             }),
           )
         }
