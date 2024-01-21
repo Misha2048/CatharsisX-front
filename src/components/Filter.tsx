@@ -40,7 +40,7 @@ function isDateValid(date: Dayjs) {
   return !date.isBefore(minDate) && !date.isAfter(maxDate) && date.isValid()
 }
 
-const invalidDateError = `Invalid date! The minimum date is ${minDate.format(
+const validDatesMessage = `The minimum date is ${minDate.format(
   'DD.MM.YYYY',
 )}, and the maximum date is ${maxDate.format('DD.MM.YYYY')}.`
 
@@ -86,8 +86,19 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         requestBody.name = formData.shelfName
       }
       if (formData.uploadDateCheckbox) {
-        if (!isDateValid(formData.uploadDateFrom) || !isDateValid(formData.uploadDateTo)) {
-          return dispatch(setHint({ message: invalidDateError }))
+        if (!isDateValid(formData.uploadDateFrom)) {
+          return dispatch(
+            setHint({
+              message: `Invalid start date for the upload date interval! ${validDatesMessage}`,
+            }),
+          )
+        }
+        if (!isDateValid(formData.uploadDateTo)) {
+          return dispatch(
+            setHint({
+              message: `Invalid end date for the upload date interval! ${validDatesMessage}`,
+            }),
+          )
         }
         requestBody.last_upload_at = [
           formData.uploadDateFrom.format('YYYY-MM-DD'),
@@ -95,8 +106,19 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         ]
       }
       if (formData.creationDateCheckbox) {
-        if (!isDateValid(formData.creationDateFrom) || !isDateValid(formData.creationDateTo)) {
-          return dispatch(setHint({ message: invalidDateError }))
+        if (!isDateValid(formData.creationDateFrom)) {
+          return dispatch(
+            setHint({
+              message: `Invalid start date for the creation date interval! ${validDatesMessage}`,
+            }),
+          )
+        }
+        if (!isDateValid(formData.creationDateTo)) {
+          return dispatch(
+            setHint({
+              message: `Invalid end date for the creation date interval! ${validDatesMessage}`,
+            }),
+          )
         }
         requestBody.created_at = [
           formData.creationDateFrom.format('YYYY-MM-DD'),
