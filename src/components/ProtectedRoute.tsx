@@ -8,10 +8,10 @@ import { setValue } from '@redux/slices/UserSlice'
 import Spinner from '@components/Spinner'
 
 interface Props extends PropsWithChildren {
-  Component: React.FunctionComponent
+  component: React.FunctionComponent
 }
 
-function ProtectedRoute({ Component }: Props) {
+function ProtectedRoute({ component: Component }: Props) {
   const dispatch = useDispatch()
   const isEmailVerified = useSelector((state: RootState) => state.user.emailVerified)
   const [isFetching, setIsFetching] = useState(true)

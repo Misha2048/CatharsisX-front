@@ -13,6 +13,10 @@ import {
   IShelfsRequest,
   IShelfsResponse,
   ISignUpRequest,
+  IStillagesLikeRequest,
+  IStillagesLikeResponse,
+  IStillagesRequest,
+  IStillagesResponse,
   ITokensResponse,
   IUniversity,
   IUsersMe,
@@ -162,6 +166,26 @@ export const api = {
           data: options,
         })
         .then((response) => response.data as INewUniversityResponse)
+    },
+  },
+
+  stillages: {
+    get: async (options?: IStillagesRequest): Promise<IStillagesResponse[]> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/stillages',
+          params: options,
+        })
+        .then((response) => response.data as IStillagesResponse[])
+    },
+    like: async (options: IStillagesLikeRequest): Promise<IStillagesLikeResponse> => {
+      return axiosInstance
+        .request({
+          method: 'PATCH',
+          url: `/stillages/like/${options.id}`,
+        })
+        .then((response) => ({ status: response.status }) as IStillagesLikeResponse)
     },
   },
 }

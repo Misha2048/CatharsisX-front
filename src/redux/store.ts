@@ -4,6 +4,7 @@ import tokensReducer from './slices/tokensSlice'
 import hintReducer from './slices/hintSlice'
 import stillageReducer from './slices/stillageSlice'
 import userReducer from './slices/UserSlice'
+import libraryReducer from '@redux/slices/librarySlice'
 
 export const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ export const store = configureStore({
     hint: hintReducer,
     user: userReducer,
     stillage: stillageReducer,
+    library: libraryReducer,
   },
 })
 

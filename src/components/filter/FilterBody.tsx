@@ -13,7 +13,7 @@ const FilterBody = styled.div<Props>`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 500;
   background-color: #333;
   border-radius: 16px;
   transition: all 0.3s;
