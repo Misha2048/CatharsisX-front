@@ -94,7 +94,7 @@ export interface IStillagesResponse {
   created_at: string
   last_upload_at: string
   university_id: string
-  liked?: boolean
+  liked: boolean
 }
 
 export interface IStillagesLikeRequest {
@@ -103,4 +103,23 @@ export interface IStillagesLikeRequest {
 
 export interface IStillagesLikeResponse {
   status: number
+}
+
+export interface ICatalogRequest {
+  limit?: number
+  offset?: number
+}
+
+export interface ICatalogStillages {
+  id: string
+  name: string
+  created_at: string
+  last_upload_at: string
+  university_id: string
+  liked: boolean
+}
+
+export interface ICatalogResponse {
+  count: number
+  stillages: ICatalogStillages[]
 }

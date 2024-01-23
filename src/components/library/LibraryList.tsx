@@ -34,10 +34,8 @@ function LibraryList() {
   const stillagesList = useSelector((state: RootState) => state.library.list)
 
   const fetchData = useCallback(async () => {
-    const stillages = await api.stillages.get()
-    if (Array.isArray(stillages)) {
-      dispatch(setLibraryList(stillages))
-    }
+    const response = await api.catalog()
+    dispatch(setLibraryList(response.stillages))
   }, [])
 
   useEffect(() => {

@@ -1,6 +1,8 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
+  ICatalogRequest,
+  ICatalogResponse,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
   IFilesRequest,
@@ -187,5 +189,15 @@ export const api = {
         })
         .then((response) => ({ status: response.status }) as IStillagesLikeResponse)
     },
+  },
+
+  catalog: async (options?: ICatalogRequest): Promise<ICatalogResponse> => {
+    return axiosInstance
+      .request({
+        method: 'GET',
+        url: '/catalog',
+        params: options,
+      })
+      .then((response) => response.data as ICatalogResponse)
   },
 }
