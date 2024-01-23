@@ -67,6 +67,7 @@ const ResetPasswordForm: React.FC = () => {
               type='password'
               value={formData.newPassword}
               onChange={handleChange}
+              minLength={8}
               required
             />
             <Input
@@ -75,6 +76,7 @@ const ResetPasswordForm: React.FC = () => {
               type='password'
               value={formData.confimedPassword}
               onChange={handleChange}
+              minLength={8}
               required
             />
             <Button>Reset password</Button>
