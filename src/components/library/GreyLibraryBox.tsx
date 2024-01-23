@@ -5,7 +5,7 @@ const GreyLibraryBox = styled.div`
   background-color: #333;
   padding: 50px 0px;
   flex: 1 1 auto;
-  border-radius: 10px;
+  border-radius: 16px;
 
   @media only screen and (min-width: 600px) {
     padding: 50px 20px;
