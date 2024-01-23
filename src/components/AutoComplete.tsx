@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { styled } from '@linaria/react'
 interface IAutoComplete {
   options: string[]
-  onChange: unknown
+  onChange: void
   label?: string
   name?: string
   value: string
