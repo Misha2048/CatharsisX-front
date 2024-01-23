@@ -15,6 +15,7 @@ const StyledItem = styled.li`
   border-radius: 16px;
   display: flex;
   justify-content: center;
+  overflow: hidden;
   img {
     width: 24px;
     height: 24px;
@@ -34,6 +35,9 @@ const StyledItem = styled.li`
     color: #fff;
     padding: 4px 16px 0 0;
     flex: 1 1 auto;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
   }
   p + button {
     margin-right: 16px;
@@ -59,7 +63,7 @@ function StillageItem({ children, showDeleteModal }: PropsType) {
   return (
     <StyledItem>
       <img src={folderIcon} alt='' />
-      <p>{children}</p>
+      <p title={children}>{children}</p>
       <button>
         <img src={editIcon} alt='Rename' />
       </button>
