@@ -38,19 +38,21 @@ const StarBtn = styled.button`
     width: 100%;
     height: 100%;
   }
+  overflow: hidden;
 `
 
 const Title = styled.h3`
   min-height: 35px;
   margin-bottom: -3px;
-  max-height: 100%;
   max-width: 170px;
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-size: 32px;
   font-weight: 700;
   line-height: 100%;
-  overflow: auto;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
   word-wrap: break-word;
 `
 
@@ -86,7 +88,7 @@ function LibraryItem({ name, id, liked, addToFavourites }: Props) {
         <img src={liked ? starFilled : starTransparent} alt='' />
       </StarBtn>
 
-      <Title>{name}</Title>
+      <Title title={name}>{name}</Title>
 
       <StyledLink to={`/stillage/${id}`}>
         <img src={arrowIcon} alt='go to stillage' />
