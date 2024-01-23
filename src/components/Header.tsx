@@ -21,6 +21,9 @@ const HeaderNavigation = styled.nav`
     gap: 8px;
   }
 `
+const HeaderLogoContainer = styled.div`
+  cursor: pointer;
+`
 const HeaderLink = styled.button`
   color: #fff;
   font-family: Inter;
@@ -97,7 +100,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     top: 0;
     justify-content: center;
     z-index: 1000;
-    & > img {
+    & > ${HeaderLogoContainer} {
       display: none;
     }
   }
@@ -133,12 +136,19 @@ function Header() {
     navigate('/signup')
   }, [])
 
+  const redirectToHome = useCallback((event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
+    event.preventDefault()
+    navigate('/')
+  }, [])
+
   return (
     <>
       <BackgroundContainer>
         <MaxWidthContainer>
           <HeaderContainer open={isOpen}>
-            <Logo></Logo>
+            <HeaderLogoContainer onClick={redirectToHome}>
+              <Logo></Logo>
+            </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
               <SearchField></SearchField>
               <HeaderNavigation>
