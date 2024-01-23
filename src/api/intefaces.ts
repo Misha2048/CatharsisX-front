@@ -11,6 +11,7 @@ export interface ISignUpRequest {
   last_name: string
   email: string
   password: string
+  university_id: string
 }
 
 export interface ITokensResponse {
@@ -46,6 +47,10 @@ export interface IShelfsResponse {
   name: string
   last_upload_at: string
   created_at: string
+}
+export interface IUniversity {
+  id: string
+  name: string
 }
 
 export interface IDeleteShelvesRequest {

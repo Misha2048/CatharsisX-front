@@ -18,6 +18,7 @@ import {
   IStillagesRequest,
   IStillagesResponse,
   ITokensResponse,
+  IUniversity,
   IUsersMe,
 } from '@api/intefaces'
 
@@ -88,7 +89,16 @@ export const api = {
       })
     },
   },
-
+  universities: {
+    getUniversities: async (): Promise<IUniversity[]> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/universities',
+        })
+        .then((response) => response.data as IUniversity[])
+    },
+  },
   emailVerify: (() => {
     const funcToCall = async (): Promise<null> => {
       return axiosInstance

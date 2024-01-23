@@ -3,11 +3,12 @@ import { whiteColor } from './colors'
 import { styled } from '@linaria/react'
 
 interface InputProps {
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  onFocus?: (e: React.ChangeEvent<HTMLInputElement>) => void
   label: string
   value: string
   name: string
-  type: string
+  type?: string
   required?: boolean
   maxLength?: number
   minLength?: number
