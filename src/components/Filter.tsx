@@ -87,10 +87,6 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
 
       fetchData(requestBody)
 
-      // set the initial form data after the filter's been hidden
-      setTimeout(() => {
-        setFormData(initialFormData)
-      }, 300)
       hideFilter()
     },
     [formData, additionalParams, fetchData],
