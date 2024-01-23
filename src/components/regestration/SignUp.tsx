@@ -17,7 +17,7 @@ import ToolTip from '../ToolTip'
 import AutoComplete from '@components/AutoComplete'
 
 function SignUp() {
-  const [universities, setUniversities] = useState<Array<IUniversity>>([])
+  const [universities, setUniversities] = useState<IUniversity[]>([])
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
     last_name: '',
@@ -27,10 +27,10 @@ function SignUp() {
   })
 
   useEffect(() => {
-    const universitiesList = async () => {
-      const unilist = await api.universities.getUniversities().then((data) => data)
-      setUniversities(unilist)
-      console.log(unilist)
+    const universitiesList = () => {
+      api.universities.getUniversities().then((data) => {
+        setUniversities(data)
+      })
     }
     universitiesList()
   }, [])

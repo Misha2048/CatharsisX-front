@@ -86,13 +86,13 @@ export const api = {
     },
   },
   universities: {
-    getUniversities: async (): Promise<Array<IUniversity>> => {
+    getUniversities: async (): Promise<IUniversity[]> => {
       return axiosInstance
         .request({
           method: 'GET',
           url: '/universities',
         })
-        .then((response) => response.data as Array<IUniversity>)
+        .then((response) => response.data as IUniversity[])
     },
   },
   emailVerify: (() => {

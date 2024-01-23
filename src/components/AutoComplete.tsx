@@ -1,11 +1,9 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable react/jsx-key */
 import React, { useState, useEffect, useRef } from 'react'
 import { styled } from '@linaria/react'
 interface IAutoComplete {
   options: string[]
-  // onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
-  onChange: any
+  onChange: unknown
   label?: string
   name?: string
   value: string
@@ -71,7 +69,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
   value,
   onChange,
 }) => {
-  const autoCompleteRef = useRef<any>()
+  const autoCompleteRef = useRef<unknown>()
   const [input, setInput] = useState(value)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestions = options.filter((option: string) =>
@@ -96,7 +94,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
   }
 
   useEffect(() => {
-    const handleClick = (e: any) => {
+    const handleClick = (e: unknown) => {
       if (autoCompleteRef.current && !autoCompleteRef.current.contains(e.target)) {
         setShowSuggestions(false)
       }
