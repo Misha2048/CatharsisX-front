@@ -3,7 +3,6 @@ import { useCallback, useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import LibraryItem from '@components/library/LibraryItem'
-import ToolTip from '@components/ToolTip'
 import { api } from '@api/index'
 import { RootState } from '@redux/store'
 import { clearLibraryList, setLibraryList, setLiked } from '@redux/slices/librarySlice'
@@ -58,21 +57,18 @@ function LibraryList() {
   }, [])
 
   return (
-    <>
-      <StyledList>
-        {stillagesList &&
-          stillagesList.map((stillage) => (
-            <LibraryItem
-              key={stillage.id}
-              id={stillage.id}
-              name={stillage.name}
-              addToFavourites={addToFavourites}
-              liked={stillage.liked}
-            />
-          ))}
-      </StyledList>
-      <ToolTip />
-    </>
+    <StyledList>
+      {stillagesList &&
+        stillagesList.map((stillage) => (
+          <LibraryItem
+            key={stillage.id}
+            id={stillage.id}
+            name={stillage.name}
+            addToFavourites={addToFavourites}
+            liked={stillage.liked}
+          />
+        ))}
+    </StyledList>
   )
 }
 

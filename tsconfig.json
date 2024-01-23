@@ -9,7 +9,8 @@
       "@helpers/*": ["src/helpers/*"],
       "@pages/*": ["src/pages/*"],
       "@redux/*": ["src/redux/*"],
-      "@utils/*": ["src/utils/*"]
+      "@utils/*": ["src/utils/*"],
+      "@const": ["src/const.ts"]
     },
 
     "target": "es5",

@@ -1,6 +1,8 @@
 import { DatePicker } from '@mui/x-date-pickers'
-import dayjs, { Dayjs } from 'dayjs'
+import { Dayjs } from 'dayjs'
 import { useCallback } from 'react'
+
+import { maxDate, minDate } from '@const'
 
 interface SetDateParams {
   name: string
@@ -12,8 +14,6 @@ interface Props {
   value: Dayjs
   setDate: (params: SetDateParams) => void
 }
-
-const minDate = dayjs('01-01-2024', 'DD-MM-YYYY')
 
 function DateInput({ name, value, setDate }: Props) {
   const setNewDate = useCallback(
@@ -31,6 +31,7 @@ function DateInput({ name, value, setDate }: Props) {
       value={value}
       onChange={setNewDate}
       minDate={minDate}
+      maxDate={maxDate}
     />
   )
 }

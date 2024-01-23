@@ -7,7 +7,7 @@ interface Props {
 const TooltipContainer = styled.div<Props>`
   position: fixed;
   bottom: 16px;
-  z-index: 10;
+  z-index: 1000;
   background-color: #3ec290;
   width: 300px;
   max-height: calc(100vh - 32px);
