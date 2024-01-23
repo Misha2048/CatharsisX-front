@@ -69,7 +69,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
   value,
   onChange,
 }) => {
-  const autoCompleteRef = useRef<unknown>()
+  const autoCompleteRef = useRef<HTMLElement | undefined>()
   const [input, setInput] = useState(value)
   const [showSuggestions, setShowSuggestions] = useState(false)
   const suggestions = options.filter((option: string) =>
