@@ -1,4 +1,3 @@
-import React from 'react'
 import { css } from '@linaria/core'
 import CatharsisX from '../assets/CatharsisX.svg'
 
