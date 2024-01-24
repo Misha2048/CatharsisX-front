@@ -44,24 +44,23 @@ function SignUp() {
   }
 
   // Send formDate to server
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
     if (nameExists(universities, formDate.university_id)) {
       const uniID = getIdByName(universities, formDate.university_id)
       formDate.university_id = uniID
 
-      api.auth.signUp(formDate).then((data) => {
-        console.log(data)
-        setFormDate({
-          first_name: '',
-          last_name: '',
-          email: '',
-          password: '',
-          university_id: '',
-        })
-        location.reload()
+      const data = await api.auth.signUp(formDate)
+      console.log(data)
+      setFormDate({
+        first_name: '',
+        last_name: '',
+        email: '',
+        password: '',
+        university_id: '',
       })
+      location.reload()
     }
   }
 
