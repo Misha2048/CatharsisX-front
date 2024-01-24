@@ -17,6 +17,7 @@ axiosInstance.interceptors.request.use((config) => {
   if (token && !config.headers.Authorization) {
     config.headers.Authorization = `Bearer ${token}`
   }
+  config.headers['ngrok-skip-browser-warning'] = '69420'
   return config
 })
 
@@ -39,7 +40,10 @@ axiosInstance.interceptors.response.use(
     if (error.response.status === 401 && !error.config._isRetry && refreshToken) {
       try {
         const resp = await axiosInstance.get('/auth/refresh', {
-          headers: { Authorization: `Bearer ${refreshToken}` },
+          headers: {
+            Authorization: `Bearer ${refreshToken}`,
+            'ngrok-skip-browser-warning': '69420',
+          },
           _isRetry: true,
         } as ConfigType)
         store.dispatch(setTokens(resp.data))
