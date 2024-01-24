@@ -51,16 +51,17 @@ function SignUp() {
       const uniID = getIdByName(universities, formDate.university_id)
       formDate.university_id = uniID
 
-      api.auth.signUp(formDate).then((data) => console.log(data))
-
-      setFormDate({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        university_id: '',
+      api.auth.signUp(formDate).then((data) => {
+        console.log(data)
+        setFormDate({
+          first_name: '',
+          last_name: '',
+          email: '',
+          password: '',
+          university_id: '',
+        })
+        location.reload()
       })
-      location.reload()
     }
   }
 
