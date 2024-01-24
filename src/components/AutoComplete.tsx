@@ -3,7 +3,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import { styled } from '@linaria/react'
 interface IAutoComplete {
   options: string[]
-  onChange: void
+  onChange: React.ChangeEvent<HTMLInputElement>
   label?: string
   name?: string
   value: string
@@ -105,7 +105,7 @@ const AutoComplete: React.FC<IAutoComplete> = ({
     return () => {
       document.removeEventListener('click', handleClick)
     }
-  }, [value])
+  }, [value, input])
 
   return (
     <AutoCompleteContainer ref={autoCompleteRef}>
