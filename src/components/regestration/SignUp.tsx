@@ -60,6 +60,7 @@ function SignUp() {
         password: '',
         university_id: '',
       })
+      location.reload()
     }
   }
 
