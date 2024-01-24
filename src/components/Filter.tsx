@@ -37,7 +37,7 @@ interface SetDateParams {
 const todayDate = dayjs()
 
 function isDateValid(date: Dayjs) {
-  return !date.isBefore(minDate) && !date.isAfter(maxDate.add(1, 'day')) && date.isValid()
+  return !date.isBefore(minDate) && !date.isAfter(maxDate) && date.isValid()
 }
 
 const validDateDescription = `The minimum date is ${minDate.format(
