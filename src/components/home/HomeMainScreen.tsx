@@ -55,16 +55,19 @@ const Wrapper = styled.div`
   }
 `
 
-const LeftColumn = styled.div`
+const TextColumn = styled.div`
   max-width: 420px;
   height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  gap: 32px;
+  gap: 24px;
   order: 2;
 
+  @media screen and (min-width: 375px) and (min-height: 768px) {
+    gap: 32px;
+  }
   @media screen and (min-width: 1024px) {
     order: 1;
     max-width: 356px;
@@ -81,14 +84,14 @@ const LeftColumn = styled.div`
   }
 `
 
-const RightColumn = styled.div`
+const ImageColumn = styled.div`
   display: none;
   background: url(${bgImage}) center/cover no-repeat;
   width: 100%;
   padding-bottom: 68.438%;
   order: 1;
 
-  @media screen and (min-width: 375px) and (min-height: 768px) and (orientation: portrait) {
+  @media screen and (min-width: 360px) and (min-height: 667px) and (orientation: portrait) {
     display: block;
   }
   @media screen and (min-height: 768px) and (min-width: 769px) and (orientation: landscape) {
@@ -115,10 +118,13 @@ const RightColumn = styled.div`
 
 const Heading = styled.h1`
   color: #fff;
-  font-size: 32px;
+  font-size: 26px;
   font-weight: 700;
   line-height: 1.1;
 
+  @media screen and (min-width: 375px) and (min-height: 768px) {
+    font-size: 32px;
+  }
   @media screen and (min-width: 568px) and (orientation: landscape) {
     font-size: 26px;
   }
@@ -163,12 +169,12 @@ function HomeMainScreen({ onButtonClick }: Props) {
   return (
     <StyledMainScreen>
       <Wrapper>
-        <LeftColumn>
+        <TextColumn>
           <Heading>From burden to bond. Store, share, connect with CatharsisX.</Heading>
           <Text>Store data, ask people, and get answers all in the browser — with CatharsisX.</Text>
           <MainScreenBtn onClick={onButtonClick}>Try for free</MainScreenBtn>
-        </LeftColumn>
-        <RightColumn />
+        </TextColumn>
+        <ImageColumn />
       </Wrapper>
     </StyledMainScreen>
   )
