@@ -13,3 +13,7 @@ export function convertFileSize(fileSize: number) {
 export function getFileExtensionUppercase(fileName: string) {
   return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length).toUpperCase()
 }
+
+export function getFileExtensionLowercase(fileName: string) {
+  return fileName.substring(fileName.lastIndexOf('.') + 1, fileName.length).toLowerCase()
+}
