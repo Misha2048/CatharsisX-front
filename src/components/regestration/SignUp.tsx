@@ -15,8 +15,13 @@ import { api } from '../../api'
 import { ISignUpRequest, IUniversity } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
 import AutoComplete from '@components/AutoComplete'
+import { setHint } from '../../redux/slices/hintSlice'
+import { useDispatch } from 'react-redux'
+import PassportValidator from '@helpers/PasswordValidator'
 
 function SignUp() {
+  const dispatch = useDispatch()
+
   const [universities, setUniversities] = useState<IUniversity[]>([])
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
@@ -47,21 +52,29 @@ function SignUp() {
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (nameExists(universities, formDate.university_id)) {
+    if (!PassportValidator.validatePassword(formDate.password)) {
+      const errors = PassportValidator.getPasswordValidationErrors(formDate.password)
+      dispatch(setHint({ message: errors.join('\n') }))
+      return
+    }
+
+    if (!nameExists(universities, formDate.university_id)) {
+      dispatch(setHint({ message: 'There is no such university our list.' }))
+      return
+    } else {
       const uniID = getIdByName(universities, formDate.university_id)
       formDate.university_id = uniID
-
-      const data = await api.auth.signUp(formDate)
-      console.log(data)
-      setFormDate({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        university_id: '',
-      })
-      location.reload()
     }
+
+    api.auth.signUp(formDate)
+    setFormDate({
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      university_id: '',
+    })
+    location.reload()
   }
 
   return (

@@ -12,15 +12,16 @@ import { useLocation } from 'react-router-dom'
 import ToolTip from './ToolTip'
 import { setHint } from '../redux/slices/hintSlice'
 import { useDispatch } from 'react-redux'
+import PassportValidator from '@helpers/PasswordValidator'
 
 const ResetPasswordFormStyle = css`
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    gap:40px
-    max-width:300px;
-    `
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  max-width: 300px;
+`
 
 const ResetPasswordForm: React.FC = () => {
   const { pathname } = useLocation()
@@ -31,25 +32,33 @@ const ResetPasswordForm: React.FC = () => {
     confimedPassword: '',
   })
 
-  //Getting key/value from input to update formDate
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     setFormData((previousData) => ({ ...previousData, [name]: value }))
   }
 
-  // Send formDate to server
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (arePasswordsMatching(formData.newPassword, formData.confimedPassword)) {
-      api.auth.newPassword({
-        id: id,
-        password: formData.newPassword,
-      })
-      setFormData({
-        newPassword: '',
-        confimedPassword: '',
-      })
+    if (formData.newPassword === formData.confimedPassword) {
+      if (PassportValidator.validatePassword(formData.newPassword)) {
+        api.auth
+          .newPassword({ id, password: formData.newPassword })
+          .then(() => {
+            setFormData({ newPassword: '', confimedPassword: '' })
+            dispatch(setHint({ message: 'Password changed successfully!' }))
+          })
+          .catch((error) => {
+            dispatch(setHint({ message: error.message }))
+          })
+        setFormData({
+          newPassword: '',
+          confimedPassword: '',
+        })
+      } else {
+        const errors = PassportValidator.getPasswordValidationErrors(formData.newPassword)
+        dispatch(setHint({ message: errors.join('\n') }))
+      }
     } else {
       dispatch(setHint({ message: 'Passwords should be the same!' }))
     }
@@ -86,13 +95,6 @@ const ResetPasswordForm: React.FC = () => {
       <ToolTip />
     </CenteredContainer>
   )
-}
-
-function arePasswordsMatching(newPassword: string, confirmPassword: string): boolean {
-  const trimmedNewPassword = newPassword.trim()
-  const trimmedConfirmPassword = confirmPassword.trim()
-
-  return trimmedNewPassword === trimmedConfirmPassword
 }
 
 export default ResetPasswordForm
