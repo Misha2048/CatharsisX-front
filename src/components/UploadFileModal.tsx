@@ -52,12 +52,15 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
     [shelfId],
   )
 
-  const showFileName = useCallback(() => {
-    if (fileName) {
-      return `${fileName}.${getFileExtensionLowercase((file as File).name)}`
-    }
-    return getFileNameAndSize(file as File)
-  }, [shelfId, file, fileName])
+  const showFileName = useCallback(
+    (withSize = true) => {
+      if (fileName) {
+        return `${fileName}.${getFileExtensionLowercase((file as File).name)}`
+      }
+      return withSize ? getFileNameAndSize(file as File) : (file as File).name
+    },
+    [shelfId, file, fileName],
+  )
 
   const submitForm = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
