@@ -65,7 +65,7 @@ function SignUp() {
       formDate.university_id = uniID
     }
 
-    api.auth.signUp(formDate)
+    await api.auth.signUp(formDate)
     setFormDate({
       first_name: '',
       last_name: '',
