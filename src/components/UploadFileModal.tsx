@@ -11,7 +11,7 @@ import Input from '@components/Input'
 import ModalWindowBtn from '@components/ModalWindowBtn'
 import ToolTip from '@components/ToolTip'
 import UploadFileText from '@components/uploadFile/UploadFileText'
-import { getFileNameAndSize } from '@helpers/fileHelper'
+import { getFileExtensionLowercase, getFileNameAndSize } from '@helpers/fileHelper'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
 import ModalWindowSpinner from '@components/ModalWindowSpinner'
@@ -52,12 +52,15 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
     [shelfId],
   )
 
-  const showFileName = useCallback(() => {
-    if (fileName) {
-      return fileName
-    }
-    return getFileNameAndSize(file as File)
-  }, [shelfId, file, fileName])
+  const showFileName = useCallback(
+    (withSize = true) => {
+      if (fileName.trim()) {
+        return `${fileName.trimEnd()}.${getFileExtensionLowercase((file as File).name)}`
+      }
+      return withSize ? getFileNameAndSize(file as File) : (file as File).name
+    },
+    [shelfId, file, fileName],
+  )
 
   const submitForm = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
@@ -66,7 +69,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       if (!file) return
 
       setIsLoading(true)
-      const name = fileName || file.name
+      const name = showFileName(false)
       const data = {
         file,
         shelfId,
