@@ -15,8 +15,14 @@ import { api } from '../../api'
 import { ISignUpRequest, IUniversity } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
 import AutoComplete from '@components/AutoComplete'
+import { setHint } from '../../redux/slices/hintSlice'
+import { useDispatch } from 'react-redux'
+import PassportValidator from '@helpers/PasswordValidator'
+import { useNavigate } from 'react-router-dom'
 
 function SignUp() {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   const [universities, setUniversities] = useState<IUniversity[]>([])
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
@@ -35,7 +41,6 @@ function SignUp() {
     universitiesList()
   }, [])
 
-  //Getting key/value from input to update formDate
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name !== undefined) {
@@ -43,25 +48,32 @@ function SignUp() {
     }
   }
 
-  // Send formDate to server
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (nameExists(universities, formDate.university_id)) {
+    if (!PassportValidator.validatePassword(formDate.password)) {
+      const errors = PassportValidator.getPasswordValidationErrors(formDate.password)
+      dispatch(setHint({ message: errors.join('\n') }))
+      return
+    }
+
+    if (!nameExists(universities, formDate.university_id)) {
+      dispatch(setHint({ message: 'There is no such university our list.' }))
+      return
+    } else {
       const uniID = getIdByName(universities, formDate.university_id)
       formDate.university_id = uniID
-
-      const data = await api.auth.signUp(formDate)
-      console.log(data)
-      setFormDate({
-        first_name: '',
-        last_name: '',
-        email: '',
-        password: '',
-        university_id: '',
-      })
-      location.reload()
     }
+
+    await api.auth.signUp(formDate)
+    setFormDate({
+      first_name: '',
+      last_name: '',
+      email: '',
+      password: '',
+      university_id: '',
+    })
+    navigate('/check-email')
   }
 
   return (
