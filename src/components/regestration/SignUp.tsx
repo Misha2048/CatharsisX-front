@@ -18,10 +18,11 @@ import AutoComplete from '@components/AutoComplete'
 import { setHint } from '../../redux/slices/hintSlice'
 import { useDispatch } from 'react-redux'
 import PassportValidator from '@helpers/PasswordValidator'
+import { useNavigate } from 'react-router-dom'
 
 function SignUp() {
   const dispatch = useDispatch()
-
+  const navigate = useNavigate()
   const [universities, setUniversities] = useState<IUniversity[]>([])
   const [formDate, setFormDate] = useState<ISignUpRequest>({
     first_name: '',
@@ -40,7 +41,6 @@ function SignUp() {
     universitiesList()
   }, [])
 
-  //Getting key/value from input to update formDate
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
     if (name !== undefined) {
@@ -48,7 +48,6 @@ function SignUp() {
     }
   }
 
-  // Send formDate to server
   const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
@@ -74,7 +73,7 @@ function SignUp() {
       password: '',
       university_id: '',
     })
-    location.reload()
+    navigate('/check-email')
   }
 
   return (

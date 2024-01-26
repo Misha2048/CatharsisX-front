@@ -40,28 +40,30 @@ const ResetPasswordForm: React.FC = () => {
   const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    if (formData.newPassword === formData.confimedPassword) {
-      if (PassportValidator.validatePassword(formData.newPassword)) {
-        api.auth
-          .newPassword({ id, password: formData.newPassword })
-          .then(() => {
-            setFormData({ newPassword: '', confimedPassword: '' })
-            dispatch(setHint({ message: 'Password changed successfully!' }))
-          })
-          .catch((error) => {
-            dispatch(setHint({ message: error.message }))
-          })
-        setFormData({
-          newPassword: '',
-          confimedPassword: '',
-        })
-      } else {
-        const errors = PassportValidator.getPasswordValidationErrors(formData.newPassword)
-        dispatch(setHint({ message: errors.join('\n') }))
-      }
-    } else {
-      dispatch(setHint({ message: 'Passwords should be the same!' }))
+    if (!(formData.newPassword === formData.confimedPassword)) {
+      dispatch(setHint({ message: 'Passwords should be the same' }))
+      return
     }
+
+    if (PassportValidator.validatePassword(formData.newPassword)) {
+      api.auth
+        .newPassword({ id, password: formData.newPassword })
+        .then(() => {
+          setFormData({ newPassword: '', confimedPassword: '' })
+          dispatch(setHint({ message: 'Password changed successfully!' }))
+        })
+        .catch((error) => {
+          dispatch(setHint({ message: error.message }))
+        })
+      setFormData({
+        newPassword: '',
+        confimedPassword: '',
+      })
+    } else {
+      const errors = PassportValidator.getPasswordValidationErrors(formData.newPassword)
+      dispatch(setHint({ message: errors.join('\n') }))
+    }
+    ``
   }
   return (
     <CenteredContainer>
