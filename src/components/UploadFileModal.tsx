@@ -69,7 +69,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       if (!file) return
 
       setIsLoading(true)
-      const name = showFileName()
+      const name = showFileName(false)
       const data = {
         file,
         shelfId,
