@@ -54,8 +54,8 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
 
   const showFileName = useCallback(
     (withSize = true) => {
-      if (fileName) {
-        return `${fileName}.${getFileExtensionLowercase((file as File).name)}`
+      if (fileName.trim()) {
+        return `${fileName.trimEnd()}.${getFileExtensionLowercase((file as File).name)}`
       }
       return withSize ? getFileNameAndSize(file as File) : (file as File).name
     },
