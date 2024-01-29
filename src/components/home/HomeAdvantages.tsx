@@ -1,4 +1,3 @@
-import React from 'react'
 import { styled } from '@linaria/react'
 
 import HomeValue from '@components/home/HomeValue'
@@ -23,7 +22,7 @@ const Wrapper = styled.div`
   margin: 0px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   gap: 30px;
 
   @media screen and (min-width: 568px) {
@@ -42,13 +41,19 @@ function HomeAdvantages() {
     <StyledAdvantages>
       <Wrapper>
         <HomeValue iconPath={bigUserIcon} title='Communicate'>
-          Lorem ipsum dolor sit amet consectetur adipiscing elit a quam dapibus rutrum suscipit, di.
+          Learning thrives in a community, and CatharsisX fosters just that. Connect with a network
+          of dedicated students like yourself, eager to share their insights and collaborate on
+          challenging topics.{' '}
         </HomeValue>
         <HomeValue iconPath={notesIcon} title='Organize'>
-          Lorem ipsum dolor sit amet consectetur adipiscing elit a quam dapibus rutrum suscipit, di.
+          Learning shouldn&apos;t be a monotonous grind. Personalize your experience on CatharsisX
+          and make studying a joy. Organize your notes with customizable folders, highlight key
+          points with vibrant colors, and even choose a theme that resonates with you.{' '}
         </HomeValue>
         <HomeValue iconPath={penIcon} title='Create'>
-          Lorem ipsum dolor sit amet consectetur adipiscing elit a quam dapibus rutrum suscipit, di.
+          Stay organized and stress-free with our user-friendly shelves. Upload your personal study
+          materials, lecture notes, and even favorite online resources, creating a personalized
+          knowledge bank accessible anytime, anywhere.{' '}
         </HomeValue>
       </Wrapper>
     </StyledAdvantages>
