@@ -18,13 +18,13 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import ToolTip from '@components/ToolTip'
 import { setHint } from '@redux/slices/hintSlice'
 import { maxDate, minDate } from '@const'
-import { RequestParams } from '@helpers/filterTypes'
+import { FilterParams } from '@helpers/filterTypes'
 import '@assets/datePicker.css'
 
 interface Props {
   isShow: boolean
   setIsShow: (value: boolean) => void
-  fetchData: (RequestParams: RequestParams) => Promise<void>
+  filterData: (requestParams: FilterParams) => Promise<void>
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   additionalParams?: { [key: string]: any }
 }
@@ -55,7 +55,7 @@ const initialFormData = {
   creationDateCheckbox: false,
 }
 
-function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
+function Filter({ isShow, setIsShow, additionalParams, filterData }: Props) {
   const [formData, setFormData] = useState(initialFormData)
   const dispatch = useDispatch()
 
@@ -81,7 +81,7 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
   const handleSubmit = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      const requestBody: RequestParams = additionalParams ? { ...additionalParams } : {}
+      const requestBody: FilterParams = additionalParams ? { ...additionalParams } : {}
       if (formData.nameCheckbox) {
         requestBody.name = formData.shelfName
       }
@@ -126,11 +126,11 @@ function Filter({ isShow, setIsShow, additionalParams, fetchData }: Props) {
         ]
       }
 
-      fetchData(requestBody)
+      filterData(requestBody)
 
       hideFilter()
     },
-    [formData, additionalParams, fetchData],
+    [formData, additionalParams, filterData],
   )
 
   return (

@@ -12,6 +12,8 @@ import Stillage from '@pages/Stillage'
 import Header from '@components/Header'
 import ProtectedRoute from '@components/ProtectedRoute'
 import Library from '@pages/Library'
+import MyStillages from '@pages/MyStillages'
+import LikedStillages from '@pages/LikedStillages'
 
 dayjs.locale('en-gb')
 
@@ -21,7 +23,9 @@ function App() {
       <Route path='/' element={<Header />}>
         <Route index element={<Home />} />
         <Route path='check-email' element={<CheckVerify />} />
-        <Route path='stillage/:id' element={<ProtectedRoute component={Stillage} />} />
+        <Route path='stillages' element={<ProtectedRoute component={MyStillages} />} />
+        <Route path='stillages/:id' element={<ProtectedRoute component={Stillage} />} />
+        <Route path='stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
         <Route path='library' element={<ProtectedRoute component={Library} />} />
       </Route>
       <Route path='/login' element={<LogIn />} />

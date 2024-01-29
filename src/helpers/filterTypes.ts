@@ -1,4 +1,4 @@
-export interface RequestParams {
+export interface FilterParams {
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [key: string]: any
   name?: string

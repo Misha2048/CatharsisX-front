@@ -1,16 +1,20 @@
 import { styled } from '@linaria/react'
 import { useCallback } from 'react'
 import { Link } from 'react-router-dom'
+import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
 
 import arrowIcon from '@assets/arrow-right-icon.svg'
 import starTransparent from '@assets/star-transparent.svg'
 import starFilled from '@assets/star-filled.svg'
+import { api } from '@api/index'
+import { setLiked } from '@redux/slices/librarySlice'
+import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   id: string
   name: string
   liked: boolean | undefined
-  addToFavourites: (id: string, liked: boolean, name: string) => Promise<unknown>
+  dispatch: Dispatch<UnknownAction>
 }
 
 const StyledLibraryItem = styled.li`
@@ -70,14 +74,21 @@ const StyledLink = styled(Link)`
   }
 `
 
-function LibraryItem({ name, id, liked, addToFavourites }: Props) {
+function LibraryItem({ name, id, liked, dispatch }: Props) {
   const handleClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
       if (liked === undefined) {
-        liked = false
+        liked = false // TODO delete it later (when all endpoints returns elems with the liked prop)
       }
-      addToFavourites(id, !liked, name)
+      await api.stillages.like({ id })
+      liked = !liked
+      dispatch(setLiked({ id, liked }))
+      if (liked) {
+        dispatch(setHint({ message: `${name} was added to favourites` }))
+      } else {
+        dispatch(setHint({ message: `${name} was removed from favourites` }))
+      }
     },
     [id, liked],
   )
@@ -90,7 +101,7 @@ function LibraryItem({ name, id, liked, addToFavourites }: Props) {
 
       <Title title={name}>{name}</Title>
 
-      <StyledLink to={`/stillage/${id}`}>
+      <StyledLink to={`/stillages/${id}`}>
         <img src={arrowIcon} alt='go to stillage' />
       </StyledLink>
     </StyledLibraryItem>

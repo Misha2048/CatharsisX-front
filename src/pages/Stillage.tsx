@@ -12,7 +12,7 @@ import FilterWithShowBtn from '@components/FilterWithShowBtn'
 import { api } from '@api/index'
 import { IShelfsRequest } from '@api/intefaces'
 import { setStillageList } from '@redux/slices/stillageSlice'
-import { RequestParams } from '@helpers/filterTypes'
+import { FilterParams } from '@helpers/filterTypes'
 
 function Stillage() {
   const { id } = useParams()
@@ -21,8 +21,7 @@ function Stillage() {
   // this param will be added to requestParams
   const additionalParams = { stillage: id }
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const fetchData = useCallback(async (requestParams: RequestParams) => {
+  const filterData = useCallback(async (requestParams: FilterParams) => {
     const resp = await api.shelves.get(requestParams as IShelfsRequest)
     dispatch(setStillageList(resp))
   }, [])
@@ -32,7 +31,7 @@ function Stillage() {
       <StillageWrapper>
         <StillageHeadingRow>
           <StillageHeading>Stillage</StillageHeading>
-          <FilterWithShowBtn fetchData={fetchData} additionalParams={additionalParams} />
+          <FilterWithShowBtn filterData={filterData} additionalParams={additionalParams} />
         </StillageHeadingRow>
         <GreyStillageBox>
           <StillageList />
