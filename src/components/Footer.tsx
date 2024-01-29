@@ -1,4 +1,3 @@
-import React from 'react'
 import { styled } from '@linaria/react'
 import CatharsisX from '../assets/CatharsisX.svg'
 import chatIcon from '../assets/chatIcon.svg'
@@ -8,6 +7,7 @@ import myMaterialIcon from '../assets/myMaterialsIcon.svg'
 import pricingIcon from '../assets/pricingIcon.svg'
 import purchasesIcon from '../assets/purchasesIcon.svg'
 import { css } from '@linaria/core'
+import { useNavigate } from 'react-router-dom'
 
 const FooterContainer = styled.footer`
   display: flex;
@@ -86,34 +86,40 @@ const FooterLogo = css`
 `
 
 function Footer() {
+  const navigator = useNavigate()
   return (
     <FooterContainer>
-      <img src={CatharsisX} alt='CatharsisX Logo' className={FooterLogo} />
+      <img
+        onClick={() => navigator('/')}
+        src={CatharsisX}
+        alt='CatharsisX Logo'
+        className={FooterLogo}
+      />
       <FooterNavigation style={{ color: '#fff' }}>
         <FooterNavigationColumn>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/')}>
             <img src={myMaterialIcon} alt='My materials icon' />
             My materials
           </FooterNavLink>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/library')}>
             <img src={libraryIcon} alt='Library icon' />
             Library
           </FooterNavLink>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/forum')}>
             <img src={forumIcon} alt='Forum icon' />
             Forum
           </FooterNavLink>
         </FooterNavigationColumn>
         <FooterNavigationColumn>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/purchases')}>
             <img src={purchasesIcon} alt='Purchases icon' />
             Purchases
           </FooterNavLink>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/price')}>
             <img src={pricingIcon} alt='Pricing icon' />
-            Pricing
+            Price
           </FooterNavLink>
-          <FooterNavLink>
+          <FooterNavLink onClick={() => navigator('/chat')}>
             <img src={chatIcon} alt='Chat icon' />
             Chat
           </FooterNavLink>
