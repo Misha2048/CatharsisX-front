@@ -1,7 +1,6 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
-  ICatalogRequest,
   ICatalogResponse,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
@@ -17,6 +16,8 @@ import {
   ISignUpRequest,
   IStillagesLikeRequest,
   IStillagesLikeResponse,
+  IStillagesLikedResponse,
+  IStillagesPaginationRequest,
   IStillagesRequest,
   IStillagesResponse,
   ITokensResponse,
@@ -189,9 +190,18 @@ export const api = {
         })
         .then((response) => ({ status: response.status }) as IStillagesLikeResponse)
     },
+    liked: async (options?: IStillagesPaginationRequest): Promise<IStillagesLikedResponse> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/stillages/liked',
+          params: options,
+        })
+        .then((response) => response.data as IStillagesLikedResponse)
+    },
   },
 
-  catalog: async (options?: ICatalogRequest): Promise<ICatalogResponse> => {
+  catalog: async (options?: IStillagesPaginationRequest): Promise<ICatalogResponse> => {
     return axiosInstance
       .request({
         method: 'GET',

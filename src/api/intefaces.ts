@@ -105,9 +105,17 @@ export interface IStillagesLikeResponse {
   status: number
 }
 
-export interface ICatalogRequest {
+export interface IStillagesPaginationRequest {
   limit?: number
   offset?: number
+  name?: string
+  last_upload_at?: string[]
+  created_at?: string[]
+}
+
+export interface IStillagesLikedResponse {
+  count: number
+  likedStillages: IStillagesResponse[]
 }
 
 export interface ICatalogStillages {
