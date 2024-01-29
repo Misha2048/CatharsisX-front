@@ -1,12 +1,16 @@
 import { styled } from '@linaria/react'
-import { useCallback, useEffect } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector } from 'react-redux'
+import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
+import { RootState } from '@redux/store'
 
 import LibraryItem from '@components/library/LibraryItem'
-import { api } from '@api/index'
-import { RootState } from '@redux/store'
-import { clearLibraryList, setLibraryList, setLiked } from '@redux/slices/librarySlice'
-import { setHint } from '@redux/slices/hintSlice'
+import { clearLibraryList } from '@redux/slices/librarySlice'
+
+interface Props {
+  dispatch: Dispatch<UnknownAction>
+  fetchData: () => Promise<void>
+}
 
 const StyledList = styled.ul`
   display: flex;
@@ -28,29 +32,13 @@ const StyledList = styled.ul`
   }
 `
 
-function LibraryList() {
-  const dispatch = useDispatch()
+function LibraryList({ fetchData, dispatch }: Props) {
   const stillagesList = useSelector((state: RootState) => state.library.list)
-
-  const fetchData = useCallback(async () => {
-    const response = await api.catalog()
-    dispatch(setLibraryList(response.stillages))
-  }, [])
 
   useEffect(() => {
     fetchData()
     return () => {
       dispatch(clearLibraryList())
-    }
-  }, [])
-
-  const addToFavourites = useCallback(async (id: string, liked: boolean, name: string) => {
-    await api.stillages.like({ id })
-    dispatch(setLiked({ id, liked }))
-    if (liked) {
-      dispatch(setHint({ message: `${name} was added to favourites` }))
-    } else {
-      dispatch(setHint({ message: `${name} was removed from favourites` }))
     }
   }, [])
 
@@ -62,7 +50,7 @@ function LibraryList() {
             key={stillage.id}
             id={stillage.id}
             name={stillage.name}
-            addToFavourites={addToFavourites}
+            dispatch={dispatch}
             liked={stillage.liked}
           />
         ))}
