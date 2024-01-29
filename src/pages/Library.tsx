@@ -1,22 +1,21 @@
-import GreyLibraryBox from '@components/library/GreyLibraryBox'
-import LibraryContainer from '@components/library/LibraryContainer'
-import LibraryList from '@components/library/LibraryList'
-import StillageHeading from '@components/stillage/StillageHeading'
-import StillageHeadingRow from '@components/stillage/StillageHeadingRow'
-import StillageWrapper from '@components/stillage/StillageWrapper'
+import { useDispatch } from 'react-redux'
+import { useCallback } from 'react'
+
+import { api } from '@api/index'
+import { FilterParams } from '@helpers/filterTypes'
+import { setLibraryList } from '@redux/slices/librarySlice'
+import Stillages from '@components/Stillages'
 
 function Library() {
+  const dispatch = useDispatch()
+
+  const fetchData = useCallback(async (requestParams?: FilterParams) => {
+    const response = await api.catalog(requestParams)
+    dispatch(setLibraryList(response.stillages))
+  }, [])
+
   return (
-    <LibraryContainer>
-      <StillageWrapper>
-        <StillageHeadingRow>
-          <StillageHeading>Library</StillageHeading>
-        </StillageHeadingRow>
-        <GreyLibraryBox>
-          <LibraryList />
-        </GreyLibraryBox>
-      </StillageWrapper>
-    </LibraryContainer>
+    <Stillages title='Library' fetchData={fetchData} filterData={fetchData} dispatch={dispatch} />
   )
 }
 
