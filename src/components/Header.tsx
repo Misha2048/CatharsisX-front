@@ -159,10 +159,12 @@ function Header() {
                 <HeaderLink>Price</HeaderLink>
                 <HeaderLink>Chat</HeaderLink>
               </HeaderNavigation>
-              <ButtonsContainer>
-                <Button onClick={redirectToLogin}>Log in</Button>
-                <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
-              </ButtonsContainer>
+              {sessionStorage.getItem('accessToken') && (
+                <ButtonsContainer>
+                  <Button onClick={redirectToLogin}>Log in</Button>
+                  <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
+                </ButtonsContainer>
+              )}
             </BurgerMenuContainer>
             <HeaderBurger open={isOpen}>
               <BurgerIcon open={isOpen} setOpen={setIsOpen} />

@@ -13,8 +13,11 @@ import AdditionalRegistryContent from './AdditionalRegistryContent'
 import { api } from '../../api'
 import { ILoginRequest } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
+import { useNavigate } from 'react-router-dom'
 
 function LogIn() {
+  const navigator = useNavigate()
+
   //Referencing to ILoginRequest interface
   const [formDate, setFormDate] = useState<ILoginRequest>({
     email: '',
@@ -38,6 +41,7 @@ function LogIn() {
         email: '',
         password: '',
       })
+      navigator('/')
     })
   }
 
