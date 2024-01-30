@@ -70,20 +70,24 @@ function CheckVerify() {
   }, [])
 
   useEffect(() => {
+    checkEmailIsVerified()
+
     const pollingEmailStatus = new PollingTool(async () => {
-      const userInfo = await api.users.me()
-
-      if (userInfo.email_verified) {
-        dispatch(setValue({ emailVerified: true }))
-        pollingEmailStatus.stop()
-
-        navigate('/', { replace: true })
-      }
+      checkEmailIsVerified(pollingEmailStatus)
     }, 5000)
 
     pollingEmailStatus.start()
 
     return () => pollingEmailStatus.stop()
+  }, [])
+
+  const checkEmailIsVerified = useCallback(async (pollingEmailStatus?: PollingTool) => {
+    const userInfo = await api.users.me()
+    if (userInfo.email_verified) {
+      dispatch(setValue({ emailVerified: true }))
+      pollingEmailStatus?.stop()
+      navigate('/library', { replace: true })
+    }
   }, [])
 
   return (
