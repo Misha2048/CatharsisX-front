@@ -56,7 +56,7 @@ const ReviewsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 30px;
 
   & > div:last-child {
@@ -67,6 +67,7 @@ const ReviewsContainer = styled.div`
     gap: 40px;
   }
   @media screen and (min-width: 1024px) {
+    align-items: stretch;
     flex-direction: row;
   }
   @media screen and (min-width: 1440px) {
@@ -84,15 +85,15 @@ function HomeReviews() {
         <ReviewsContainer>
           <HomeCustomerReview photo={customer1} fullName='Mariya Verhovetska'>
             Lifesaver for busy bees! Share & learn with ease, vibrant forums feel like home.
-            CatharsisX = academic BFF, boosting success, no more stress!
+            CatharsisX = academic BFF, success, no more stress!
           </HomeCustomerReview>
           <HomeCustomerReview photo={customer2} fullName='Valentyn Tkach'>
             Notes on tap, forums on blast, knowledge explodes on CatharsisX. Ditch the begging, join
-            the study squad, ace those exams, dude!
+            the study squad, ace those exams!
           </HomeCustomerReview>
           <HomeCustomerReview photo={customer3} fullName='Valentyn Romanov'>
             Email chains banished, virtual hangout ignited, gamified learning? My brain is on fire
-            (in a good way). CatharsisX is the bomb, level up your studies!
+            (in a good way). Level up your studies!
           </HomeCustomerReview>
         </ReviewsContainer>
       </Wrapper>
