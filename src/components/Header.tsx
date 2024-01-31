@@ -152,12 +152,12 @@ function Header() {
             <BurgerMenuContainer open={isOpen}>
               <SearchField></SearchField>
               <HeaderNavigation>
-                <HeaderLink>Forum</HeaderLink>
-                <HeaderLink>Library</HeaderLink>
+                <HeaderLink onClick={() => navigate('/forum')}>Forum</HeaderLink>
+                <HeaderLink onClick={() => navigate('/library')}>Library</HeaderLink>
                 <HeaderLink>My Materials</HeaderLink>
-                <HeaderLink>Purchases</HeaderLink>
-                <HeaderLink>Price</HeaderLink>
-                <HeaderLink>Chat</HeaderLink>
+                <HeaderLink onClick={() => navigate('/purchases')}>Purchases</HeaderLink>
+                <HeaderLink onClick={() => navigate('/price')}>Price</HeaderLink>
+                <HeaderLink onClick={() => navigate('/chat')}>Chat</HeaderLink>
               </HeaderNavigation>
               <ButtonsContainer>
                 <Button onClick={redirectToLogin}>Log in</Button>
