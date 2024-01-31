@@ -7,6 +7,8 @@ import SearchField from './SearchField'
 import Button from './Button'
 import BurgerIcon from './BurgerIcon'
 import OutlinedButton from './OutlinedButton'
+import HeaderLink from './HeaderLink'
+import HeaderDropdown from './HeaderDropdown'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -24,21 +26,7 @@ const HeaderNavigation = styled.nav`
 const HeaderLogoContainer = styled.div`
   cursor: pointer;
 `
-const HeaderLink = styled.button`
-  color: #fff;
-  font-family: Inter;
-  background: none;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 19.6px; /* 140% */
-  transition: all 0.3s ease;
-  text-transform: capitalized;
-  white-space: nowrap;
-  &:hover {
-    text-decoration: underline;
-  }
-`
+
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -91,7 +79,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   justify-content: space-between;
   align-items: center;
   background: #000;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 
   &[open] {
     width: 100%;
@@ -154,7 +142,7 @@ function Header() {
               <HeaderNavigation>
                 <HeaderLink onClick={() => navigate('/forum')}>Forum</HeaderLink>
                 <HeaderLink onClick={() => navigate('/library')}>Library</HeaderLink>
-                <HeaderLink>My Materials</HeaderLink>
+                <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
                 <HeaderLink onClick={() => navigate('/purchases')}>Purchases</HeaderLink>
                 <HeaderLink onClick={() => navigate('/price')}>Price</HeaderLink>
                 <HeaderLink onClick={() => navigate('/chat')}>Chat</HeaderLink>
