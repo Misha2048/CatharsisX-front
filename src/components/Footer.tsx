@@ -9,6 +9,10 @@ import purchasesIcon from '../assets/purchasesIcon.svg'
 import { css } from '@linaria/core'
 import { useNavigate } from 'react-router-dom'
 
+const FooterLogoContainer = styled.div`
+  cursor: pointer;
+`
+
 const FooterContainer = styled.footer`
   display: flex;
   height: 310px;
@@ -89,12 +93,9 @@ function Footer() {
   const navigator = useNavigate()
   return (
     <FooterContainer>
-      <img
-        onClick={() => navigator('/')}
-        src={CatharsisX}
-        alt='CatharsisX Logo'
-        className={FooterLogo}
-      />
+      <FooterLogoContainer onClick={() => navigator('/')}>
+        <img src={CatharsisX} alt='CatharsisX Logo' className={FooterLogo} />
+      </FooterLogoContainer>
       <FooterNavigation style={{ color: '#fff' }}>
         <FooterNavigationColumn>
           <FooterNavLink onClick={() => navigator('/')}>
