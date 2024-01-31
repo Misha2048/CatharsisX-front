@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import { styled } from '@linaria/react'
 
 interface Props extends PropsWithChildren {
@@ -28,7 +28,6 @@ const TextContainer = styled.div`
   background-color: #3ec290;
   padding: 16px;
   border-radius: 0 0 20px 20px;
-
   @media screen and (min-width: 375px) {
     padding: 20px;
   }

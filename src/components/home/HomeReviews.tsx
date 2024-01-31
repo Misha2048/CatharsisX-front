@@ -1,4 +1,3 @@
-import React from 'react'
 import { styled } from '@linaria/react'
 
 import HomeCustomerReview from '@components/home/HomeCustomerReview'
@@ -68,6 +67,7 @@ const ReviewsContainer = styled.div`
     gap: 40px;
   }
   @media screen and (min-width: 1024px) {
+    align-items: stretch;
     flex-direction: row;
   }
   @media screen and (min-width: 1440px) {
@@ -84,19 +84,16 @@ function HomeReviews() {
         <Title>Customer reviews</Title>
         <ReviewsContainer>
           <HomeCustomerReview photo={customer1} fullName='Mariya Verhovetska'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            deserunt mollit anim id est laborum...
+            Lifesaver for busy bees! Share & learn with ease, vibrant forums feel like home.
+            CatharsisX = academic BFF, success, no more stress!
           </HomeCustomerReview>
           <HomeCustomerReview photo={customer2} fullName='Valentyn Tkach'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            deserunt mollit anim id est laborum...
+            Notes on tap, forums on blast, knowledge explodes on CatharsisX. Ditch the begging, join
+            the study squad, ace those exams!
           </HomeCustomerReview>
           <HomeCustomerReview photo={customer3} fullName='Valentyn Romanov'>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
-            incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud
-            deserunt mollit anim id est laborum...
+            Email chains banished, virtual hangout ignited, gamified learning? My brain is on fire
+            (in a good way). Level up your studies!
           </HomeCustomerReview>
         </ReviewsContainer>
       </Wrapper>
