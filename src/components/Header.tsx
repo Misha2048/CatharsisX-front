@@ -31,7 +31,7 @@ const HeaderLink = styled.button`
   font-size: 14px;
   font-style: normal;
   font-weight: 400;
-  line-height: 19.6px; /* 140% */
+  line-height: 19.6px;
   transition: all 0.3s ease;
   text-transform: capitalized;
   white-space: nowrap;
@@ -48,17 +48,14 @@ const ButtonsContainer = styled.div`
   }
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
-  display: contents;
-
   &[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 15px;
+    padding-top: 20px;
     width: 200px;
-    height: 100vh;
-
+    height: 100svh;
     ${HeaderNavigation} {
       flex-direction: column;
     }
@@ -94,7 +91,9 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   overflow-x: hidden;
 
   &[open] {
+    overflow-y: scroll;
     width: 100%;
+    height: 100svh;
     position: fixed;
     left: 0;
     top: 0;
