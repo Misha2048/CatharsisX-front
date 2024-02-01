@@ -1,6 +1,6 @@
 import { styled } from '@linaria/react'
 import { PropsWithChildren, useCallback, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 import arrowDown from '@assets/arrow-down.svg'
 import HeaderLink from '@components/HeaderLink'
@@ -22,10 +22,6 @@ const StyledDropdown = styled(HeaderLink)`
   &:hover {
     text-decoration: none;
   }
-
-  @media only screen and (max-height: 567px) and (max-width: 820px) {
-    flex-direction: row;
-  }
 `
 
 const FlexContainer = styled.div`
@@ -40,10 +36,6 @@ const ArrowDown = styled.img<Props>`
   height: 14px;
   transition: transform 0.3s ease 0s;
   transform: ${(props) => (props.isDropdownOpen ? 'rotate(180deg)' : 'none')};
-
-  @media only screen and (max-height: 567px) and (max-width: 820px) {
-    transform: ${(props) => (props.isDropdownOpen ? 'rotate(-90deg)' : 'none')};
-  }
 `
 
 const DropdownBody = styled.ul<Props>`
@@ -58,13 +50,6 @@ const DropdownBody = styled.ul<Props>`
     border: none;
   }
 
-  @media only screen and (max-height: 567px) and (max-width: 820px) {
-    transition: all 0.35s ease;
-    display: flex;
-    margin: ${(props) => (props.isDropdownOpen ? '0 0 0 10px' : '0')};
-    height: 25px;
-    width: ${(props) => (props.isDropdownOpen ? '262px' : '0')};
-  }
   @media only screen and (min-width: 821px) {
     position: absolute;
     top: 100%;
@@ -79,17 +64,12 @@ const DropdownLinkContainer = styled.li`
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   line-height: 1;
 
-  @media only screen and (max-height: 567px) and (max-width: 820px) {
-    padding: 5px 20px;
-    border-bottom: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.5);
-  }
   @media only screen and (min-width: 821px) {
     text-align: left;
   }
 `
 
-const DropdownLink = styled.button`
+const DropdownLink = styled(Link)`
   color: #fff;
   background-color: transparent;
   font-family: 'Inter', sans-serif;
@@ -115,7 +95,7 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
   )
 
   const navigateTo = useCallback(
-    (path: string, event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (path: string, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault()
       setIsDropdownOpen(false)
       setBurgerIsOpen(false)
@@ -125,14 +105,14 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
   )
 
   const navigateToStillages = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       navigateTo('/stillages', event)
     },
     [],
   )
 
   const navigateToLikedStillages = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       navigateTo('/stillages/liked', event)
     },
     [],
@@ -146,10 +126,14 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
       </FlexContainer>
       <DropdownBody isDropdownOpen={isDropdownOpen}>
         <DropdownLinkContainer>
-          <DropdownLink onClick={navigateToStillages}>My Stillages</DropdownLink>
+          <DropdownLink to='/stillages' onClick={navigateToStillages}>
+            My Stillages
+          </DropdownLink>
         </DropdownLinkContainer>
         <DropdownLinkContainer>
-          <DropdownLink onClick={navigateToLikedStillages}>Favourite Stillages</DropdownLink>
+          <DropdownLink to='/stillages/liked' onClick={navigateToLikedStillages}>
+            Favourite Stillages
+          </DropdownLink>
         </DropdownLinkContainer>
       </DropdownBody>
     </StyledDropdown>
