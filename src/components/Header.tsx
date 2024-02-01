@@ -129,6 +129,11 @@ function Header() {
     navigate('/')
   }, [])
 
+  const navigateTo = useCallback((path: string) => {
+    setIsOpen(false)
+    navigate(path)
+  }, [])
+
   return (
     <>
       <BackgroundContainer>
@@ -140,12 +145,12 @@ function Header() {
             <BurgerMenuContainer open={isOpen}>
               <SearchField></SearchField>
               <HeaderNavigation>
-                <HeaderLink onClick={() => navigate('/forum')}>Forum</HeaderLink>
-                <HeaderLink onClick={() => navigate('/library')}>Library</HeaderLink>
+                <HeaderLink onClick={() => navigateTo('/forum')}>Forum</HeaderLink>
+                <HeaderLink onClick={() => navigateTo('/library')}>Library</HeaderLink>
                 <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
-                <HeaderLink onClick={() => navigate('/purchases')}>Purchases</HeaderLink>
-                <HeaderLink onClick={() => navigate('/price')}>Price</HeaderLink>
-                <HeaderLink onClick={() => navigate('/chat')}>Chat</HeaderLink>
+                <HeaderLink onClick={() => navigateTo('/purchases')}>Purchases</HeaderLink>
+                <HeaderLink onClick={() => navigateTo('/price')}>Price</HeaderLink>
+                <HeaderLink onClick={() => navigateTo('/chat')}>Chat</HeaderLink>
               </HeaderNavigation>
               {sessionStorage.getItem('accessToken') && (
                 <ButtonsContainer>
