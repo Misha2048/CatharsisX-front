@@ -19,6 +19,7 @@ import { setHint } from '../../redux/slices/hintSlice'
 import { useDispatch } from 'react-redux'
 import PassportValidator from '@helpers/PasswordValidator'
 import { useNavigate } from 'react-router-dom'
+import RedirectHomeContainer from '@components/RedirectHomeContainer'
 
 function SignUp() {
   const dispatch = useDispatch()
@@ -80,7 +81,9 @@ function SignUp() {
     <CenteredContainer>
       <GreyContainerBox>
         <AdditionalRegistryContent>
-          <Logo />
+          <RedirectHomeContainer navigate={navigate}>
+            <Logo />
+          </RedirectHomeContainer>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
           <SecondaryText>
             Already have an account? <Link to='/login'>Log in</Link>
