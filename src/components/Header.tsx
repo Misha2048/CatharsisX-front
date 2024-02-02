@@ -9,6 +9,7 @@ import BurgerIcon from './BurgerIcon'
 import OutlinedButton from './OutlinedButton'
 
 const body = document.querySelector('body') as HTMLBodyElement
+import HeaderLink from './HeaderLink'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -26,21 +27,7 @@ const HeaderNavigation = styled.nav`
 const HeaderLogoContainer = styled.div`
   cursor: pointer;
 `
-const HeaderLink = styled.button`
-  color: #fff;
-  font-family: Inter;
-  background: none;
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: 19.6px;
-  transition: all 0.3s ease;
-  text-transform: capitalized;
-  white-space: nowrap;
-  &:hover {
-    text-decoration: underline;
-  }
-`
+
 const ButtonsContainer = styled.div`
   display: flex;
   gap: 10px;
@@ -95,7 +82,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   justify-content: space-between;
   align-items: center;
   background: #000;
-  overflow-x: hidden;
+  /* overflow-x: hidden; */
 
   &[open] {
     overflow-y: scroll;

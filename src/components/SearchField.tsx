@@ -28,6 +28,13 @@ const SearchFieldStyle = css`
     height: 14px;
     pointer-events: none;
   }
+
+  @media only screen and (max-width: 1100px) {
+    padding: 8px 15px 8px 20px;
+  }
+  @media only screen and (max-width: 900px) {
+    padding: 8px 10px 8px 20px;
+  }
 `
 
 function SearchField() {
