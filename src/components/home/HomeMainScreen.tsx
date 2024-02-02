@@ -2,16 +2,16 @@ import React from 'react'
 import { styled } from '@linaria/react'
 
 import bgImage from '@assets/main-screen-bg.jpg'
+import { FullscreenUnderHeaderStyles } from '@components/FullscreenUnderHeader'
 
 interface Props {
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
 const StyledMainScreen = styled.section`
+  ${FullscreenUnderHeaderStyles}
   font-family: 'Inter', sans-serif;
   background-color: #000;
-  width: 100%;
-  min-height: calc(100vh - 80px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,9 +19,6 @@ const StyledMainScreen = styled.section`
 
   @media screen and (min-width: 768px) {
     padding: 40px 64px 60px 64px;
-  }
-  @media screen and (min-width: 821px) {
-    min-height: calc(100vh - 100px);
   }
   @media screen and (min-width: 1024px) and (orientation: portrait) {
     padding: 40px 64px;

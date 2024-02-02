@@ -1,12 +1,15 @@
 import { styled } from '@linaria/react'
 
+export const FullscreenUnderHeaderStyles = {
+  width: '100vw',
+  minHeight: 'calc(100vh - 80px)',
+  '@media screen and (min-width: 821px)': {
+    minHeight: 'calc(100vh - 100px)',
+  },
+}
+
 const FullscreenUnderHeader = styled.div`
-  width: 100vw;
-  height: calc(100vh - 80px);
-  display: flex;
-  @media screen and (min-width: 821px) {
-    height: calc(100vh - 100px);
-  }
+  ${FullscreenUnderHeaderStyles}
 `
 
 export default FullscreenUnderHeader
