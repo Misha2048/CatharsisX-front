@@ -75,7 +75,8 @@ const MaxWidthContainer = styled.div`
 const HeaderContainer = styled.header<{ open: boolean }>`
   display: flex;
   gap: 10px;
-  padding: 30px 63px;
+  min-height: 100px;
+  padding: 26px 63px;
   justify-content: space-between;
   align-items: center;
   background: #000;
@@ -93,7 +94,10 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     }
   }
   @media only screen and (max-width: 1024px) {
-    padding: 30px 15px;
+    padding: 26px 15px;
+  }
+  @media only screen and (max-width: 820px) {
+    min-height: 80px;
   }
 `
 const HeaderBurger = styled.div<{ open: boolean }>`

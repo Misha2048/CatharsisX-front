@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 
 const LibraryContainer = styled.div`
   padding: 10px 0 30px 0;
-  min-height: calc(100vh - 79px);
+  min-height: calc(100vh - 80px);
   background-color: #000;
   display: flex;
   flex-direction: column;
@@ -14,7 +14,7 @@ const LibraryContainer = styled.div`
     padding: 20px 32px 32px 32px;
   }
   @media screen and (min-width: 821px) {
-    min-height: calc(100vh - 107px);
+    min-height: calc(100vh - 100px);
   }
   @media screen and (min-width: 1440px) {
     padding: 40px 64px;
