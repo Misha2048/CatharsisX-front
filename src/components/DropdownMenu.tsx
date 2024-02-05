@@ -106,6 +106,7 @@ function DropdownMenu({ children, setBurgerIsOpen, isFooterMenu }: DropdownProps
     (path: string, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault()
       setIsDropdownOpen(false)
+      document.body.classList.remove('_lock')
       if (setBurgerIsOpen) setBurgerIsOpen(false)
       navigate(path)
     },
