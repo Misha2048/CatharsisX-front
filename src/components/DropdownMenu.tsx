@@ -6,11 +6,16 @@ import arrowDown from '@assets/arrow-down.svg'
 import HeaderLink from '@components/HeaderLink'
 
 interface DropdownProps extends PropsWithChildren {
-  setBurgerIsOpen: React.Dispatch<React.SetStateAction<boolean>>
+  setBurgerIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
+  isFooterMenu?: boolean
 }
 
 interface Props {
   isDropdownOpen: boolean
+}
+
+interface FooterMenuProps extends Props {
+  isFooterMenu: boolean | undefined
 }
 
 const StyledDropdown = styled(HeaderLink)`
@@ -38,7 +43,7 @@ const ArrowDown = styled.img<Props>`
   transform: ${(props) => (props.isDropdownOpen ? 'rotate(180deg)' : 'none')};
 `
 
-const DropdownBody = styled.ul<Props>`
+const DropdownBody = styled.ul<FooterMenuProps>`
   background-color: #333;
   margin-top: ${(props) => (props.isDropdownOpen ? '10px' : '0px')};
   border-radius: 5px;
@@ -51,19 +56,22 @@ const DropdownBody = styled.ul<Props>`
   }
 
   @media only screen and (min-width: 821px) {
-    position: absolute;
+    position: ${(props) => (props.isFooterMenu ? 'static' : 'absolute')};
     top: 100%;
     left: 0;
     min-width: 150px;
-    margin-top: 10px;
+    margin-top: ${(props) => (props.isFooterMenu ? (props.isDropdownOpen ? '10px' : '0') : '10px')};
   }
 `
 
-const DropdownLinkContainer = styled.li`
+const DropdownLinkContainer = styled.li<{ isFooterMenu: boolean | undefined }>`
   padding: 15px 20px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   line-height: 1;
 
+  @media only screen and (min-width: 553px) {
+    text-align: ${(props) => (props.isFooterMenu ? 'left' : 'center')};
+  }
   @media only screen and (min-width: 821px) {
     text-align: left;
   }
@@ -73,7 +81,7 @@ const DropdownLink = styled(Link)`
   color: #fff;
   background-color: transparent;
   font-family: 'Inter', sans-serif;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 700;
   line-height: 1;
 
@@ -82,7 +90,7 @@ const DropdownLink = styled(Link)`
   }
 `
 
-function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
+function DropdownMenu({ children, setBurgerIsOpen, isFooterMenu }: DropdownProps) {
   const navigate = useNavigate()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
@@ -98,7 +106,7 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
     (path: string, event: React.MouseEvent<HTMLAnchorElement, MouseEvent>) => {
       event.preventDefault()
       setIsDropdownOpen(false)
-      setBurgerIsOpen(false)
+      if (setBurgerIsOpen) setBurgerIsOpen(false)
       navigate(path)
     },
     [],
@@ -124,13 +132,13 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
         <span>{children}</span>
         <ArrowDown src={arrowDown} alt='show dropdown menu' isDropdownOpen={isDropdownOpen} />
       </FlexContainer>
-      <DropdownBody isDropdownOpen={isDropdownOpen}>
-        <DropdownLinkContainer>
+      <DropdownBody isDropdownOpen={isDropdownOpen} isFooterMenu={isFooterMenu}>
+        <DropdownLinkContainer isFooterMenu={isFooterMenu}>
           <DropdownLink to='/stillages' onClick={navigateToStillages}>
             My Stillages
           </DropdownLink>
         </DropdownLinkContainer>
-        <DropdownLinkContainer>
+        <DropdownLinkContainer isFooterMenu={isFooterMenu}>
           <DropdownLink to='/stillages/liked' onClick={navigateToLikedStillages}>
             Favourite Stillages
           </DropdownLink>
@@ -140,4 +148,4 @@ function HeaderDropdown({ children, setBurgerIsOpen }: DropdownProps) {
   )
 }
 
-export default HeaderDropdown
+export default DropdownMenu
