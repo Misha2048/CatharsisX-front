@@ -8,7 +8,7 @@ import Button from '@components/Button'
 import BurgerIcon from '@components/BurgerIcon'
 import OutlinedButton from '@components/OutlinedButton'
 import HeaderLink from '@components/HeaderLink'
-import HeaderDropdown from '@components/HeaderDropdown'
+import DropdownMenu from '@components/DropdownMenu'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -150,7 +150,7 @@ function Header() {
                 <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
                   Library
                 </HeaderLink>
-                <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
+                <DropdownMenu setBurgerIsOpen={setIsOpen}>My Materials</DropdownMenu>
                 <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
                   Purchases
                 </HeaderLink>

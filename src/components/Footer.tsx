@@ -8,6 +8,7 @@ import pricingIcon from '../assets/pricingIcon.svg'
 import purchasesIcon from '../assets/purchasesIcon.svg'
 import { css } from '@linaria/core'
 import { useNavigate } from 'react-router-dom'
+import DropdownMenu from '@components/DropdownMenu'
 
 const FooterLogoContainer = styled.div`
   cursor: pointer;
@@ -15,7 +16,7 @@ const FooterLogoContainer = styled.div`
 
 const FooterContainer = styled.footer`
   display: flex;
-  height: 310px;
+  min-height: 310px;
   padding: 97px 299px 87px 165px;
   gap: 222px;
   justify-content: center;
@@ -32,7 +33,7 @@ const FooterContainer = styled.footer`
   }
   @media only screen and (max-width: 552px) {
     flex-direction: column;
-    padding: 0;
+    padding: 40px;
     gap: 14px;
     align-items: center;
     justify-content: center;
@@ -98,10 +99,12 @@ function Footer() {
       </FooterLogoContainer>
       <FooterNavigation style={{ color: '#fff' }}>
         <FooterNavigationColumn>
-          <FooterNavLink onClick={() => navigator('/')}>
-            <img src={myMaterialIcon} alt='My materials icon' />
-            My materials
-          </FooterNavLink>
+          <DropdownMenu isFooterMenu>
+            <FooterNavLink onClick={() => navigator('/')}>
+              <img src={myMaterialIcon} alt='My materials icon' />
+              <span>My materials</span>
+            </FooterNavLink>
+          </DropdownMenu>
           <FooterNavLink onClick={() => navigator('/library')}>
             <img src={libraryIcon} alt='Library icon' />
             Library
