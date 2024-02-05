@@ -120,13 +120,14 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
-
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
   const handleRedirect = useCallback(
     (path: string, event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault()
       setIsOpen(false)
+      setIsDropdownOpen(false)
       navigate(path)
       if (path !== '/login' && path !== '/signup') {
         document.body.classList.remove('_lock')
@@ -150,7 +151,13 @@ function Header() {
                 <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
                   Library
                 </HeaderLink>
-                <DropdownMenu setBurgerIsOpen={setIsOpen}>My Materials</DropdownMenu>
+                <DropdownMenu
+                  isDropdownOpen={isDropdownOpen}
+                  setIsDropdownOpen={setIsDropdownOpen}
+                  setBurgerIsOpen={setIsOpen}
+                >
+                  My Materials
+                </DropdownMenu>
                 <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
                   Purchases
                 </HeaderLink>

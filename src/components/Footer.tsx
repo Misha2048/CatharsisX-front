@@ -1,13 +1,15 @@
 import { styled } from '@linaria/react'
-import CatharsisX from '../assets/CatharsisX.svg'
-import chatIcon from '../assets/chatIcon.svg'
-import forumIcon from '../assets/forumIcon.svg'
-import libraryIcon from '../assets/libraryIcon.svg'
-import myMaterialIcon from '../assets/myMaterialsIcon.svg'
-import pricingIcon from '../assets/pricingIcon.svg'
-import purchasesIcon from '../assets/purchasesIcon.svg'
 import { css } from '@linaria/core'
 import { useNavigate } from 'react-router-dom'
+import { useCallback, useState } from 'react'
+
+import CatharsisX from '@assets/CatharsisX.svg'
+import chatIcon from '@assets/chatIcon.svg'
+import forumIcon from '@assets/forumIcon.svg'
+import libraryIcon from '@assets/libraryIcon.svg'
+import myMaterialIcon from '@assets/myMaterialsIcon.svg'
+import pricingIcon from '@assets/pricingIcon.svg'
+import purchasesIcon from '@assets/purchasesIcon.svg'
 import DropdownMenu from '@components/DropdownMenu'
 
 const FooterLogoContainer = styled.div`
@@ -92,40 +94,51 @@ const FooterLogo = css`
 
 function Footer() {
   const navigator = useNavigate()
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
+
+  const navigateTo = useCallback((path: string) => {
+    setIsDropdownOpen(false)
+    navigator(path)
+  }, [])
+
   return (
     <FooterContainer>
-      <FooterLogoContainer onClick={() => navigator('/')}>
+      <FooterLogoContainer onClick={() => navigateTo('/')}>
         <img src={CatharsisX} alt='CatharsisX Logo' className={FooterLogo} />
       </FooterLogoContainer>
       <FooterNavigation style={{ color: '#fff' }}>
         <FooterNavigationColumn>
-          <DropdownMenu isFooterMenu>
-            <FooterNavLink onClick={() => navigator('/')}>
+          <DropdownMenu
+            isFooterMenu
+            isDropdownOpen={isDropdownOpen}
+            setIsDropdownOpen={setIsDropdownOpen}
+          >
+            <FooterNavLink onClick={() => navigateTo('/')}>
               <img src={myMaterialIcon} alt='My materials icon' />
               <span>My materials</span>
             </FooterNavLink>
           </DropdownMenu>
-          <FooterNavLink onClick={() => navigator('/library')}>
+          <FooterNavLink onClick={() => navigateTo('/library')}>
             <img src={libraryIcon} alt='Library icon' />
-            Library
+            <span>Library</span>
           </FooterNavLink>
-          <FooterNavLink onClick={() => navigator('/forum')}>
+          <FooterNavLink onClick={() => navigateTo('/forum')}>
             <img src={forumIcon} alt='Forum icon' />
-            Forum
+            <span>Forum</span>
           </FooterNavLink>
         </FooterNavigationColumn>
         <FooterNavigationColumn>
-          <FooterNavLink onClick={() => navigator('/purchases')}>
+          <FooterNavLink onClick={() => navigateTo('/purchases')}>
             <img src={purchasesIcon} alt='Purchases icon' />
-            Purchases
+            <span>Purchases</span>
           </FooterNavLink>
-          <FooterNavLink onClick={() => navigator('/price')}>
+          <FooterNavLink onClick={() => navigateTo('/price')}>
             <img src={pricingIcon} alt='Pricing icon' />
-            Price
+            <span>Price</span>
           </FooterNavLink>
-          <FooterNavLink onClick={() => navigator('/chat')}>
+          <FooterNavLink onClick={() => navigateTo('/chat')}>
             <img src={chatIcon} alt='Chat icon' />
-            Chat
+            <span>Chat</span>
           </FooterNavLink>
         </FooterNavigationColumn>
       </FooterNavigation>
