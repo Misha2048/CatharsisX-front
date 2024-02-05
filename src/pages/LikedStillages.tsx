@@ -10,7 +10,6 @@ function LikedStillages() {
 
   const fetchData = useCallback(async (requestParams?: FilterParams) => {
     const response = await api.stillages.liked(requestParams)
-    response.likedStillages.forEach((stillage) => (stillage.liked = true)) // TODO delete it later
     dispatch(setLibraryList(response.likedStillages))
   }, [])
 

@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { IShelfsResponse } from '@api/intefaces'
+import { IShelf } from '@api/intefaces'
 
 export interface StillageState {
-  list: IShelfsResponse[] | null
+  list: IShelf[] | null
 }
 
 const initialState: StillageState = {
@@ -14,7 +14,7 @@ export const stillageSlice = createSlice({
   name: 'stillage',
   initialState,
   reducers: {
-    setStillageList: (state, action: { payload: IShelfsResponse[]; type: string }) => {
+    setStillageList: (state, action: { payload: IShelf[]; type: string }) => {
       state.list = action.payload
     },
     clearStillageList: (state) => {

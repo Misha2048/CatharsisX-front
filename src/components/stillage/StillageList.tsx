@@ -9,6 +9,10 @@ import { clearStillageList, setStillageList } from '@redux/slices/stillageSlice'
 import { api } from '@api/index'
 import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
 
+interface Props {
+  setStillageName: React.Dispatch<React.SetStateAction<string>>
+}
+
 const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
@@ -26,7 +30,7 @@ const StyledList = styled.ul`
   }
 `
 
-function StillageList() {
+function StillageList({ setStillageName }: Props) {
   const { id: stillageId } = useParams()
   const dispatch = useDispatch()
   const shelvesList = useSelector((state: RootState) => state.stillage.list)
@@ -35,9 +39,10 @@ function StillageList() {
   const [shelfId, setShelfId] = useState('')
 
   const fetchData = useCallback(async () => {
-    const shelves = await api.shelves.get({ stillage: stillageId as string })
-    if (Array.isArray(shelves)) {
-      dispatch(setStillageList(shelves))
+    const resp = await api.shelves.get({ stillage: stillageId as string })
+    if (resp.stillageName && resp.findShelfsResponse) {
+      setStillageName(resp.stillageName)
+      dispatch(setStillageList(resp.findShelfsResponse))
     }
   }, [stillageId])
 
