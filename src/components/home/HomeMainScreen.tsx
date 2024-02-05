@@ -2,16 +2,15 @@ import React from 'react'
 import { styled } from '@linaria/react'
 
 import bgImage from '@assets/main-screen-bg.jpg'
+import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
 interface Props {
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const StyledMainScreen = styled.section`
+const StyledMainScreen = styled(FullscreenUnderHeader)`
   font-family: 'Inter', sans-serif;
   background-color: #000;
-  width: 100%;
-  min-height: calc(100vh - 79px);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -19,9 +18,6 @@ const StyledMainScreen = styled.section`
 
   @media screen and (min-width: 768px) {
     padding: 40px 64px 60px 64px;
-  }
-  @media screen and (min-width: 821px) {
-    min-height: calc(100vh - 107.59px);
   }
   @media screen and (min-width: 1024px) and (orientation: portrait) {
     padding: 40px 64px;
@@ -167,16 +163,20 @@ const MainScreenBtn = styled.button`
 
 function HomeMainScreen({ onButtonClick }: Props) {
   return (
-    <StyledMainScreen>
-      <Wrapper>
-        <TextColumn>
-          <Heading>From burden to bond. Store, share, connect with CatharsisX.</Heading>
-          <Text>Store data, ask people, and get answers all in the browser — with CatharsisX.</Text>
-          <MainScreenBtn onClick={onButtonClick}>Try for free</MainScreenBtn>
-        </TextColumn>
-        <ImageColumn />
-      </Wrapper>
-    </StyledMainScreen>
+    <section>
+      <StyledMainScreen>
+        <Wrapper>
+          <TextColumn>
+            <Heading>From burden to bond. Store, share, connect with CatharsisX.</Heading>
+            <Text>
+              Store data, ask people, and get answers all in the browser — with CatharsisX.
+            </Text>
+            <MainScreenBtn onClick={onButtonClick}>Try for free</MainScreenBtn>
+          </TextColumn>
+          <ImageColumn />
+        </Wrapper>
+      </StyledMainScreen>
+    </section>
   )
 }
 
