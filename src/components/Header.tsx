@@ -2,13 +2,13 @@ import { styled } from '@linaria/react'
 import { useCallback, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import Logo from './Logo'
-import SearchField from './SearchField'
-import Button from './Button'
-import BurgerIcon from './BurgerIcon'
-import OutlinedButton from './OutlinedButton'
-import HeaderLink from './HeaderLink'
-import HeaderDropdown from './HeaderDropdown'
+import Logo from '@components/Logo'
+import SearchField from '@components/SearchField'
+import Button from '@components/Button'
+import BurgerIcon from '@components/BurgerIcon'
+import OutlinedButton from '@components/OutlinedButton'
+import HeaderLink from '@components/HeaderLink'
+import HeaderDropdown from '@components/HeaderDropdown'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -36,19 +36,20 @@ const ButtonsContainer = styled.div`
   }
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
-  display: contents;
-
   &[open] {
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
+    justify-content: start;
     align-items: center;
-    justify-content: center;
     gap: 15px;
+    padding-top: 20px;
     width: 200px;
-    height: 100vh;
-
+    max-height: 100vh;
     ${HeaderNavigation} {
+      height: 65%;
       flex-direction: column;
+      justify-content: space-between;
     }
     ${ButtonsContainer} {
       width: 100%;
@@ -75,14 +76,17 @@ const MaxWidthContainer = styled.div`
 const HeaderContainer = styled.header<{ open: boolean }>`
   display: flex;
   gap: 10px;
-  padding: 30px 63px;
+  min-height: 100px;
+  padding: 26px 63px;
   justify-content: space-between;
   align-items: center;
   background: #000;
   /* overflow-x: hidden; */
 
   &[open] {
+    overflow-y: scroll;
     width: 100%;
+    height: 100svh;
     position: fixed;
     left: 0;
     top: 0;
@@ -93,7 +97,10 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     }
   }
   @media only screen and (max-width: 1024px) {
-    padding: 30px 15px;
+    padding: 26px 15px;
+  }
+  @media only screen and (max-width: 820px) {
+    min-height: 80px;
   }
 `
 const HeaderBurger = styled.div<{ open: boolean }>`
@@ -113,49 +120,49 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
+
   const navigate = useNavigate()
-  const redirectToLogin = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/login')
-  }, [])
 
-  const redirectToSignup = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/signup')
-  }, [])
-
-  const redirectToHome = useCallback((event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/')
-  }, [])
-
-  const navigateTo = useCallback((path: string) => {
-    setIsOpen(false)
-    navigate(path)
-  }, [])
+  const handleRedirect = useCallback(
+    (path: string, event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault()
+      setIsOpen(false)
+      navigate(path)
+      if (path !== '/login' && path !== '/signup') {
+        document.body.classList.remove('_lock')
+      }
+    },
+    [navigate],
+  )
 
   return (
     <>
       <BackgroundContainer>
         <MaxWidthContainer>
           <HeaderContainer open={isOpen}>
-            <HeaderLogoContainer onClick={redirectToHome}>
+            <HeaderLogoContainer onClick={(event) => handleRedirect('/', event)}>
               <Logo></Logo>
             </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
               <SearchField></SearchField>
               <HeaderNavigation>
-                <HeaderLink onClick={() => navigateTo('/forum')}>Forum</HeaderLink>
-                <HeaderLink onClick={() => navigateTo('/library')}>Library</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/forum', event)}>Forum</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
+                  Library
+                </HeaderLink>
                 <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
-                <HeaderLink onClick={() => navigateTo('/purchases')}>Purchases</HeaderLink>
-                <HeaderLink onClick={() => navigateTo('/price')}>Price</HeaderLink>
-                <HeaderLink onClick={() => navigateTo('/chat')}>Chat</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
+                  Purchases
+                </HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/chat', event)}>Chat</HeaderLink>
               </HeaderNavigation>
-              {sessionStorage.getItem('accessToken') && (
+              {!localStorage.getItem('accessToken') && (
                 <ButtonsContainer>
-                  <Button onClick={redirectToLogin}>Log in</Button>
-                  <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
+                  <Button onClick={(event) => handleRedirect('/login', event)}>Log in</Button>
+                  <OutlinedButton onClick={(event) => handleRedirect('/signup', event)}>
+                    Sign up
+                  </OutlinedButton>
                 </ButtonsContainer>
               )}
             </BurgerMenuContainer>

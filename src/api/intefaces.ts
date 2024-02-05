@@ -33,14 +33,14 @@ export interface INewPasswordRequest {
   password: string
 }
 
-export interface IShelfsRequest {
+export interface IShelvesRequest {
   stillage: string
   name?: string
   last_upload_at?: string[]
   created_at?: string[]
 }
 
-export interface IShelfsResponse {
+export interface IShelf {
   id: string
   userId: string
   stillageId: string
@@ -48,6 +48,12 @@ export interface IShelfsResponse {
   last_upload_at: string
   created_at: string
 }
+
+export interface IShelvesResponse {
+  stillageName: string
+  findShelfsResponse: IShelf[]
+}
+
 export interface IUniversity {
   id: string
   name: string
