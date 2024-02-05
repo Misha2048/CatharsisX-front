@@ -14,6 +14,7 @@ import { api } from '../../api'
 import { ILoginRequest } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
 import { useNavigate } from 'react-router-dom'
+import RedirectHomeContainer from '@components/RedirectHomeContainer'
 
 function LogIn() {
   const navigator = useNavigate()
@@ -49,7 +50,9 @@ function LogIn() {
     <CenteredContainer>
       <GreyContainerBox>
         <AdditionalRegistryContent>
-          <Logo />
+          <RedirectHomeContainer navigate={navigator}>
+            <Logo />
+          </RedirectHomeContainer>
           <DisplayTitle>Join a community of like-minded people.</DisplayTitle>
           <SecondaryText>
             Don’t have an accout? <Link to='/signup'>Sign up</Link>

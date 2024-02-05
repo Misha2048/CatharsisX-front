@@ -11,8 +11,8 @@ import {
   INewPasswordRequest,
   INewUniversityRequest,
   INewUniversityResponse,
-  IShelfsRequest,
-  IShelfsResponse,
+  IShelvesRequest,
+  IShelvesResponse,
   ISignUpRequest,
   IStillagesLikeRequest,
   IStillagesLikeResponse,
@@ -123,14 +123,14 @@ export const api = {
   })(),
 
   shelves: {
-    get: async (options: IShelfsRequest): Promise<IShelfsResponse[]> => {
+    get: async (options: IShelvesRequest): Promise<IShelvesResponse> => {
       return axiosInstance
         .request({
           method: 'GET',
           url: '/shelfs',
           params: options,
         })
-        .then((response) => response.data as IShelfsResponse[])
+        .then((response) => response.data as IShelvesResponse)
     },
     delete: async (options: IDeleteShelvesRequest): Promise<IDeleteShelvesResponse> => {
       return axiosInstance
