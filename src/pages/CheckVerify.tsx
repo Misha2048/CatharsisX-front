@@ -9,10 +9,8 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import { setValue } from '@redux/slices/UserSlice'
 import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
-const BackgroundContainer = styled.div`
+const BackgroundContainer = styled(FullscreenUnderHeader)`
   background-color: #282828;
-  width: 100%;
-  min-height: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
