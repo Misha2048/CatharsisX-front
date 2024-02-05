@@ -60,7 +60,7 @@ axiosInstance.interceptors.response.use(
       }
     } else {
       store.dispatch(clearTokens())
-      history.push('/login')
+      history.replace('/login')
       return error.response
     }
   },
