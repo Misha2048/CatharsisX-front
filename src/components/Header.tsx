@@ -36,17 +36,14 @@ const ButtonsContainer = styled.div`
   }
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
-  display: contents;
-
   &[open] {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 15px;
+    padding-top: 20px;
     width: 200px;
-    height: 100vh;
-
+    height: 100svh;
     ${HeaderNavigation} {
       flex-direction: column;
     }
@@ -82,7 +79,9 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   /* overflow-x: hidden; */
 
   &[open] {
+    overflow-y: scroll;
     width: 100%;
+    height: 100svh;
     position: fixed;
     left: 0;
     top: 0;
