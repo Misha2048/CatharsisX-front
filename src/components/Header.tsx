@@ -2,14 +2,13 @@ import { styled } from '@linaria/react'
 import { useCallback, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
-import Logo from './Logo'
-import SearchField from './SearchField'
-import Button from './Button'
-import BurgerIcon from './BurgerIcon'
-import OutlinedButton from './OutlinedButton'
-
-const body = document.querySelector('body') as HTMLBodyElement
-import HeaderLink from './HeaderLink'
+import Logo from '@components/Logo'
+import SearchField from '@components/SearchField'
+import Button from '@components/Button'
+import BurgerIcon from '@components/BurgerIcon'
+import OutlinedButton from '@components/OutlinedButton'
+import HeaderLink from '@components/HeaderLink'
+import HeaderDropdown from '@components/HeaderDropdown'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -38,19 +37,19 @@ const ButtonsContainer = styled.div`
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
   &[open] {
-    margin-top:20px
+    margin-top: 20px;
     display: flex;
     flex-direction: column;
-    justify-content:start;
+    justify-content: start;
     align-items: center;
     gap: 15px;
     padding-top: 20px;
     width: 200px;
-    height: 100svh;
+    max-height: 100vh;
     ${HeaderNavigation} {
-      height:65%;
+      height: 65%;
       flex-direction: column;
-      justify-content:space-between;
+      justify-content: space-between;
     }
     ${ButtonsContainer} {
       width: 100%;
@@ -127,9 +126,10 @@ function Header() {
   const handleRedirect = useCallback(
     (path: string, event: React.MouseEvent<HTMLElement>) => {
       event.preventDefault()
+      setIsOpen(false)
       navigate(path)
       if (path !== '/login' && path !== '/signup') {
-        body.classList.remove('_lock')
+        document.body.classList.remove('_lock')
       }
     },
     [navigate],
@@ -150,7 +150,7 @@ function Header() {
                 <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
                   Library
                 </HeaderLink>
-                <HeaderLink>My Materials</HeaderLink>
+                <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
                 <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
                   Purchases
                 </HeaderLink>
