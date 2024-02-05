@@ -43,11 +43,10 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
     flex-direction: column;
     justify-content:start;
     align-items: center;
-    gap: 50px;
+    gap: 15px;
     padding-top: 20px;
     width: 200px;
     height: 100svh;
-
     ${HeaderNavigation} {
       height:65%;
       flex-direction: column;
