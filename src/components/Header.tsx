@@ -7,8 +7,9 @@ import SearchField from './SearchField'
 import Button from './Button'
 import BurgerIcon from './BurgerIcon'
 import OutlinedButton from './OutlinedButton'
+
+const body = document.querySelector('body') as HTMLBodyElement
 import HeaderLink from './HeaderLink'
-import HeaderDropdown from './HeaderDropdown'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -37,15 +38,19 @@ const ButtonsContainer = styled.div`
 `
 const BurgerMenuContainer = styled.div<{ open: boolean }>`
   &[open] {
+    margin-top:20px
     display: flex;
     flex-direction: column;
+    justify-content:start;
     align-items: center;
     gap: 15px;
     padding-top: 20px;
     width: 200px;
     height: 100svh;
     ${HeaderNavigation} {
+      height:65%;
       flex-direction: column;
+      justify-content:space-between;
     }
     ${ButtonsContainer} {
       width: 100%;
@@ -112,44 +117,48 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
+
   const navigate = useNavigate()
-  const redirectToLogin = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/login')
-  }, [])
 
-  const redirectToSignup = useCallback((event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/signup')
-  }, [])
-
-  const redirectToHome = useCallback((event: React.MouseEvent<HTMLImageElement, MouseEvent>) => {
-    event.preventDefault()
-    navigate('/')
-  }, [])
+  const handleRedirect = useCallback(
+    (path: string, event: React.MouseEvent<HTMLElement>) => {
+      event.preventDefault()
+      navigate(path)
+      if (path !== '/login' && path !== '/signup') {
+        body.classList.remove('_lock')
+      }
+    },
+    [navigate],
+  )
 
   return (
     <>
       <BackgroundContainer>
         <MaxWidthContainer>
           <HeaderContainer open={isOpen}>
-            <HeaderLogoContainer onClick={redirectToHome}>
+            <HeaderLogoContainer onClick={(event) => handleRedirect('/', event)}>
               <Logo></Logo>
             </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
               <SearchField></SearchField>
               <HeaderNavigation>
-                <HeaderLink onClick={() => navigate('/forum')}>Forum</HeaderLink>
-                <HeaderLink onClick={() => navigate('/library')}>Library</HeaderLink>
-                <HeaderDropdown setBurgerIsOpen={setIsOpen}>My Materials</HeaderDropdown>
-                <HeaderLink onClick={() => navigate('/purchases')}>Purchases</HeaderLink>
-                <HeaderLink onClick={() => navigate('/price')}>Price</HeaderLink>
-                <HeaderLink onClick={() => navigate('/chat')}>Chat</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/forum', event)}>Forum</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
+                  Library
+                </HeaderLink>
+                <HeaderLink>My Materials</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
+                  Purchases
+                </HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/chat', event)}>Chat</HeaderLink>
               </HeaderNavigation>
-              {sessionStorage.getItem('accessToken') && (
+              {!localStorage.getItem('accessToken') && (
                 <ButtonsContainer>
-                  <Button onClick={redirectToLogin}>Log in</Button>
-                  <OutlinedButton onClick={redirectToSignup}>Sign up</OutlinedButton>
+                  <Button onClick={(event) => handleRedirect('/login', event)}>Log in</Button>
+                  <OutlinedButton onClick={(event) => handleRedirect('/signup', event)}>
+                    Sign up
+                  </OutlinedButton>
                 </ButtonsContainer>
               )}
             </BurgerMenuContainer>
