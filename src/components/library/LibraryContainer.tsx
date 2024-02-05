@@ -1,9 +1,8 @@
 import { styled } from '@linaria/react'
 
-import { FullscreenUnderHeaderStyles } from '@components/FullscreenUnderHeader'
+import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
-const LibraryContainer = styled.div`
-  ${FullscreenUnderHeaderStyles}
+const LibraryContainer = styled(FullscreenUnderHeader)`
   padding: 10px 0 30px 0;
   background-color: #000;
   display: flex;

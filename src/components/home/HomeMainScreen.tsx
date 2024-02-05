@@ -2,14 +2,13 @@ import React from 'react'
 import { styled } from '@linaria/react'
 
 import bgImage from '@assets/main-screen-bg.jpg'
-import { FullscreenUnderHeaderStyles } from '@components/FullscreenUnderHeader'
+import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
 interface Props {
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void
 }
 
-const StyledMainScreen = styled.section`
-  ${FullscreenUnderHeaderStyles}
+const StyledMainScreen = styled(FullscreenUnderHeader)`
   font-family: 'Inter', sans-serif;
   background-color: #000;
   display: flex;
@@ -164,16 +163,20 @@ const MainScreenBtn = styled.button`
 
 function HomeMainScreen({ onButtonClick }: Props) {
   return (
-    <StyledMainScreen>
-      <Wrapper>
-        <TextColumn>
-          <Heading>From burden to bond. Store, share, connect with CatharsisX.</Heading>
-          <Text>Store data, ask people, and get answers all in the browser — with CatharsisX.</Text>
-          <MainScreenBtn onClick={onButtonClick}>Try for free</MainScreenBtn>
-        </TextColumn>
-        <ImageColumn />
-      </Wrapper>
-    </StyledMainScreen>
+    <section>
+      <StyledMainScreen>
+        <Wrapper>
+          <TextColumn>
+            <Heading>From burden to bond. Store, share, connect with CatharsisX.</Heading>
+            <Text>
+              Store data, ask people, and get answers all in the browser — with CatharsisX.
+            </Text>
+            <MainScreenBtn onClick={onButtonClick}>Try for free</MainScreenBtn>
+          </TextColumn>
+          <ImageColumn />
+        </Wrapper>
+      </StyledMainScreen>
+    </section>
   )
 }
 
