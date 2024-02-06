@@ -4,6 +4,7 @@ import { FilterParams } from '@helpers/filterTypes'
 import { setLibraryList } from '@redux/slices/librarySlice'
 import { useCallback } from 'react'
 import { useDispatch } from 'react-redux'
+import Page from '@components/Page'
 
 function LikedStillages() {
   const dispatch = useDispatch()
@@ -14,12 +15,14 @@ function LikedStillages() {
   }, [])
 
   return (
-    <Stillages
-      title='Favourite stillages'
-      fetchData={fetchData}
-      filterData={fetchData}
-      dispatch={dispatch}
-    />
+    <Page hasHeader>
+      <Stillages
+        title='Favourite stillages'
+        fetchData={fetchData}
+        filterData={fetchData}
+        dispatch={dispatch}
+      />
+    </Page>
   )
 }
 

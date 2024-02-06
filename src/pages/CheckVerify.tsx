@@ -8,6 +8,7 @@ import PollingTool from '@utils/pollingTool'
 import ModalWindowBtn from '@components/ModalWindowBtn'
 import { setValue } from '@redux/slices/UserSlice'
 import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
+import Page from '@components/Page'
 
 const BackgroundContainer = styled(FullscreenUnderHeader)`
   background-color: #282828;
@@ -89,17 +90,19 @@ function CheckVerify() {
   }, [])
 
   return (
-    <FullscreenUnderHeader>
-      <BackgroundContainer>
-        <GreyContainerBox>
-          <Title>Verify Your Email</Title>
-          <Message>
-            Check your email & click the <br /> link to activate your account.
-          </Message>
-          <ModalWindowBtn onClick={handleResendVerification}>Resend Email</ModalWindowBtn>
-        </GreyContainerBox>
-      </BackgroundContainer>
-    </FullscreenUnderHeader>
+    <Page hasHeader>
+      <FullscreenUnderHeader>
+        <BackgroundContainer>
+          <GreyContainerBox>
+            <Title>Verify Your Email</Title>
+            <Message>
+              Check your email & click the <br /> link to activate your account.
+            </Message>
+            <ModalWindowBtn onClick={handleResendVerification}>Resend Email</ModalWindowBtn>
+          </GreyContainerBox>
+        </BackgroundContainer>
+      </FullscreenUnderHeader>
+    </Page>
   )
 }
 

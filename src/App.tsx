@@ -9,7 +9,6 @@ import ForgotPasswordForm from '@components/ForgotPasswordForm'
 import ResetPasswordForm from '@components/ResetPasswordForm'
 import CheckVerify from '@pages/CheckVerify'
 import Stillage from '@pages/Stillage'
-import Header from '@components/Header'
 import ProtectedRoute from '@components/ProtectedRoute'
 import Library from '@pages/Library'
 import MyStillages from '@pages/MyStillages'
@@ -20,14 +19,13 @@ dayjs.locale('en-gb')
 function App() {
   return (
     <Routes>
-      <Route path='/' element={<Header />}>
-        <Route index element={<Home />} />
-        <Route path='check-email' element={<CheckVerify />} />
-        <Route path='stillages' element={<ProtectedRoute component={MyStillages} />} />
-        <Route path='stillages/:id' element={<ProtectedRoute component={Stillage} />} />
-        <Route path='stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
-        <Route path='library' element={<ProtectedRoute component={Library} />} />
-      </Route>
+      <Route path='/' element={<Home />} />
+      <Route path='/check-email' element={<CheckVerify />} />
+      <Route path='/stillages' element={<ProtectedRoute component={MyStillages} />} />
+      <Route path='/stillages/:id' element={<ProtectedRoute component={Stillage} />} />
+      <Route path='/stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
+      <Route path='/library' element={<ProtectedRoute component={Library} />} />
+
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/forgot-password' element={<ForgotPasswordForm />} />

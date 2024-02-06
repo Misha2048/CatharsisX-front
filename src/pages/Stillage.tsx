@@ -13,6 +13,7 @@ import { api } from '@api/index'
 import { IShelvesRequest } from '@api/intefaces'
 import { setStillageList } from '@redux/slices/stillageSlice'
 import { FilterParams } from '@helpers/filterTypes'
+import Page from '@components/Page'
 
 function Stillage() {
   const { id } = useParams()
@@ -31,17 +32,19 @@ function Stillage() {
   )
 
   return (
-    <StillageContainer>
-      <StillageWrapper>
-        <StillageHeadingRow>
-          <StillageHeading>{stillageName}</StillageHeading>
-          <FilterWithShowBtn filterData={filterData} additionalParams={additionalParams} />
-        </StillageHeadingRow>
-        <GreyStillageBox>
-          <StillageList setStillageName={setStillageName} />
-        </GreyStillageBox>
-      </StillageWrapper>
-    </StillageContainer>
+    <Page hasHeader>
+      <StillageContainer>
+        <StillageWrapper>
+          <StillageHeadingRow>
+            <StillageHeading>{stillageName}</StillageHeading>
+            <FilterWithShowBtn filterData={filterData} additionalParams={additionalParams} />
+          </StillageHeadingRow>
+          <GreyStillageBox>
+            <StillageList setStillageName={setStillageName} />
+          </GreyStillageBox>
+        </StillageWrapper>
+      </StillageContainer>
+    </Page>
   )
 }
 

@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 import StyledFullscreen from './FullscreenUnderHeader'
 import SpinnerIcon from './SpinnerIcon'
+import Page from '@components/Page'
 
 const Container = styled.div`
   background-color: #000;
@@ -27,12 +28,14 @@ const Text = styled.h1`
 
 function Spinner() {
   return (
-    <StyledFullscreen>
-      <Container>
-        <SpinnerIcon />
-        <Text>Loading...</Text>
-      </Container>
-    </StyledFullscreen>
+    <Page hasHeader>
+      <StyledFullscreen>
+        <Container>
+          <SpinnerIcon />
+          <Text>Loading...</Text>
+        </Container>
+      </StyledFullscreen>
+    </Page>
   )
 }
 
