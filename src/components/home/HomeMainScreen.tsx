@@ -15,7 +15,7 @@ const StyledMainScreen = styled(FullscreenUnderHeader)`
   justify-content: center;
   align-items: center;
   padding: 30px;
-
+  width: 100%;
   @media screen and (min-width: 768px) {
     padding: 40px 64px 60px 64px;
   }
