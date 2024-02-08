@@ -8,6 +8,8 @@ import { RootState } from '@redux/store'
 import { clearStillageList, setStillageList } from '@redux/slices/stillageSlice'
 import { api } from '@api/index'
 import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
+import ShelfModal from '@components/shelf/ShelfModal'
+import UploadFileModal from '@components/UploadFileModal'
 
 interface Props {
   setStillageName: React.Dispatch<React.SetStateAction<string>>
@@ -35,6 +37,8 @@ function StillageList({ setStillageName }: Props) {
   const dispatch = useDispatch()
   const shelvesList = useSelector((state: RootState) => state.stillage.list)
   const [isShowDeleteModal, setIsShowDeleteModal] = useState(false)
+  const [isShowShelf, setIsShowShelf] = useState(false)
+  const [isShowUpload, setIsShowUpload] = useState(false)
   const [shelfName, setShelfName] = useState('')
   const [shelfId, setShelfId] = useState('')
 
@@ -53,15 +57,6 @@ function StillageList({ setStillageName }: Props) {
     }
   }, [])
 
-  const showDeleteModal = useCallback(
-    (shelfId: string, shelfName: string) => {
-      setShelfId(shelfId)
-      setShelfName(shelfName)
-      setIsShowDeleteModal(true)
-    },
-    [stillageId],
-  )
-
   return (
     <>
       <StyledList>
@@ -69,10 +64,13 @@ function StillageList({ setStillageName }: Props) {
           shelvesList.map((shelf) => (
             <StillageItem
               key={shelf.id}
-              showDeleteModal={() => showDeleteModal(shelf.id, shelf.name)}
-            >
-              {shelf.name}
-            </StillageItem>
+              shelfId={shelf.id}
+              shelfName={shelf.name}
+              setShelfId={setShelfId}
+              setShelfName={setShelfName}
+              setIsShowShelf={setIsShowShelf}
+              setIsShowDeleteModal={setIsShowDeleteModal}
+            ></StillageItem>
           ))}
       </StyledList>
       <DeleteShelfModal
@@ -81,6 +79,14 @@ function StillageList({ setStillageName }: Props) {
         shelfName={shelfName}
         shelfId={shelfId}
       />
+      <ShelfModal
+        shelfName={shelfName}
+        shelfId={shelfId}
+        isShow={isShowShelf}
+        setIsShow={setIsShowShelf}
+        setIsShowUpload={setIsShowUpload}
+      />
+      <UploadFileModal isShow={isShowUpload} setIsShow={setIsShowUpload} shelfId={shelfId} />
     </>
   )
 }

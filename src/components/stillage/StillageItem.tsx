@@ -1,12 +1,17 @@
-import React, { PropsWithChildren, useCallback } from 'react'
+import { useCallback } from 'react'
 import { styled } from '@linaria/react'
 
 import folderIcon from '@assets/folder-icon.svg'
 import editIcon from '@assets/edit-icon.svg'
 import trashIcon from '@assets/trash-icon.svg'
 
-interface PropsType extends PropsWithChildren {
-  showDeleteModal: () => void
+interface PropsType {
+  shelfId: string
+  shelfName: string
+  setShelfId: (shelfId: string) => void
+  setShelfName: (shelfName: string) => void
+  setIsShowShelf: (value: boolean) => void
+  setIsShowDeleteModal: (value: boolean) => void
 }
 
 const StyledItem = styled.li`
@@ -14,7 +19,7 @@ const StyledItem = styled.li`
   padding: 16px;
   border-radius: 16px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   overflow: hidden;
   img {
     width: 24px;
@@ -25,51 +30,68 @@ const StyledItem = styled.li`
     width: 24px;
     height: 24px;
   }
+`
 
-  & > img {
-    margin-right: 12px;
-  }
-  p {
-    font-size: 16px;
-    line-height: 1.1;
-    color: #fff;
-    padding: 4px 16px 0 0;
-    flex: 1 1 auto;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-    overflow: hidden;
-  }
-  p + button {
-    margin-right: 16px;
-  }
+const ShelfNameContainer = styled.div`
+  cursor: pointer;
+  display: flex;
+  gap: 12px;
+`
+
+const ShelfName = styled.p`
+  font-size: 16px;
+  line-height: 1.1;
+  color: #fff;
+  padding: 4px 16px 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 
   @media screen and (min-width: 768px) {
-    p {
-      font-size: 18px;
-      padding: 3px 16px 0 0;
-    }
+    font-size: 18px;
+    padding: 3px 16px 0 0;
   }
 `
 
-function StillageItem({ children, showDeleteModal }: PropsType) {
-  const handleDeleteClick = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-      event.preventDefault()
-      showDeleteModal()
-    },
-    [showDeleteModal],
-  )
+const ButtonsContainer = styled.div`
+  display: flex;
+  gap: 16px;
+`
+
+function StillageItem({
+  shelfId,
+  shelfName,
+  setShelfId,
+  setShelfName,
+  setIsShowShelf,
+  setIsShowDeleteModal,
+}: PropsType) {
+  const showThisShelf = useCallback(() => {
+    setShelfId(shelfId)
+    setShelfName(shelfName)
+    setIsShowShelf(true)
+  }, [shelfId, shelfName])
+
+  const showDeleteModal = useCallback(() => {
+    setShelfId(shelfId)
+    setShelfName(shelfName)
+    setIsShowDeleteModal(true)
+  }, [shelfId, shelfName])
 
   return (
     <StyledItem>
-      <img src={folderIcon} alt='' />
-      <p title={children}>{children}</p>
-      <button>
-        <img src={editIcon} alt='Rename' />
-      </button>
-      <button onClick={handleDeleteClick}>
-        <img src={trashIcon} alt='Delete' />
-      </button>
+      <ShelfNameContainer onClick={showThisShelf}>
+        <img src={folderIcon} alt='' />
+        <ShelfName title={shelfName}>{shelfName}</ShelfName>
+      </ShelfNameContainer>
+      <ButtonsContainer>
+        <button>
+          <img src={editIcon} alt='Rename shelf' />
+        </button>
+        <button onClick={showDeleteModal}>
+          <img src={trashIcon} alt='Delete shelf' />
+        </button>
+      </ButtonsContainer>
     </StyledItem>
   )
 }
