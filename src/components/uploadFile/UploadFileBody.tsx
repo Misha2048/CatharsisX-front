@@ -15,7 +15,7 @@ const UploadFileBody = styled.div<Props>`
   top: ${(props) => (props.show ? '50%' : 'calc(50% + 24px)')};
   left: 50%;
   transform: translate(-50%, -50%);
-  z-index: 5;
+  z-index: 500;
   transition: all 0.3s;
   visibility: ${(props) => (props.show ? 'visible' : 'hidden')};
   opacity: ${(props) => (props.show ? '1' : '0')};

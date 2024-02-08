@@ -1,11 +1,13 @@
 import { styled } from '@linaria/react'
-import { PropsWithChildren, useCallback, useState } from 'react'
+import { PropsWithChildren, useCallback } from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import arrowDown from '@assets/arrow-down.svg'
 import HeaderLink from '@components/HeaderLink'
 
 interface DropdownProps extends PropsWithChildren {
+  isDropdownOpen: boolean
+  setIsDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>
   setBurgerIsOpen?: React.Dispatch<React.SetStateAction<boolean>>
   isFooterMenu?: boolean
 }
@@ -90,9 +92,14 @@ const DropdownLink = styled(Link)`
   }
 `
 
-function DropdownMenu({ children, setBurgerIsOpen, isFooterMenu }: DropdownProps) {
+function DropdownMenu({
+  children,
+  setBurgerIsOpen,
+  isFooterMenu,
+  isDropdownOpen,
+  setIsDropdownOpen,
+}: DropdownProps) {
   const navigate = useNavigate()
-  const [isDropdownOpen, setIsDropdownOpen] = useState(false)
 
   const toggleDropdown = useCallback(
     (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
