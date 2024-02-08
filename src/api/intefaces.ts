@@ -137,3 +137,14 @@ export interface ICatalogResponse {
   count: number
   stillages: ICatalogStillages[]
 }
+
+export interface IGetFilesRequest {
+  shelfId: string
+}
+
+export interface IGetFilesResponse {
+  fileId: string
+  fileName: string
+  size: number
+  uploadedAt: string
+}
