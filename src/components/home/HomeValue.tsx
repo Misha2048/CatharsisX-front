@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react'
+import { PropsWithChildren } from 'react'
 import { styled } from '@linaria/react'
 
 interface Props extends PropsWithChildren {
@@ -41,14 +41,22 @@ const Title = styled.h2`
   @media screen and (min-width: 768px) {
     margin-bottom: 10px;
   }
+
+  @media only screen and (max-width: 550px) {
+    font-size: 24px;
+  }
 `
 
 const Text = styled.p`
   color: #fff;
   text-align: center;
-  font-size: 14px;
+  font-size: 16px;
   line-height: 172.5%;
   letter-spacing: -0.21px;
+
+  @media only screen and (max-width: 550px) {
+    font-size: 18px;
+  }
 `
 
 function HomeValue({ iconPath, title, children }: Props) {
