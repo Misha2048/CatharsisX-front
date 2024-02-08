@@ -1,11 +1,11 @@
-import React, { useCallback, useRef } from 'react'
+import { useCallback, useRef } from 'react'
 
 import HomeMainScreen from '@components/home/HomeMainScreen'
 import HomeAdvantages from '@components/home/HomeAdvantages'
 import HomeReviews from '@components/home/HomeReviews'
 import SignUp from '@components/regestration/SignUp'
 import HomeSignUpContainer from '@components/home/HomeSignUpContainer'
-import Footer from '@components/Footer'
+import Page from '@components/Page'
 
 function Home() {
   const signUpRef = useRef<HTMLElement | null>(null)
@@ -15,15 +15,16 @@ function Home() {
   }, [])
 
   return (
-    <main>
-      <HomeMainScreen onButtonClick={scrollToSignUp} />
-      <HomeAdvantages />
-      <HomeReviews />
-      <HomeSignUpContainer ref={signUpRef}>
-        <SignUp />
-      </HomeSignUpContainer>
-      <Footer />
-    </main>
+    <Page hasHeader hasFooter>
+      <main>
+        <HomeMainScreen onButtonClick={scrollToSignUp} />
+        <HomeAdvantages />
+        <HomeReviews />
+        <HomeSignUpContainer ref={signUpRef}>
+          <SignUp />
+        </HomeSignUpContainer>
+      </main>
+    </Page>
   )
 }
 

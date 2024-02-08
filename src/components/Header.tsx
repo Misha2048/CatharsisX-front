@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { jwtDecode } from 'jwt-decode'
 
 import Logo from '@components/Logo'
 import SearchField from '@components/SearchField'
@@ -120,8 +121,24 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true)
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const navigate = useNavigate()
+
+  const checkUserIsLoggedIn = useCallback(() => {
+    const refreshToken = localStorage.getItem('refreshToken')
+    if (!refreshToken) return setIsUserLoggedIn(false)
+    const decodedToken = jwtDecode(refreshToken)
+    if (decodedToken.exp && decodedToken.exp * 1000 > new Date().getTime()) {
+      return setIsUserLoggedIn(true)
+    } else {
+      return setIsUserLoggedIn(false)
+    }
+  }, [])
+
+  useEffect(() => {
+    checkUserIsLoggedIn()
+  }, [])
 
   const handleRedirect = useCallback(
     (path: string, event: React.MouseEvent<HTMLElement>) => {
@@ -164,7 +181,7 @@ function Header() {
                 <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink>
                 <HeaderLink onClick={(event) => handleRedirect('/chat', event)}>Chat</HeaderLink>
               </HeaderNavigation>
-              {!localStorage.getItem('accessToken') && (
+              {!isUserLoggedIn && (
                 <ButtonsContainer>
                   <Button onClick={(event) => handleRedirect('/login', event)}>Log in</Button>
                   <OutlinedButton onClick={(event) => handleRedirect('/signup', event)}>
