@@ -15,7 +15,6 @@ import DateInput from '@components/DateInput'
 import FilterButtonsRow from '@components/filter/FilterButtonsRow'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowBtn from '@components/ModalWindowBtn'
-import ToolTip from '@components/ToolTip'
 import { setHint } from '@redux/slices/hintSlice'
 import { maxDate, minDate } from '@const'
 import { FilterParams } from '@helpers/filterTypes'
@@ -203,7 +202,6 @@ function Filter({ isShow, setIsShow, additionalParams, filterData }: Props) {
         </FilterForm>
       </FilterBody>
       <BlackOverlay show={isShow} onClick={hideFilter} />
-      <ToolTip />
     </>
   )
 }

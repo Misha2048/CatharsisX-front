@@ -9,13 +9,13 @@ import CloseBtn from '@components/CloseBtn'
 import UploadFileDropzone from '@components/uploadFile/UploadFileDropzone'
 import Input from '@components/Input'
 import ModalWindowBtn from '@components/ModalWindowBtn'
-import ToolTip from '@components/ToolTip'
 import UploadFileText from '@components/uploadFile/UploadFileText'
 import { getFileExtensionLowercase, getFileNameAndSize } from '@helpers/fileHelper'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
 import ModalWindowSpinner from '@components/ModalWindowSpinner'
 import UploadFileSpinnerRow from '@components/uploadFile/UploadFileSpinnerRow'
+import BlackOverlay from '@components/BlackOverlay'
 
 interface Props {
   shelfId: string
@@ -39,7 +39,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
   )
 
   const hideModalWindow = useCallback(
-    (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
+    (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
       event.preventDefault()
       setTimeout(() => {
         setFile(null)
@@ -96,6 +96,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
 
   return (
     <>
+      <BlackOverlay show={isShow} onClick={hideModalWindow} zIndex={460} />
       <UploadFileBody show={isShow}>
         <UploadFileForm onSubmit={submitForm}>
           <CloseBtnContainer>
@@ -130,7 +131,6 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
           )}
         </UploadFileForm>
       </UploadFileBody>
-      <ToolTip />
     </>
   )
 }

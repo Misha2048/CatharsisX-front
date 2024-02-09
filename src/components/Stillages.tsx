@@ -7,6 +7,7 @@ import GreyLibraryBox from '@components/library/GreyLibraryBox'
 import LibraryList from '@components/library/LibraryList'
 import { FilterParams } from '@helpers/filterTypes'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
+import Page from '@components/Page'
 
 interface Props {
   title: string
@@ -17,17 +18,19 @@ interface Props {
 
 function Stillages({ title, fetchData, filterData, dispatch }: Props) {
   return (
-    <LibraryContainer>
-      <StillageWrapper>
-        <StillageHeadingRow>
-          <StillageHeading>{title}</StillageHeading>
-          <FilterWithShowBtn filterData={filterData} />
-        </StillageHeadingRow>
-        <GreyLibraryBox>
-          <LibraryList fetchData={fetchData} dispatch={dispatch} />
-        </GreyLibraryBox>
-      </StillageWrapper>
-    </LibraryContainer>
+    <Page hasHeader hasTooltip>
+      <LibraryContainer>
+        <StillageWrapper>
+          <StillageHeadingRow>
+            <StillageHeading>{title}</StillageHeading>
+            <FilterWithShowBtn filterData={filterData} />
+          </StillageHeadingRow>
+          <GreyLibraryBox>
+            <LibraryList fetchData={fetchData} dispatch={dispatch} />
+          </GreyLibraryBox>
+        </StillageWrapper>
+      </LibraryContainer>
+    </Page>
   )
 }
 

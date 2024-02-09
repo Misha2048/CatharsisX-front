@@ -32,7 +32,7 @@ function Stillage() {
   )
 
   return (
-    <Page hasHeader>
+    <Page hasHeader hasTooltip>
       <StillageContainer>
         <StillageWrapper>
           <StillageHeadingRow>
