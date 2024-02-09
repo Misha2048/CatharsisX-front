@@ -4,7 +4,6 @@ const MainRegistryContent = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
-  aligh-items: center;
   gap: 20px;
 
   @media only screen and (max-width: 768px) {
