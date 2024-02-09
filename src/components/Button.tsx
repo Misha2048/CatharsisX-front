@@ -5,11 +5,6 @@ import { styled } from '@linaria/react'
 interface ButtonProps {
   children: React.ReactNode
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
-}
-
-interface ButtonProps {
-  children: React.ReactNode
-  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   disabled?: boolean
 }
 
@@ -32,7 +27,9 @@ const StyledButton = styled.button`
     background-color: ${greyColor};
     cursor: not-allowed;
   }
-
+  &:hover {
+    filter: brightness(90%);
+  }
   &:active {
     transform: scale(0.98);
     box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);

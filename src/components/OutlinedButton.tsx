@@ -2,12 +2,10 @@ import React from 'react'
 import { greyColor, primaryColor, whiteColor } from './colors'
 import { styled } from '@linaria/react'
 
-//////////////////////
-// Outline
-//////////////////////
 interface OutlinedButtonProps {
   children: React.ReactNode
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 const StyledOutlinedButton = styled.button`
@@ -27,7 +25,8 @@ const StyledOutlinedButton = styled.button`
     background-color: ${greyColor};
   }
   :hover {
-    opacity: 0.9;
+    opacity: 0.8;
+    background: inherit;
   }
 `
 
