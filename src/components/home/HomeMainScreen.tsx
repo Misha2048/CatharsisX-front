@@ -1,6 +1,6 @@
 import React from 'react'
 import { styled } from '@linaria/react'
-
+import { greyColor } from './../colors'
 import bgImage from '@assets/main-screen-bg.jpg'
 import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
@@ -155,7 +155,20 @@ const MainScreenBtn = styled.button`
   font-family: Inter;
   font-size: 20px;
   margin: 0px auto;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: all 0.2s ease-in-out;
 
+  &.disabled {
+    background-color: ${greyColor};
+    cursor: not-allowed;
+  }
+  &:hover {
+    filter: brightness(90%);
+  }
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
   @media screen and (min-width: 1024px) {
     margin: 0;
   }

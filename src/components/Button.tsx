@@ -2,12 +2,10 @@ import React from 'react'
 import { greyColor, primaryColor, whiteColor } from './colors'
 import { styled } from '@linaria/react'
 
-//////////////////////
-// BUTTON
-//////////////////////
 interface ButtonProps {
   children: React.ReactNode
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
+  disabled?: boolean
 }
 
 const StyledButton = styled.button`
@@ -22,17 +20,20 @@ const StyledButton = styled.button`
   border: none;
   border-radius: 8px;
   cursor: pointer;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;
+
   &.disabled {
     background-color: ${greyColor};
+    cursor: not-allowed;
   }
-  :hover {
-    opacity: 0.9;
+  &:hover {
+    filter: brightness(90%);
   }
-  // @media only screen and (max-height: 450px) and (orientation:landscape){
-  //   font-size:14px;
-  //   line-height:1;
-  // }
+  &:active {
+    transform: scale(0.98);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.2);
+  }
 `
 
 const Button: React.FC<ButtonProps> = ({ children, onClick }) => {
