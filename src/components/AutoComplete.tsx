@@ -36,13 +36,13 @@ const AutoCompleteInput = styled.input`
   }
 `
 const AutoCompleteList = styled.ul`
-  position:absolute;
-  width:100%
-  max-height:100px;
-  overflow-y:scroll;
-  top:89%;
-  left:0px;
-  z-index:5;
+  position: absolute;
+  width: 100%;
+  max-height: 100px;
+  overflow-y: scroll;
+  top: 89%;
+  left: 0px;
+  z-index: 5;
 `
 const AutoCompleteListComponent = styled.li`
   color: rgba(0, 0, 0, 0.7);
@@ -53,7 +53,7 @@ const AutoCompleteListComponent = styled.li`
   letter-spacing: 0.42px;
   padding: 10px 5px;
   background: #fff;
-  curson: pointer;
+  cursor: pointer;
 
   &:hover {
     background: #f3f3f3;
