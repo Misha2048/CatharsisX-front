@@ -59,7 +59,7 @@ function SignUp() {
     }
 
     if (!nameExists(universities, formDate.university_id)) {
-      dispatch(setHint({ message: 'There is no such university our list.' }))
+      dispatch(setHint({ message: 'There is no such university in our list.' }))
       return
     } else {
       const uniID = getIdByName(universities, formDate.university_id)
