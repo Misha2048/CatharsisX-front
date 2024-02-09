@@ -29,4 +29,7 @@ export default defineConfig({
       '@const': '/src/const.ts',
     },
   },
+  build: {
+    outDir: 'build',
+  },
 })
