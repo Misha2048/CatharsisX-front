@@ -1,9 +1,9 @@
 import { createSlice } from '@reduxjs/toolkit'
 
-import { ICatalogStillages } from '@api/intefaces'
+import { IStillagesResponse } from '@api/intefaces'
 
 export interface LibraryState {
-  list: ICatalogStillages[] | null
+  list: IStillagesResponse[] | null
 }
 
 const initialState: LibraryState = {
@@ -14,7 +14,7 @@ export const librarySlice = createSlice({
   name: 'library',
   initialState,
   reducers: {
-    setLibraryList: (state, action: { payload: ICatalogStillages[]; type: string }) => {
+    setLibraryList: (state, action: { payload: IStillagesResponse[]; type: string }) => {
       state.list = action.payload
     },
     clearLibraryList: (state) => {

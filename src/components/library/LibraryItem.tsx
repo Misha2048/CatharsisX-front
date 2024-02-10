@@ -14,12 +14,13 @@ interface Props {
   id: string
   name: string
   liked: boolean | undefined
+  color: string
   dispatch: Dispatch<UnknownAction>
 }
 
-const StyledLibraryItem = styled.li`
+const StyledLibraryItem = styled.li<{ color: string }>`
   position: relative;
-  background-color: #019c56;
+  background-color: ${(props) => (props.color ? props.color : '#019c56')};
   width: 250px;
   height: 300px;
   padding: 20px;
@@ -74,7 +75,7 @@ const StyledLink = styled(Link)`
   }
 `
 
-function LibraryItem({ name, id, liked, dispatch }: Props) {
+function LibraryItem({ name, id, liked, color, dispatch }: Props) {
   const handleClick = useCallback(
     async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
@@ -94,7 +95,7 @@ function LibraryItem({ name, id, liked, dispatch }: Props) {
   )
 
   return (
-    <StyledLibraryItem>
+    <StyledLibraryItem color={color}>
       <StarBtn onClick={handleClick}>
         <img src={liked ? starFilled : starTransparent} alt='' />
       </StarBtn>
