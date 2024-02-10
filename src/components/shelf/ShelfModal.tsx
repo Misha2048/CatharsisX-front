@@ -8,6 +8,7 @@ import ModalTitle from '@components/modalWindow/ModalTitle'
 import ModalWindowBtn from '@components/ModalWindowBtn'
 import ShelfFile from '@components/shelf/ShelfFile'
 import BlackOverlay from '@components/BlackOverlay'
+import ModalWindowSpinner from '@components/ModalWindowSpinner'
 
 interface Props {
   shelfName: string
@@ -63,10 +64,20 @@ const ShelfList = styled.ul`
   gap: 20px 30px;
 `
 
+const SpinnerContainer = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+`
+
 function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: Props) {
   const [files, setFiles] = useState<IGetFilesResponse[]>([])
+  const [isFilesFetched, setIsFilesFetched] = useState(false)
 
-  const fetchFiles = useCallback(() => {
+  const fetchFiles = useCallback(async () => {
     // const resp = await api.files.get(shelfId)
     // setFiles(resp)
 
@@ -79,6 +90,8 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
       { fileId: '5', fileName: 'test5.xlsx', size: 1024, uploadedAt: '01.01.2024' },
       { fileId: '6', fileName: 'test6.pptx', size: 1024, uploadedAt: '01.01.2024' },
     ])
+    await new Promise((resolve) => setTimeout(resolve, 2000)) // TODO delete it later
+    setIsFilesFetched(true)
   }, [shelfId])
 
   useEffect(() => {
@@ -105,13 +118,20 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
           <CloseBtn onClick={closeShelfModal} />
         </CloseBtnContainer>
         <ModalWindowBtn onClick={showUploadModal}>Upload File</ModalWindowBtn>
-        <ShelfList>
-          {files.map((file) => (
-            <li key={file.fileId}>
-              <ShelfFile fileName={file.fileName} fileSize={file.size} />
-            </li>
-          ))}
-        </ShelfList>
+        {isFilesFetched ? (
+          <ShelfList>
+            {files.map((file) => (
+              <li key={file.fileId}>
+                <ShelfFile fileName={file.fileName} fileSize={file.size} />
+              </li>
+            ))}
+          </ShelfList>
+        ) : (
+          <SpinnerContainer>
+            <ModalWindowSpinner />
+            <ModalTitle>Loading...</ModalTitle>
+          </SpinnerContainer>
+        )}
       </Body>
       <BlackOverlay show={isShow} onClick={closeShelfModal} />
     </>
