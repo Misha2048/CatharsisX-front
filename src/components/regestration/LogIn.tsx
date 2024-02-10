@@ -37,20 +37,14 @@ function LogIn() {
   }
 
   // Send formDate to server
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault()
-
-    api.auth.login(formDate).then((data) => {
-      console.log(data)
-
-      setFormDate({
-        email: '',
-        password: '',
-      })
-
+    const resp = await api.auth.login(formDate)
+    if (resp.accessToken && resp.refreshToken) {
+      setFormDate({ email: '', password: '' })
       dispatch(clearHistoryState())
       prevPage ? navigator(prevPage) : navigator('/')
-    })
+    }
   }
 
   return (
