@@ -82,6 +82,7 @@ function StillageList({ setStillageName }: Props) {
       <ShelfModal
         shelfName={shelfName}
         shelfId={shelfId}
+        stillageId={stillageId as string}
         isShow={isShowShelf}
         setIsShow={setIsShowShelf}
         setIsShowUpload={setIsShowUpload}

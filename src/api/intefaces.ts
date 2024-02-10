@@ -140,11 +140,12 @@ export interface ICatalogResponse {
 
 export interface IGetFilesRequest {
   shelfId: string
+  stillageId: string
 }
 
 export interface IGetFilesResponse {
-  fileId: string
-  fileName: string
+  id: string
+  name: string
   size: number
   uploadedAt: string
 }

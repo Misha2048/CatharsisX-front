@@ -67,6 +67,7 @@ function StillageItem({
   setIsShowDeleteModal,
 }: PropsType) {
   const showThisShelf = useCallback(() => {
+    console.log('StillageItem shelfId:', shelfId)
     setShelfId(shelfId)
     setShelfName(shelfName)
     setIsShowShelf(true)
