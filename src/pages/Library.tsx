@@ -11,7 +11,7 @@ function Library() {
 
   const fetchData = useCallback(async (requestParams?: FilterParams) => {
     const response = await api.catalog(requestParams)
-    dispatch(setLibraryList(response.stillages))
+    if (response.stillages) dispatch(setLibraryList(response.stillages))
   }, [])
 
   return (

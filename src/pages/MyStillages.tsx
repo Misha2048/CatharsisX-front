@@ -11,7 +11,7 @@ function MyStillages() {
 
   const fetchData = useCallback(async (requestParams?: FilterParams) => {
     const response = await api.stillages.get(requestParams)
-    dispatch(setLibraryList(response))
+    if (Array.isArray(response)) dispatch(setLibraryList(response))
   }, [])
 
   return (

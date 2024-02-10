@@ -11,7 +11,7 @@ function LikedStillages() {
 
   const fetchData = useCallback(async (requestParams?: FilterParams) => {
     const response = await api.stillages.liked(requestParams)
-    dispatch(setLibraryList(response.likedStillages))
+    if (response.likedStillages) dispatch(setLibraryList(response.likedStillages))
   }, [])
 
   return (
