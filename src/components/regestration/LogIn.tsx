@@ -15,9 +15,14 @@ import { ILoginRequest } from '../../api/intefaces'
 import ToolTip from '../ToolTip'
 import { useNavigate } from 'react-router-dom'
 import RedirectHomeContainer from '@components/RedirectHomeContainer'
+import { useDispatch, useSelector } from 'react-redux'
+import { RootState } from '@redux/store'
+import { clearHistoryState } from '@redux/slices/historySlice'
 
 function LogIn() {
   const navigator = useNavigate()
+  const prevPage = useSelector((state: RootState) => state.history.prevPage)
+  const dispatch = useDispatch()
 
   //Referencing to ILoginRequest interface
   const [formDate, setFormDate] = useState<ILoginRequest>({
@@ -42,7 +47,9 @@ function LogIn() {
         email: '',
         password: '',
       })
-      navigator('/')
+
+      dispatch(clearHistoryState())
+      prevPage ? navigator(prevPage) : navigator('/')
     })
   }
 

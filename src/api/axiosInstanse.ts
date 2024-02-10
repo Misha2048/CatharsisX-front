@@ -3,6 +3,7 @@ import { store } from '../redux/store'
 import { setTokens, clearTokens } from '../redux/slices/tokensSlice'
 import history from '../helpers/customRouter/history'
 import { setHint } from '../redux/slices/hintSlice'
+import { setHistoryState } from '@redux/slices/historySlice'
 
 interface ConfigType extends AxiosRequestConfig {
   _isRetry: boolean
@@ -60,6 +61,9 @@ axiosInstance.interceptors.response.use(
       }
     } else {
       store.dispatch(clearTokens())
+      if (history.location.pathname !== '/login') {
+        store.dispatch(setHistoryState({ prevPage: history.location.pathname }))
+      }
       history.replace('/login')
       return error.response
     }

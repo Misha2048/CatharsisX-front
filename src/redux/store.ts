@@ -5,6 +5,7 @@ import hintReducer from './slices/hintSlice'
 import stillageReducer from './slices/stillageSlice'
 import userReducer from './slices/UserSlice'
 import libraryReducer from '@redux/slices/librarySlice'
+import historyReducer from '@redux/slices/historySlice'
 
 export const store = configureStore({
   reducer: {
@@ -13,6 +14,7 @@ export const store = configureStore({
     user: userReducer,
     stillage: stillageReducer,
     library: libraryReducer,
+    history: historyReducer,
   },
 })
 
