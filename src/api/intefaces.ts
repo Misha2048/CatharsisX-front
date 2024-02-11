@@ -95,12 +95,12 @@ export interface IStillagesRequest {
 
 export interface IStillagesResponse {
   id: string
-  userId: string
   name: string
   created_at: string
   last_upload_at: string
   university_id: string
   liked: boolean
+  color: string
 }
 
 export interface IStillagesLikeRequest {
@@ -124,18 +124,9 @@ export interface IStillagesLikedResponse {
   likedStillages: IStillagesResponse[]
 }
 
-export interface ICatalogStillages {
-  id: string
-  name: string
-  created_at: string
-  last_upload_at: string
-  university_id: string
-  liked: boolean
-}
-
 export interface ICatalogResponse {
   count: number
-  stillages: ICatalogStillages[]
+  stillages: IStillagesResponse[]
 }
 
 export interface IGetFilesRequest {

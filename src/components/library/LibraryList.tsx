@@ -52,6 +52,7 @@ function LibraryList({ fetchData, dispatch }: Props) {
             name={stillage.name}
             dispatch={dispatch}
             liked={stillage.liked}
+            color={stillage.color}
           />
         ))}
     </StyledList>
