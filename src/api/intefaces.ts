@@ -75,8 +75,10 @@ export interface IFilesRequest {
 }
 
 export interface IFilesResponse {
-  message?: string
-  error?: string
+  id: string
+  name: string
+  size: number
+  uploadedAt: string
 }
 
 export interface INewUniversityRequest {
@@ -140,11 +142,4 @@ export interface ICatalogResponse {
 
 export interface IGetFilesRequest {
   shelfId: string
-}
-
-export interface IGetFilesResponse {
-  id: string
-  name: string
-  size: number
-  uploadedAt: string
 }

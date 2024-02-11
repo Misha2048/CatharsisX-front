@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { IGetFilesResponse } from '@api/intefaces'
 import CloseBtn from '@components/CloseBtn'
 import CloseBtnContainer from '@components/filter/CloseBtnContainer'
 import ModalTitle from '@components/modalWindow/ModalTitle'
@@ -10,6 +10,8 @@ import ShelfFile from '@components/shelf/ShelfFile'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowSpinner from '@components/ModalWindowSpinner'
 import { api } from '@api/index'
+import { RootState } from '@redux/store'
+import { clearFilesList, setFilesList } from '@redux/slices/filesSlice'
 
 interface Props {
   shelfName: string
@@ -75,13 +77,14 @@ const SpinnerContainer = styled.div`
 `
 
 function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: Props) {
-  const [files, setFiles] = useState<IGetFilesResponse[]>([])
+  const files = useSelector((state: RootState) => state.files.list)
+  const dispatch = useDispatch()
   const [isFilesFetched, setIsFilesFetched] = useState(false)
 
   const fetchFiles = useCallback(async () => {
     if (shelfId) {
       const resp = await api.files.get({ shelfId })
-      if (Array.isArray(resp)) setFiles(resp)
+      if (Array.isArray(resp)) dispatch(setFilesList(resp))
     }
   }, [shelfId])
 
@@ -91,7 +94,7 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
     setIsFilesFetched(true)
 
     return () => {
-      setFiles([])
+      dispatch(clearFilesList())
     }
   }, [shelfId])
 

@@ -16,6 +16,7 @@ import { setHint } from '@redux/slices/hintSlice'
 import ModalWindowSpinner from '@components/ModalWindowSpinner'
 import UploadFileSpinnerRow from '@components/uploadFile/UploadFileSpinnerRow'
 import BlackOverlay from '@components/BlackOverlay'
+import { addFile } from '@redux/slices/filesSlice'
 
 interface Props {
   shelfId: string
@@ -77,7 +78,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       }
       const res = await api.files.upload(data)
       setIsFinishedLoading(true)
-      if (res.error) {
+      if (!res.id || !res.name || !res.size) {
         setFinishMessage("File wasn't uploaded")
         dispatch(
           setHint({
@@ -86,9 +87,11 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
               ' or contact the administrator.',
           }),
         )
-      }
-      if (res.message) {
+      } else {
         setFinishMessage("File's been uploaded successfully!")
+        dispatch(
+          addFile({ id: res.id, name: res.name, size: res.size, uploadedAt: res.uploadedAt }),
+        )
       }
     },
     [shelfId, file, fileName],
