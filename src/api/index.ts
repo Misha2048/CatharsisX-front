@@ -163,7 +163,7 @@ export const api = {
         .request({
           method: 'GET',
           url: '/files',
-          params: { shelf: options.shelfId, stillage: options.stillageId },
+          params: { shelf: options.shelfId },
         })
         .then((response) => response.data as IGetFilesResponse[])
     },
