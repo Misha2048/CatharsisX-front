@@ -140,7 +140,6 @@ export interface ICatalogResponse {
 
 export interface IGetFilesRequest {
   shelfId: string
-  stillageId: string
 }
 
 export interface IGetFilesResponse {

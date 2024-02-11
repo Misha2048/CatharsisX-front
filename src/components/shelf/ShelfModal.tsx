@@ -14,7 +14,6 @@ import { api } from '@api/index'
 interface Props {
   shelfName: string
   shelfId: string
-  stillageId: string
   isShow: boolean
   setIsShow: (value: boolean) => void
   setIsShowUpload: (value: boolean) => void
@@ -75,14 +74,14 @@ const SpinnerContainer = styled.div`
   gap: 10px;
 `
 
-function ShelfModal({ shelfName, shelfId, stillageId, isShow, setIsShow, setIsShowUpload }: Props) {
+function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: Props) {
   const [files, setFiles] = useState<IGetFilesResponse[]>([])
   const [isFilesFetched, setIsFilesFetched] = useState(false)
 
   const fetchFiles = useCallback(async () => {
     if (shelfId) {
-      const resp = await api.files.get({ shelfId, stillageId })
-      setFiles(resp)
+      const resp = await api.files.get({ shelfId })
+      if (Array.isArray(resp)) setFiles(resp)
       setIsFilesFetched(true)
     }
   }, [shelfId])

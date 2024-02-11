@@ -159,9 +159,6 @@ export const api = {
         .then((response) => response.data as IFilesResponse)
     },
     get: async (options: IGetFilesRequest): Promise<IGetFilesResponse[]> => {
-      console.log(options)
-      console.log(options.shelfId)
-      console.log(options.stillageId)
       return axiosInstance
         .request({
           method: 'GET',
