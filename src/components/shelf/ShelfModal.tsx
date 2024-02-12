@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
 
-import { IGetFilesResponse } from '@api/intefaces'
 import CloseBtn from '@components/CloseBtn'
 import CloseBtnContainer from '@components/filter/CloseBtnContainer'
 import ModalTitle from '@components/modalWindow/ModalTitle'
@@ -9,6 +9,9 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import ShelfFile from '@components/shelf/ShelfFile'
 import BlackOverlay from '@components/BlackOverlay'
 import ModalWindowSpinner from '@components/ModalWindowSpinner'
+import { api } from '@api/index'
+import { RootState } from '@redux/store'
+import { clearFilesList, setFilesList } from '@redux/slices/filesSlice'
 
 interface Props {
   shelfName: string
@@ -74,31 +77,24 @@ const SpinnerContainer = styled.div`
 `
 
 function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: Props) {
-  const [files, setFiles] = useState<IGetFilesResponse[]>([])
+  const files = useSelector((state: RootState) => state.files.list)
+  const dispatch = useDispatch()
   const [isFilesFetched, setIsFilesFetched] = useState(false)
 
   const fetchFiles = useCallback(async () => {
-    // const resp = await api.files.get(shelfId)
-    // setFiles(resp)
-
-    // setFiles([]) // TODO delete it later
-    setFiles([
-      { fileId: '1', fileName: 'test1.txt', size: 1024, uploadedAt: '01.01.2024' },
-      { fileId: '2', fileName: 'test2.rtf', size: 1024, uploadedAt: '01.01.2024' },
-      { fileId: '3', fileName: 'test3.pdf', size: 1024, uploadedAt: '01.01.2024' },
-      { fileId: '4', fileName: 'test4.docx', size: 1024, uploadedAt: '01.01.2024' },
-      { fileId: '5', fileName: 'test5.xlsx', size: 1024, uploadedAt: '01.01.2024' },
-      { fileId: '6', fileName: 'test6.pptx', size: 1024, uploadedAt: '01.01.2024' },
-    ])
-    await new Promise((resolve) => setTimeout(resolve, 2000)) // TODO delete it later
-    setIsFilesFetched(true)
+    if (shelfId) {
+      const resp = await api.files.get({ shelfId })
+      if (Array.isArray(resp)) dispatch(setFilesList(resp))
+    }
   }, [shelfId])
 
   useEffect(() => {
+    setIsFilesFetched(false)
     fetchFiles()
+    setIsFilesFetched(true)
 
     return () => {
-      setFiles([])
+      dispatch(clearFilesList())
     }
   }, [shelfId])
 
@@ -121,8 +117,8 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
         {isFilesFetched ? (
           <ShelfList>
             {files.map((file) => (
-              <li key={file.fileId}>
-                <ShelfFile fileName={file.fileName} fileSize={file.size} />
+              <li key={file.id}>
+                <ShelfFile fileName={file.name} fileSize={file.size} />
               </li>
             ))}
           </ShelfList>

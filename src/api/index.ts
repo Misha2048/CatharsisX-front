@@ -7,6 +7,7 @@ import {
   IFilesRequest,
   IFilesResponse,
   IForgotPasswordRequest,
+  IGetFilesRequest,
   ILoginRequest,
   INewPasswordRequest,
   INewUniversityRequest,
@@ -155,6 +156,15 @@ export const api = {
           data: formData,
         })
         .then((response) => response.data as IFilesResponse)
+    },
+    get: async (options: IGetFilesRequest): Promise<IFilesResponse[]> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/files',
+          params: { shelf: options.shelfId },
+        })
+        .then((response) => response.data as IFilesResponse[])
     },
   },
 

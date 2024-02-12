@@ -6,6 +6,7 @@ import stillageReducer from './slices/stillageSlice'
 import userReducer from './slices/UserSlice'
 import libraryReducer from '@redux/slices/librarySlice'
 import historyReducer from '@redux/slices/historySlice'
+import filesReducer from '@redux/slices/filesSlice'
 
 export const store = configureStore({
   reducer: {
@@ -15,6 +16,7 @@ export const store = configureStore({
     stillage: stillageReducer,
     library: libraryReducer,
     history: historyReducer,
+    files: filesReducer,
   },
 })
 
