@@ -86,12 +86,12 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
       const resp = await api.files.get({ shelfId })
       if (Array.isArray(resp)) dispatch(setFilesList(resp))
     }
+    setIsFilesFetched(true)
   }, [shelfId])
 
   useEffect(() => {
     setIsFilesFetched(false)
     fetchFiles()
-    setIsFilesFetched(true)
 
     return () => {
       dispatch(clearFilesList())
