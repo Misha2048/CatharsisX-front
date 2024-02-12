@@ -25,6 +25,7 @@ const Body = styled.div<{ isShow: boolean }>`
   background-color: #4f4f4f;
   width: calc(100vw - 40px);
   height: calc(100vh - 40px);
+  height: calc(100svh - 40px);
   padding: 20px;
   border-radius: 16px;
   position: fixed;
@@ -44,14 +45,17 @@ const Body = styled.div<{ isShow: boolean }>`
   @media screen and (min-width: 768px) {
     width: calc(100vw - 64px);
     height: calc(100vh - 64px);
+    height: calc(100svh - 64px);
   }
   @media screen and (min-width: 1440px) {
     width: calc(100vw - 128px);
     height: calc(100vh - 80px);
+    height: calc(100svh - 80px);
   }
   @media screen and (min-width: 1441px) {
     width: 1312px;
     height: calc(100vh - 128px);
+    height: calc(100svh - 128px);
   }
 `
 
