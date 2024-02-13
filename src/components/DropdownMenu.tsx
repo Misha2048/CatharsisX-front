@@ -60,7 +60,15 @@ const DropdownBody = styled.ul<FooterMenuProps>`
   @media only screen and (min-width: 821px) {
     position: ${(props) => (props.isFooterMenu ? 'static' : 'absolute')};
     top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    min-width: 150px;
+    margin-top: ${(props) => (props.isFooterMenu ? (props.isDropdownOpen ? '10px' : '0') : '10px')};
+  }
+  @media only screen and (min-width: 1025px) {
+    top: 100%;
     left: 0;
+    transform: translateX(0);
     min-width: 150px;
     margin-top: ${(props) => (props.isFooterMenu ? (props.isDropdownOpen ? '10px' : '0') : '10px')};
   }
