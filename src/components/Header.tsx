@@ -84,7 +84,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   background: #000;
   position: relative;
   z-index: 1000;
-  box-shadow: 0px 0px 10px 5px #3ec290;
+  box-shadow: 0px 0px 10px 3px #3ec290;
 
   &[open] {
     overflow-y: scroll;
@@ -176,6 +176,7 @@ function Header() {
                 >
                   My Materials
                 </DropdownMenu>
+                {/* TODO change it later */}
                 {/* <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
                   Purchases
                 </HeaderLink>
