@@ -82,7 +82,9 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   justify-content: space-between;
   align-items: center;
   background: #000;
-  /* overflow-x: hidden; */
+  position: relative;
+  z-index: 1000;
+  box-shadow: 0px 0px 10px 3px #3ec290;
 
   &[open] {
     overflow-y: scroll;
@@ -92,7 +94,6 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     left: 0;
     top: 0;
     justify-content: center;
-    z-index: 1000;
     & > ${HeaderLogoContainer} {
       display: none;
     }
@@ -162,7 +163,8 @@ function Header() {
               <Logo></Logo>
             </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
-              <SearchField></SearchField>
+              {/* TODO delete or show SearchField later */}
+              <SearchField />
               <HeaderNavigation>
                 <HeaderLink onClick={(event) => handleRedirect('/forum', event)}>Forum</HeaderLink>
                 <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
@@ -175,10 +177,11 @@ function Header() {
                 >
                   My Materials
                 </DropdownMenu>
-                <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
+                {/* TODO change it later */}
+                {/* <HeaderLink onClick={(event) => handleRedirect('/purchases', event)}>
                   Purchases
                 </HeaderLink>
-                <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink>
+                <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink> */}
                 <HeaderLink onClick={(event) => handleRedirect('/chat', event)}>Chat</HeaderLink>
               </HeaderNavigation>
               {!isUserLoggedIn && (

@@ -11,6 +11,7 @@ const SearchFieldStyle = css`
   min-width: 100px;
   border-radius: 15px;
   background: #333;
+  visibility: hidden; /* TODO change it later maybe */
 
   & > input {
     width: 100%;
