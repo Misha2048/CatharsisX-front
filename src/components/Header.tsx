@@ -163,6 +163,7 @@ function Header() {
               <Logo></Logo>
             </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
+              {/* TODO delete or show SearchField later */}
               <SearchField />
               <HeaderNavigation>
                 <HeaderLink onClick={(event) => handleRedirect('/forum', event)}>Forum</HeaderLink>
