@@ -2,7 +2,7 @@ import { styled } from '@linaria/react'
 import { useMemo } from 'react'
 
 import downloadIcon from '@assets/download-file-icon.svg'
-import { convertFileSize, getImageUrl } from '@helpers/fileHelper'
+import { convertFileSize, getImageUrl, truncateFileName } from '@helpers/fileHelper'
 import MuiTooltip from '@components/MuiTooltip'
 
 interface Props {
@@ -78,9 +78,7 @@ function ShelfFile({ fileName, fileSize }: Props) {
     return convertFileSize(fileSize)
   }, [fileSize])
 
-  const truncatedFileName = useMemo(() => {
-    return fileName.length > maxFileNameLength ? `${fileName.substring(0, 25)}...` : fileName
-  }, [fileName])
+  const truncatedFileName = useMemo(() => truncateFileName(fileName, maxFileNameLength), [fileName])
 
   return (
     <StyledFileBody>

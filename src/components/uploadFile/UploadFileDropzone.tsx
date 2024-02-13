@@ -9,6 +9,7 @@ import { setHint } from '@redux/slices/hintSlice'
 import { getFileExtensionUppercase, getFileNameAndSize } from '@helpers/fileHelper'
 import DropzoneSmallText from '@components/uploadFile/DropzoneSmallText'
 import addFileIcon from '@assets/add-file-icon.png'
+import { uploadFileNameMaxLength } from '@const'
 
 interface Props {
   file: File | null
@@ -71,7 +72,7 @@ function UploadFileDropzone({ file, setFile }: Props) {
       return // because we accept only 1 file at a time. Dragging 2 or more files will cause the acceptedFiles array to be empty
     }
     setFile(acceptedFiles[0])
-    setMessage(getFileNameAndSize(acceptedFiles[0]))
+    setMessage(getFileNameAndSize(acceptedFiles[0], uploadFileNameMaxLength))
   }, [])
 
   const handleDropRejection = useCallback((fileRejections: Array<FileRejection>) => {

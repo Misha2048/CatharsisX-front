@@ -17,6 +17,7 @@ import ModalWindowSpinner from '@components/ModalWindowSpinner'
 import UploadFileSpinnerRow from '@components/uploadFile/UploadFileSpinnerRow'
 import BlackOverlay from '@components/BlackOverlay'
 import { addFile } from '@redux/slices/filesSlice'
+import { uploadFileNameMaxLength } from '@const'
 
 interface Props {
   shelfId: string
@@ -58,7 +59,9 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       if (fileName.trim()) {
         return `${fileName.trimEnd()}.${getFileExtensionLowercase((file as File).name)}`
       }
-      return withSize ? getFileNameAndSize(file as File) : (file as File).name
+      return withSize
+        ? getFileNameAndSize(file as File, uploadFileNameMaxLength)
+        : (file as File).name
     },
     [shelfId, file, fileName],
   )

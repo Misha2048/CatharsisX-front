@@ -1,5 +1,5 @@
-export function getFileNameAndSize(file: File) {
-  return `${file.name} ${convertFileSize(file.size)}`
+export function getFileNameAndSize(file: File, fileNameMaxLength: number) {
+  return `${truncateFileName(file.name, fileNameMaxLength)} ${convertFileSize(file.size)}`
 }
 
 export function convertFileSize(fileSize: number) {
@@ -21,4 +21,9 @@ export function getFileExtensionLowercase(fileName: string) {
 export function getImageUrl(fileName: string) {
   const imageExtension = getFileExtensionLowercase(fileName)
   return new URL(`./src/assets/${imageExtension}-icon.png`, import.meta.env.VITE_MY_BASE_URL).href
+}
+
+export function truncateFileName(fileName: string, maxLength: number) {
+  if (maxLength < 1) return fileName
+  return fileName.length > maxLength ? `${fileName.substring(0, maxLength - 4)} ...` : fileName
 }
