@@ -87,7 +87,7 @@ function ShelfFile({ fileName, fileSize }: Props) {
       </FileIcon>
       <FileDescription>
         {fileName.length > maxFileNameLength ? (
-          <MuiTooltip title={fileName}>
+          <MuiTooltip text={fileName}>
             <FileName>{truncatedFileName}</FileName>
           </MuiTooltip>
         ) : (

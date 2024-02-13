@@ -2,16 +2,15 @@ import { Tooltip } from '@mui/material'
 import { ReactElement } from 'react'
 
 interface Props {
-  title: string
+  text: string
   children: ReactElement
 }
 
-function MuiTooltip({ children, title }: Props) {
+function MuiTooltip({ children, text }: Props) {
   return (
     <Tooltip
-      title={title}
+      title={text}
       placement='top'
-      enterDelay={0}
       enterTouchDelay={0}
       leaveTouchDelay={1500}
       slotProps={{
