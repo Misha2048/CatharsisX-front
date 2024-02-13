@@ -94,7 +94,6 @@ const HeaderContainer = styled.header<{ open: boolean }>`
     left: 0;
     top: 0;
     justify-content: center;
-    z-index: 1000;
     & > ${HeaderLogoContainer} {
       display: none;
     }
