@@ -8,8 +8,8 @@ import chatIcon from '@assets/chatIcon.svg'
 import forumIcon from '@assets/forumIcon.svg'
 import libraryIcon from '@assets/libraryIcon.svg'
 import myMaterialIcon from '@assets/myMaterialsIcon.svg'
-import pricingIcon from '@assets/pricingIcon.svg'
-import purchasesIcon from '@assets/purchasesIcon.svg'
+// import pricingIcon from '@assets/pricingIcon.svg'
+// import purchasesIcon from '@assets/purchasesIcon.svg'
 import DropdownMenu from '@components/DropdownMenu'
 
 const FooterLogoContainer = styled.div`
@@ -122,19 +122,20 @@ function Footer() {
             <img src={libraryIcon} alt='Library icon' />
             <span>Library</span>
           </FooterNavLink>
-          <FooterNavLink onClick={() => navigateTo('/forum')}>
-            <img src={forumIcon} alt='Forum icon' />
-            <span>Forum</span>
-          </FooterNavLink>
         </FooterNavigationColumn>
         <FooterNavigationColumn>
-          <FooterNavLink onClick={() => navigateTo('/purchases')}>
+          {/* TODO change it later */}
+          {/* <FooterNavLink onClick={() => navigateTo('/purchases')}>
             <img src={purchasesIcon} alt='Purchases icon' />
             <span>Purchases</span>
           </FooterNavLink>
           <FooterNavLink onClick={() => navigateTo('/price')}>
             <img src={pricingIcon} alt='Pricing icon' />
             <span>Price</span>
+          </FooterNavLink> */}
+          <FooterNavLink onClick={() => navigateTo('/forum')}>
+            <img src={forumIcon} alt='Forum icon' />
+            <span>Forum</span>
           </FooterNavLink>
           <FooterNavLink onClick={() => navigateTo('/chat')}>
             <img src={chatIcon} alt='Chat icon' />
