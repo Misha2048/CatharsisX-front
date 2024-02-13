@@ -19,7 +19,7 @@ const StyledFileBody = styled.div`
 `
 
 const FileIcon = styled.div`
-  background-color: #2f80ed;
+  background-color: #3ec290;
   width: 164px;
   height: 142px;
   padding: 20px 31px;
