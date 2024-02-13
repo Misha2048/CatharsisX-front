@@ -12,6 +12,7 @@ import ModalWindowSpinner from '@components/ModalWindowSpinner'
 import { api } from '@api/index'
 import { RootState } from '@redux/store'
 import { clearFilesList, setFilesList } from '@redux/slices/filesSlice'
+import '@assets/muiTooltip.css'
 
 interface Props {
   shelfName: string

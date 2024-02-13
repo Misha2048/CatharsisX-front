@@ -7,6 +7,7 @@ const UploadFileText = styled.p`
   font-size: 16px;
   line-height: 1.4;
   width: 220px;
+  overflow-wrap: break-word;
 
   @media screen and (min-width: 768px) {
     font-size: 20px;

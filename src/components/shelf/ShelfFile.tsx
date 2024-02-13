@@ -2,7 +2,8 @@ import { styled } from '@linaria/react'
 import { useMemo } from 'react'
 
 import downloadIcon from '@assets/download-file-icon.svg'
-import { convertFileSize, getImageUrl } from '@helpers/fileHelper'
+import { convertFileSize, getImageUrl, truncateFileName } from '@helpers/fileHelper'
+import MuiTooltip from '@components/MuiTooltip'
 
 interface Props {
   fileName: string
@@ -10,18 +11,15 @@ interface Props {
 }
 
 const StyledFileBody = styled.div`
-  background-color: #fff;
-  background-color: #e5e5e5;
   width: 164px;
-  min-height: 284px;
+  height: 284px;
   display: flex;
   flex-direction: column;
   position: relative;
 `
 
 const FileIcon = styled.div`
-  background-color: #e5e5e5;
-  background-color: #fff;
+  background-color: #3ec290;
   width: 164px;
   height: 142px;
   padding: 20px 31px;
@@ -32,6 +30,7 @@ const FileIcon = styled.div`
 `
 
 const FileDescription = styled.div`
+  background-color: #e5e5e5;
   flex: 1 1 auto;
   padding: 12px;
   display: flex;
@@ -68,6 +67,8 @@ const DownloadBtn = styled.button`
   }
 `
 
+const maxFileNameLength = 28
+
 function ShelfFile({ fileName, fileSize }: Props) {
   const imagePath = useMemo(() => {
     return getImageUrl(fileName)
@@ -77,13 +78,21 @@ function ShelfFile({ fileName, fileSize }: Props) {
     return convertFileSize(fileSize)
   }, [fileSize])
 
+  const truncatedFileName = useMemo(() => truncateFileName(fileName, maxFileNameLength), [fileName])
+
   return (
     <StyledFileBody>
       <FileIcon>
         <img src={imagePath} alt='' />
       </FileIcon>
       <FileDescription>
-        <FileName>{fileName}</FileName>
+        {fileName.length > maxFileNameLength ? (
+          <MuiTooltip text={fileName}>
+            <FileName>{truncatedFileName}</FileName>
+          </MuiTooltip>
+        ) : (
+          <FileName>{truncatedFileName}</FileName>
+        )}
         <FileSize>{convertedFileSize}</FileSize>
         <DownloadBtn>
           <img src={downloadIcon} alt='download file' />
