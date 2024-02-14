@@ -23,6 +23,7 @@ const StyledItem = styled.li`
   border-radius: 16px;
   display: flex;
   justify-content: space-between;
+  gap: 16px;
   overflow: hidden;
   img {
     width: 24px;
@@ -39,20 +40,21 @@ const ShelfNameContainer = styled.div`
   cursor: pointer;
   display: flex;
   gap: 12px;
+  flex: 1 1 auto;
 `
 
 const ShelfName = styled.p`
   font-size: 16px;
   line-height: 1.1;
   color: #fff;
-  padding: 4px 16px 0 0;
+  padding-top: 4px;
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
 
   @media screen and (min-width: 768px) {
     font-size: 18px;
-    padding: 3px 16px 0 0;
+    padding-top: 3px;
   }
 `
 
