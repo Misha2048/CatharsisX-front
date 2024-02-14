@@ -15,6 +15,8 @@ import { clearFilesList, setFilesList } from '@redux/slices/filesSlice'
 import '@assets/muiTooltip.css'
 
 interface Props {
+  userId: string | null | undefined
+  shelfUserId: string
   shelfName: string
   shelfId: string
   isShow: boolean
@@ -81,7 +83,15 @@ const SpinnerContainer = styled.div`
   gap: 10px;
 `
 
-function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: Props) {
+function ShelfModal({
+  shelfName,
+  shelfId,
+  shelfUserId,
+  userId,
+  isShow,
+  setIsShow,
+  setIsShowUpload,
+}: Props) {
   const files = useSelector((state: RootState) => state.files.list)
   const dispatch = useDispatch()
   const [isFilesFetched, setIsFilesFetched] = useState(false)
@@ -118,7 +128,9 @@ function ShelfModal({ shelfName, shelfId, isShow, setIsShow, setIsShowUpload }: 
         <CloseBtnContainer>
           <CloseBtn onClick={closeShelfModal} />
         </CloseBtnContainer>
-        <ModalWindowBtn onClick={showUploadModal}>Upload File</ModalWindowBtn>
+        {userId && userId === shelfUserId && (
+          <ModalWindowBtn onClick={showUploadModal}>Upload File</ModalWindowBtn>
+        )}
         {isFilesFetched ? (
           <ShelfList>
             {files.map((file) => (
