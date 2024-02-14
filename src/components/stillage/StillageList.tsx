@@ -10,6 +10,7 @@ import { api } from '@api/index'
 import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
 import ShelfModal from '@components/shelf/ShelfModal'
 import UploadFileModal from '@components/UploadFileModal'
+import { setValue } from '@redux/slices/UserSlice'
 
 interface Props {
   setStillageName: React.Dispatch<React.SetStateAction<string>>
@@ -41,8 +42,17 @@ function StillageList({ setStillageName }: Props) {
   const [isShowUpload, setIsShowUpload] = useState(false)
   const [shelfName, setShelfName] = useState('')
   const [shelfId, setShelfId] = useState('')
+  const reduxUserId = useSelector((state: RootState) => state.user.id)
+  const [shelfUserId, setShelfUserId] = useState('')
 
   const fetchData = useCallback(async () => {
+    if (!reduxUserId) {
+      const userData = await api.users.me()
+      if (userData.id && userData.email) {
+        dispatch(setValue({ id: userData.id }))
+      }
+    }
+
     const resp = await api.shelves.get({ stillage: stillageId as string })
     if (resp.stillageName && resp.findShelfsResponse) {
       setStillageName(resp.stillageName)
@@ -66,6 +76,9 @@ function StillageList({ setStillageName }: Props) {
               key={shelf.id}
               shelfId={shelf.id}
               shelfName={shelf.name}
+              userId={reduxUserId}
+              shelfUserId={shelf.userId}
+              setShelfUserId={setShelfUserId}
               setShelfId={setShelfId}
               setShelfName={setShelfName}
               setIsShowShelf={setIsShowShelf}
@@ -82,6 +95,8 @@ function StillageList({ setStillageName }: Props) {
       <ShelfModal
         shelfName={shelfName}
         shelfId={shelfId}
+        shelfUserId={shelfUserId}
+        userId={reduxUserId}
         isShow={isShowShelf}
         setIsShow={setIsShowShelf}
         setIsShowUpload={setIsShowUpload}
