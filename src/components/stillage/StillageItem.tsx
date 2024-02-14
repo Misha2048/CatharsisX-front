@@ -9,7 +9,7 @@ interface PropsType {
   shelfId: string
   shelfName: string
   shelfUserId: string
-  userId: string | null
+  userId: string | null | undefined
   setShelfId: (shelfId: string) => void
   setShelfName: (shelfName: string) => void
   setShelfUserId: (shelfUserId: string) => void

@@ -15,7 +15,7 @@ import { clearFilesList, setFilesList } from '@redux/slices/filesSlice'
 import '@assets/muiTooltip.css'
 
 interface Props {
-  userId: string | null
+  userId: string | null | undefined
   shelfUserId: string
   shelfName: string
   shelfId: string
