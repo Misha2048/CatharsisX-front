@@ -67,6 +67,9 @@ const BurgerMenuContainer = styled.div<{ open: boolean }>`
 
 const BackgroundContainer = styled.div`
   background-color: #000;
+  position: relative;
+  z-index: 100;
+  box-shadow: 0px 0px 10px 3px #3ec290;
 `
 
 const MaxWidthContainer = styled.div`
@@ -82,15 +85,13 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   justify-content: space-between;
   align-items: center;
   background: #000;
-  position: relative;
-  z-index: 1000;
-  box-shadow: 0px 0px 10px 3px #3ec290;
 
   &[open] {
     overflow-y: scroll;
     width: 100%;
     height: 100svh;
     position: fixed;
+    z-index: 1000;
     left: 0;
     top: 0;
     justify-content: center;
