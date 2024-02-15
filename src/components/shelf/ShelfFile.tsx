@@ -62,6 +62,7 @@ const DownloadBtn = styled.button`
   height: 30px;
   border-radius: 5px;
   background-color: transparent;
+  transition: all 0.2s ease-in-out;
   img {
     width: 24px;
     height: 24px;
