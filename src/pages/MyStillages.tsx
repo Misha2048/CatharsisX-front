@@ -17,6 +17,7 @@ function MyStillages() {
   return (
     <Stillages
       title='My stillages'
+      hasCreateStillageBtn
       fetchData={fetchData}
       filterData={fetchData}
       dispatch={dispatch}

@@ -1,6 +1,8 @@
 import { styled } from '@linaria/react'
+
 import { greyColor } from './colors'
-const ModalWindowBtn = styled.button`
+
+const ModalWindowBtn = styled.button<{ alignCenter?: boolean }>`
   color: #fff;
   font-family: 'Inter', sans-serif;
   font-size: 16px;
@@ -8,6 +10,7 @@ const ModalWindowBtn = styled.button`
   border-radius: 8px;
   background-color: #3ec290;
   padding: 8px 12px;
+  align-self: ${(props) => (props.alignCenter ? 'center' : 'auto')};
 
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
   transition: all 0.2s ease-in-out;

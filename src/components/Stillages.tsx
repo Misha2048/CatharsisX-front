@@ -8,15 +8,17 @@ import LibraryList from '@components/library/LibraryList'
 import { FilterParams } from '@helpers/filterTypes'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
 import Page from '@components/Page'
+import CreateStillage from '@components/stillage/CreateStillage'
 
 interface Props {
   title: string
+  hasCreateStillageBtn?: boolean
   fetchData: () => Promise<void>
   filterData: (requestParams: FilterParams) => Promise<void>
   dispatch: Dispatch<UnknownAction>
 }
 
-function Stillages({ title, fetchData, filterData, dispatch }: Props) {
+function Stillages({ title, hasCreateStillageBtn, fetchData, filterData, dispatch }: Props) {
   return (
     <Page hasHeader hasTooltip>
       <LibraryContainer>
@@ -26,6 +28,7 @@ function Stillages({ title, fetchData, filterData, dispatch }: Props) {
             <FilterWithShowBtn filterData={filterData} />
           </StillageHeadingRow>
           <GreyLibraryBox>
+            {hasCreateStillageBtn && <CreateStillage />}
             <LibraryList fetchData={fetchData} dispatch={dispatch} />
           </GreyLibraryBox>
         </StillageWrapper>
