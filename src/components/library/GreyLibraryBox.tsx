@@ -13,9 +13,6 @@ const GreyLibraryBox = styled.div`
   @media only screen and (min-width: 600px) {
     padding: 50px 20px;
   }
-  @media only screen and (min-width: 1024px) {
-    gap: 30px;
-  }
   @media only screen and (min-width: 1440px) {
     padding: 50px;
   }
