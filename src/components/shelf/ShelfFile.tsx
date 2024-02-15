@@ -58,12 +58,17 @@ const DownloadBtn = styled.button`
   position: absolute;
   bottom: 12px;
   right: 12px;
-  width: 24px;
-  height: 24px;
+  width: 30px;
+  height: 30px;
+  border-radius: 5px;
   background-color: transparent;
   img {
-    width: 100%;
-    height: 100%;
+    width: 24px;
+    height: 24px;
+  }
+
+  &:hover {
+    background-color: #3ec290;
   }
 `
 
