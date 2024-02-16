@@ -6,6 +6,9 @@ const GreyLibraryBox = styled.div`
   padding: 50px 0px;
   flex: 1 1 auto;
   border-radius: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   @media only screen and (min-width: 600px) {
     padding: 50px 20px;
