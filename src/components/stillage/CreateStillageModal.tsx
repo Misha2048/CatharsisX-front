@@ -10,6 +10,7 @@ import Input from '@components/Input'
 import ModalText from '@components/modalWindow/ModalText'
 import Checkbox from '@components/Checkbox'
 import ModalWindowBtn from '@components/ModalWindowBtn'
+import ColorInput from '@components/ColorInput'
 
 interface Props {
   isShow: boolean
@@ -20,32 +21,6 @@ const FlexContainer = styled.div`
   display: flex;
   justify-content: space-between;
   align-items: center;
-`
-
-const ColorInput = styled.input<{ value: string }>`
-  appearance: none;
-  width: 34px;
-  height: 34px;
-  border-radius: 50%;
-  position: relative;
-  margin-left: 16px;
-
-  &::before {
-    content: '';
-    display: block;
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background-color: ${(props) => props.value};
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-
-  &:checked {
-    border: 2px solid #fff;
-  }
 `
 
 const CheckboxContainer = styled.label`

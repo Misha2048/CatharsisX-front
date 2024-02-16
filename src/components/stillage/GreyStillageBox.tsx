@@ -6,6 +6,9 @@ const GreyStillageBox = styled.div`
   padding: 16px 20px;
   border-radius: 16px;
   flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 
   @media screen and (min-width: 375px) {
     padding: 20px;
