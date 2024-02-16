@@ -1,8 +1,8 @@
 import { useCallback, useState } from 'react'
+import { styled } from '@linaria/react'
 
 import AddBtn from '@components/AddBtn'
 import CreateShelfModal from '@components/stillage/CreateShelfModal'
-import { styled } from '@linaria/react'
 
 const CreateShelfContainer = styled.div`
   align-self: center;
