@@ -9,6 +9,7 @@ import starFilled from '@assets/star-filled.svg'
 import { api } from '@api/index'
 import { setLiked } from '@redux/slices/librarySlice'
 import { setHint } from '@redux/slices/hintSlice'
+import MuiTooltip from '@components/MuiTooltip'
 
 interface Props {
   id: string
@@ -100,7 +101,13 @@ function LibraryItem({ name, id, liked, color, dispatch }: Props) {
         <img src={liked ? starFilled : starTransparent} alt='' />
       </StarBtn>
 
-      <Title title={name}>{name}</Title>
+      {name.length > 5 ? (
+        <MuiTooltip text={name}>
+          <Title>{name}</Title>
+        </MuiTooltip>
+      ) : (
+        <Title>{name}</Title>
+      )}
 
       <StyledLink to={`/stillages/${id}`}>
         <img src={arrowIcon} alt='go to stillage' />
