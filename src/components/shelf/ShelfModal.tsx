@@ -114,6 +114,7 @@ function ShelfModal({
   }, [shelfId])
 
   const closeShelfModal = useCallback(() => {
+    document.body.classList.remove('_lock')
     setIsShow(false)
   }, [shelfId])
 

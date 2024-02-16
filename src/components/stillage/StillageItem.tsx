@@ -78,6 +78,7 @@ function StillageItem({
     setShelfId(shelfId)
     setShelfName(shelfName)
     setShelfUserId(shelfUserId)
+    document.body.classList.add('_lock')
     setIsShowShelf(true)
   }, [shelfId, shelfName])
 
