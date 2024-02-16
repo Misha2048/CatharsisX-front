@@ -3,7 +3,7 @@ import { styled } from '@linaria/react'
 import FullscreenUnderHeader from '@components/FullscreenUnderHeader'
 
 const StillageContainer = styled(FullscreenUnderHeader)`
-  padding: 10px 0 0 0;
+  padding: 20px 0 0 0;
   background-color: #000;
   display: flex;
   flex-direction: column;
