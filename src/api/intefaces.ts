@@ -51,6 +51,7 @@ export interface IShelf {
 
 export interface IShelvesResponse {
   stillageName: string
+  stillageUserId: string
   findShelfsResponse: IShelf[]
 }
 
@@ -97,6 +98,7 @@ export interface IStillagesRequest {
 
 export interface IStillagesResponse {
   id: string
+  userId: string
   name: string
   created_at: string
   last_upload_at: string
