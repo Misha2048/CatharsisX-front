@@ -13,7 +13,9 @@ const GreyStillageBox = styled.div`
   @media screen and (min-width: 375px) {
     padding: 20px;
   }
-
+  @media screen and (min-width: 1024px) {
+    gap: 30px;
+  }
   @media screen and (min-width: 1440px) {
     padding: 24px;
   }

@@ -1,6 +1,14 @@
 import { styled } from '@linaria/react'
 
-const ColorInput = styled.input<{ value: string }>`
+interface Props {
+  type?: string
+  name: string
+  value: string
+  checked: boolean
+  onChange: (event: React.ChangeEvent<HTMLInputElement>) => void
+}
+
+const StyledInput = styled.input<{ value: string }>`
   appearance: none;
   width: 34px;
   height: 34px;
@@ -25,5 +33,9 @@ const ColorInput = styled.input<{ value: string }>`
     border: 2px solid #fff;
   }
 `
+
+function ColorInput({ type = 'radio', name, value, checked, onChange }: Props) {
+  return <StyledInput type={type} name={name} value={value} checked={checked} onChange={onChange} />
+}
 
 export default ColorInput

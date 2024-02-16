@@ -1,3 +1,5 @@
+import { useCallback, useState } from 'react'
+
 import BlackOverlay from '@components/BlackOverlay'
 import CloseBtn from '@components/CloseBtn'
 import Input from '@components/Input'
@@ -5,7 +7,6 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import CloseBtnContainer from '@components/filter/CloseBtnContainer'
 import ModalBody from '@components/modalWindow/ModalBody'
 import ModalTitle from '@components/modalWindow/ModalTitle'
-import { useCallback, useState } from 'react'
 
 interface Props {
   isShow: boolean
