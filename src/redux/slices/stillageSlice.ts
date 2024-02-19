@@ -25,9 +25,17 @@ export const stillageSlice = createSlice({
         state.list = state.list.filter((shelf) => shelf.id !== action.payload)
       }
     },
+    addStillageItem: (state, action: { payload: IShelf; type: string }) => {
+      if (state.list) {
+        state.list.push(action.payload)
+      } else {
+        state.list = [action.payload]
+      }
+    },
   },
 })
 
-export const { setStillageList, clearStillageList, removeStillageItem } = stillageSlice.actions
+export const { setStillageList, clearStillageList, removeStillageItem, addStillageItem } =
+  stillageSlice.actions
 
 export default stillageSlice.reducer

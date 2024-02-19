@@ -2,6 +2,7 @@ import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
   ICatalogResponse,
+  ICreateShelfRequest,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
   IFilesRequest,
@@ -12,6 +13,7 @@ import {
   INewPasswordRequest,
   INewUniversityRequest,
   INewUniversityResponse,
+  IShelf,
   IShelvesRequest,
   IShelvesResponse,
   ISignUpRequest,
@@ -140,6 +142,15 @@ export const api = {
           url: `/shelfs/${options.id}`,
         })
         .then((response) => response.data as IDeleteShelvesResponse)
+    },
+    post: async (options: ICreateShelfRequest): Promise<IShelf> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/shelfs',
+          data: { stillage: options.stillageId, name: options.shelfName },
+        })
+        .then((response) => response.data as IShelf)
     },
   },
 
