@@ -1,4 +1,5 @@
 import { useCallback, useState } from 'react'
+import { useDispatch } from 'react-redux'
 
 import BlackOverlay from '@components/BlackOverlay'
 import CloseBtn from '@components/CloseBtn'
@@ -7,17 +8,21 @@ import ModalWindowBtn from '@components/ModalWindowBtn'
 import CloseBtnContainer from '@components/filter/CloseBtnContainer'
 import ModalBody from '@components/modalWindow/ModalBody'
 import ModalTitle from '@components/modalWindow/ModalTitle'
+import { api } from '@api/index'
+import { addStillageItem } from '@redux/slices/stillageSlice'
 
 interface Props {
+  stillageId: string
   isShow: boolean
   setIsShow: (value: boolean) => void
 }
 
-function CreateShelfModal({ isShow, setIsShow }: Props) {
+function CreateShelfModal({ stillageId, isShow, setIsShow }: Props) {
   const [shelfName, setShelfName] = useState('')
+  const dispatch = useDispatch()
 
-  const hideModal = useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    event.preventDefault()
+  const hideModal = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    event?.preventDefault()
     setIsShow(false)
   }, [])
 
@@ -26,10 +31,16 @@ function CreateShelfModal({ isShow, setIsShow }: Props) {
   }, [])
 
   const submitForm = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      console.log(shelfName)
-      // const resp = api.shelves.post(shelfName) // TODO change it later
+      const resp = await api.shelves.post({ shelfName, stillageId })
+      if (resp.id && resp.userId && resp.name) {
+        dispatch(addStillageItem(resp))
+        setTimeout(() => {
+          setShelfName('')
+        }, 300)
+        hideModal()
+      }
     },
     [shelfName],
   )

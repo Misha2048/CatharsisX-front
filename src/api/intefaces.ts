@@ -136,3 +136,8 @@ export interface ICatalogResponse {
 export interface IGetFilesRequest {
   shelfId: string
 }
+
+export interface ICreateShelfRequest {
+  stillageId: string
+  shelfName: string
+}

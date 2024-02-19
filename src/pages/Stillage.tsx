@@ -58,7 +58,9 @@ function Stillage() {
             <FilterWithShowBtn filterData={filterData} additionalParams={additionalParams} />
           </StillageHeadingRow>
           <GreyStillageBox>
-            {stillageUserId && reduxUserId && stillageUserId === reduxUserId && <CreateShelf />}
+            {stillageUserId && reduxUserId && stillageUserId === reduxUserId && (
+              <CreateShelf stillageId={id as string} />
+            )}
             <StillageList
               reduxUserId={reduxUserId}
               setStillageName={setStillageName}
