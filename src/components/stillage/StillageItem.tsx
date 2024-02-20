@@ -41,6 +41,7 @@ const ShelfNameContainer = styled.div`
   display: flex;
   gap: 12px;
   flex: 1 1 auto;
+  max-width: 85%;
 `
 
 const ShelfName = styled.p`
