@@ -60,6 +60,11 @@ const Body = styled.div<{ isShow: boolean }>`
 
 const ShelfName = styled(ModalTitle)`
   align-self: flex-start;
+  max-width: 90%;
+  line-height: 1.2;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 `
 
 const ShelfList = styled.ul`

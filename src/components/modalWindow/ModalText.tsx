@@ -11,6 +11,7 @@ const ModalText = styled.p<Props>`
   font-size: 16px;
   line-height: 1.4;
   font-weight: ${(props) => (props.bold ? '700' : '400')};
+  overflow-wrap: break-word;
   @media screen and (min-width: 768px) {
     font-size: 18px;
     max-width: 300px;

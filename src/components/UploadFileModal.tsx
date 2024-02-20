@@ -118,6 +118,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
                 value={fileName}
                 onChange={handleInputChange}
                 name='fileName'
+                maxLength={50}
               />
               <ModalWindowBtn type='submit'>Upload</ModalWindowBtn>
             </>
