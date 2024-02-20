@@ -6,6 +6,7 @@ import {
   ICreateStillageRequest,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
+  IDownloadFileRequest,
   IFilesRequest,
   IFilesResponse,
   IForgotPasswordRequest,
@@ -177,6 +178,15 @@ export const api = {
           params: { shelf: options.shelfId },
         })
         .then((response) => response.data as IFilesResponse[])
+    },
+    download: async (options: IDownloadFileRequest): Promise<Buffer> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: `/files/download/${options.id}`,
+          responseType: 'blob',
+        })
+        .then((response) => response.data as Buffer)
     },
   },
 

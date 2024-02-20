@@ -132,7 +132,7 @@ function ShelfModal({
           <ShelfList>
             {files.map((file) => (
               <li key={file.id}>
-                <ShelfFile fileName={file.name} fileSize={file.size} />
+                <ShelfFile id={file.id} fileName={file.name} fileSize={file.size} />
               </li>
             ))}
           </ShelfList>

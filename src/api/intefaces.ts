@@ -148,3 +148,7 @@ export interface ICreateStillageRequest {
   color: string
   private: boolean
 }
+
+export interface IDownloadFileRequest {
+  id: string
+}
