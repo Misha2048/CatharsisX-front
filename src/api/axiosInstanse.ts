@@ -35,7 +35,9 @@ axiosInstance.interceptors.response.use(
       error.response.status >= 400 &&
       error.response.status <= 599
     ) {
-      store.dispatch(setHint({ message: error.response.data.message }))
+      if (error.response.data.message) {
+        store.dispatch(setHint({ message: error.response.data.message }))
+      }
       return error.response
     }
 
