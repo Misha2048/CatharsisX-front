@@ -31,10 +31,17 @@ export const librarySlice = createSlice({
         state.list[objIndex].liked = action.payload.liked
       }
     },
+    addLibraryItem: (state, action: { payload: IStillagesResponse; type: string }) => {
+      if (state.list) {
+        state.list.push(action.payload)
+      } else {
+        state.list = [action.payload]
+      }
+    },
   },
 })
 
-export const { setLibraryList, clearLibraryList, removeLibraryItem, setLiked } =
+export const { setLibraryList, clearLibraryList, removeLibraryItem, setLiked, addLibraryItem } =
   librarySlice.actions
 
 export default librarySlice.reducer

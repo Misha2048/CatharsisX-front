@@ -3,6 +3,7 @@ import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
   ICatalogResponse,
   ICreateShelfRequest,
+  ICreateStillageRequest,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
   IFilesRequest,
@@ -219,6 +220,15 @@ export const api = {
           params: options,
         })
         .then((response) => response.data as IStillagesLikedResponse)
+    },
+    post: async (options: ICreateStillageRequest): Promise<IStillagesResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/stillages',
+          data: options,
+        })
+        .then((response) => response.data as IStillagesResponse)
     },
   },
 

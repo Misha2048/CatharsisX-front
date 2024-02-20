@@ -1,5 +1,6 @@
 import { useCallback, useState } from 'react'
 import { styled } from '@linaria/react'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BlackOverlay from '@components/BlackOverlay'
 import CloseBtn from '@components/CloseBtn'
@@ -11,6 +12,10 @@ import ModalText from '@components/modalWindow/ModalText'
 import Checkbox from '@components/Checkbox'
 import ModalWindowBtn from '@components/ModalWindowBtn'
 import ColorInput from '@components/ColorInput'
+import { RootState } from '@redux/store'
+import { setHint } from '@redux/slices/hintSlice'
+import { api } from '@api/index'
+import { addLibraryItem } from '@redux/slices/librarySlice'
 
 interface Props {
   isShow: boolean
@@ -39,9 +44,11 @@ const initialFormData = {
 
 function CreateStillageModal({ isShow, setIsShow }: Props) {
   const [formData, setFormData] = useState(initialFormData)
+  const dispatch = useDispatch()
+  const stillagesList = useSelector((state: RootState) => state.library.list)
 
-  const hideModal = useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    event.preventDefault()
+  const hideModal = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    event?.preventDefault()
     setIsShow(false)
   }, [])
 
@@ -52,10 +59,29 @@ function CreateStillageModal({ isShow, setIsShow }: Props) {
   }, [])
 
   const submitForm = useCallback(
-    (event: React.FormEvent<HTMLFormElement>) => {
+    async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      console.log(formData) // TODO change it later
-      // const resp = api.stillage.post(formData)
+
+      if (stillagesList?.some((stillage) => stillage.name === formData.stillageName)) {
+        return dispatch(
+          setHint({
+            message: 'A stillage already exists. Please specify another name.',
+          }),
+        )
+      }
+
+      const resp = await api.stillages.post({
+        stillage_name: formData.stillageName,
+        color: formData.color,
+        private: formData.isPrivate,
+      })
+      if (resp.id && resp.color && resp.name) {
+        dispatch(addLibraryItem(resp))
+        setTimeout(() => {
+          setFormData(initialFormData)
+        }, 300)
+        hideModal()
+      }
     },
     [formData],
   )
