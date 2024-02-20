@@ -24,7 +24,7 @@ function Stillages({ title, hasCreateStillageBtn, fetchData, filterData, dispatc
       <LibraryContainer>
         <StillageWrapper>
           <StillageHeadingRow>
-            <StillageHeading text={title} />
+            <StillageHeading>{title}</StillageHeading>
             <FilterWithShowBtn filterData={filterData} />
           </StillageHeadingRow>
           <GreyLibraryBox>
