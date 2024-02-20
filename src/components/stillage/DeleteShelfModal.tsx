@@ -54,7 +54,9 @@ function DeleteShelfModal({ isShow, setIsShow, shelfName, shelfId }: Props) {
       <ModalBody show={isShow}>
         {status === 'initial' && (
           <>
-            <ModalText bold>Delete {shelfName}?</ModalText>
+            <ModalText bold>
+              Delete {shelfName.length > 20 ? `${shelfName.substring(0, 18)}...` : shelfName}?
+            </ModalText>
             <ModalText>All files on the shelf will be deleted. This cannot be undone.</ModalText>
             <ModalButtonsRow>
               <ModalWindowBtn onClick={deleteShelf}>Delete</ModalWindowBtn>
