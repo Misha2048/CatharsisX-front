@@ -148,9 +148,7 @@ function Header() {
       setIsOpen(false)
       setIsDropdownOpen(false)
       navigate(path)
-      if (path !== '/login' && path !== '/signup') {
-        document.body.classList.remove('_lock')
-      }
+      document.body.classList.remove('_lock')
     },
     [navigate],
   )
