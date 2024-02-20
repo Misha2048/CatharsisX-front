@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 
 import BlackOverlay from '@components/BlackOverlay'
 import CloseBtn from '@components/CloseBtn'
@@ -10,6 +10,8 @@ import ModalBody from '@components/modalWindow/ModalBody'
 import ModalTitle from '@components/modalWindow/ModalTitle'
 import { api } from '@api/index'
 import { addStillageItem } from '@redux/slices/stillageSlice'
+import { RootState } from '@redux/store'
+import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   stillageId: string
@@ -20,6 +22,7 @@ interface Props {
 function CreateShelfModal({ stillageId, isShow, setIsShow }: Props) {
   const [shelfName, setShelfName] = useState('')
   const dispatch = useDispatch()
+  const shelvesList = useSelector((state: RootState) => state.stillage.list)
 
   const hideModal = useCallback((event?: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event?.preventDefault()
@@ -33,6 +36,15 @@ function CreateShelfModal({ stillageId, isShow, setIsShow }: Props) {
   const submitForm = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+
+      if (shelvesList?.some((shelf) => shelf.name === shelfName)) {
+        return dispatch(
+          setHint({
+            message: `A shelf already exists. Please specify another name.`,
+          }),
+        )
+      }
+
       const resp = await api.shelves.post({ shelfName, stillageId })
       if (resp.id && resp.userId && resp.name) {
         dispatch(addStillageItem(resp))

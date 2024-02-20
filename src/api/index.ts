@@ -3,8 +3,10 @@ import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
   ICatalogResponse,
   ICreateShelfRequest,
+  ICreateStillageRequest,
   IDeleteShelvesRequest,
   IDeleteShelvesResponse,
+  IDownloadFileRequest,
   IFilesRequest,
   IFilesResponse,
   IForgotPasswordRequest,
@@ -177,6 +179,15 @@ export const api = {
         })
         .then((response) => response.data as IFilesResponse[])
     },
+    download: async (options: IDownloadFileRequest): Promise<Buffer> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: `/files/download/${options.id}`,
+          responseType: 'blob',
+        })
+        .then((response) => response.data as Buffer)
+    },
   },
 
   mail: {
@@ -219,6 +230,15 @@ export const api = {
           params: options,
         })
         .then((response) => response.data as IStillagesLikedResponse)
+    },
+    post: async (options: ICreateStillageRequest): Promise<IStillagesResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/stillages',
+          data: options,
+        })
+        .then((response) => response.data as IStillagesResponse)
     },
   },
 

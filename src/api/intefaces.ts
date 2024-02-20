@@ -105,6 +105,7 @@ export interface IStillagesResponse {
   university_id: string
   liked: boolean
   color: string
+  private: boolean
 }
 
 export interface IStillagesLikeRequest {
@@ -140,4 +141,14 @@ export interface IGetFilesRequest {
 export interface ICreateShelfRequest {
   stillageId: string
   shelfName: string
+}
+
+export interface ICreateStillageRequest {
+  stillage_name: string
+  color: string
+  private: boolean
+}
+
+export interface IDownloadFileRequest {
+  id: string
 }

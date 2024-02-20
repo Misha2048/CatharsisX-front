@@ -1,11 +1,14 @@
 import { styled } from '@linaria/react'
-import { useMemo } from 'react'
+import { useCallback, useMemo } from 'react'
+import fileDownload from 'js-file-download'
 
 import downloadIcon from '@assets/download-file-icon.svg'
 import { convertFileSize, getImageUrl, truncateFileName } from '@helpers/fileHelper'
 import MuiTooltip from '@components/MuiTooltip'
+import { api } from '@api/index'
 
 interface Props {
+  id: string
   fileName: string
   fileSize: number
 }
@@ -75,7 +78,7 @@ const DownloadBtn = styled.button`
 
 const maxFileNameLength = 28
 
-function ShelfFile({ fileName, fileSize }: Props) {
+function ShelfFile({ id, fileName, fileSize }: Props) {
   const imagePath = useMemo(() => {
     return getImageUrl(fileName)
   }, [fileName])
@@ -85,6 +88,11 @@ function ShelfFile({ fileName, fileSize }: Props) {
   }, [fileSize])
 
   const truncatedFileName = useMemo(() => truncateFileName(fileName, maxFileNameLength), [fileName])
+
+  const downloadFile = useCallback(async () => {
+    const resp = await api.files.download({ id })
+    fileDownload(resp, fileName)
+  }, [id, fileName])
 
   return (
     <StyledFileBody>
@@ -100,7 +108,7 @@ function ShelfFile({ fileName, fileSize }: Props) {
           <FileName>{truncatedFileName}</FileName>
         )}
         <FileSize>{convertedFileSize}</FileSize>
-        <DownloadBtn>
+        <DownloadBtn onClick={downloadFile}>
           <img src={downloadIcon} alt='download file' />
         </DownloadBtn>
       </FileDescription>
