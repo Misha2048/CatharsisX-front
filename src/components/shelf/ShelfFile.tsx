@@ -1,11 +1,11 @@
 import { styled } from '@linaria/react'
 import { useCallback, useMemo } from 'react'
+import fileDownload from 'js-file-download'
 
 import downloadIcon from '@assets/download-file-icon.svg'
 import { convertFileSize, getImageUrl, truncateFileName } from '@helpers/fileHelper'
 import MuiTooltip from '@components/MuiTooltip'
 import { api } from '@api/index'
-import fileDownload from 'js-file-download'
 
 interface Props {
   id: string
