@@ -54,7 +54,7 @@ function Stillage() {
       <StillageContainer>
         <StillageWrapper>
           <StillageHeadingRow>
-            <StillageHeading>{stillageName}</StillageHeading>
+            <StillageHeading text={stillageName} />
             <FilterWithShowBtn filterData={filterData} additionalParams={additionalParams} />
           </StillageHeadingRow>
           <GreyStillageBox>
