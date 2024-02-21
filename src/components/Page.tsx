@@ -1,4 +1,5 @@
 import { PropsWithChildren } from 'react'
+import { styled } from '@linaria/react'
 
 import Header from '@components/Header'
 import Footer from '@components/Footer'
@@ -10,14 +11,18 @@ interface Props extends PropsWithChildren {
   hasTooltip?: boolean
 }
 
+const StyledPage = styled.div`
+  overflow: hidden;
+`
+
 function Page({ hasHeader, children, hasFooter, hasTooltip }: Props) {
   return (
-    <div>
+    <StyledPage>
       {hasHeader && <Header />}
       {children}
       {hasFooter && <Footer />}
       {hasTooltip && <ToolTip />}
-    </div>
+    </StyledPage>
   )
 }
 
