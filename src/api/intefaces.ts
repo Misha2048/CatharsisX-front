@@ -33,6 +33,11 @@ export interface INewPasswordRequest {
   password: string
 }
 
+export interface INewPasswordResponse {
+  message: string
+  error?: string
+}
+
 export interface IShelvesRequest {
   stillage: string
   name?: string
