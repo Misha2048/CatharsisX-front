@@ -1,7 +1,6 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
-import { jwtDecode } from 'jwt-decode'
 
 import Logo from '@components/Logo'
 import SearchField from '@components/SearchField'
@@ -10,6 +9,7 @@ import BurgerIcon from '@components/BurgerIcon'
 import OutlinedButton from '@components/OutlinedButton'
 import HeaderLink from '@components/HeaderLink'
 import DropdownMenu from '@components/DropdownMenu'
+import { checkUserIsLoggedIn } from '@helpers/userHelper'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -127,19 +127,8 @@ function Header() {
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
-  const checkUserIsLoggedIn = useCallback(() => {
-    const refreshToken = localStorage.getItem('refreshToken')
-    if (!refreshToken) return setIsUserLoggedIn(false)
-    const decodedToken = jwtDecode(refreshToken)
-    if (decodedToken.exp && decodedToken.exp * 1000 > new Date().getTime()) {
-      return setIsUserLoggedIn(true)
-    } else {
-      return setIsUserLoggedIn(false)
-    }
-  }, [])
-
   useEffect(() => {
-    checkUserIsLoggedIn()
+    checkUserIsLoggedIn(setIsUserLoggedIn)
   }, [])
 
   const handleRedirect = useCallback(

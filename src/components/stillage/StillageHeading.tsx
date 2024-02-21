@@ -6,6 +6,7 @@ const StillageHeading = styled.h2`
   color: #fff;
   font-size: 24px;
   line-height: 1.2;
+  min-height: 1.2em; /* min-height must be equal to line-height */
   text-overflow: ellipsis;
   white-space: nowrap;
   overflow: hidden;
