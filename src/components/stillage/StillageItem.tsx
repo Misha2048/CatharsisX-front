@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { styled } from '@linaria/react'
 
 import folderIcon from '@assets/folder-icon.svg'
-import editIcon from '@assets/edit-icon.svg'
+// import editIcon from '@assets/edit-icon.svg' // TODO
 import trashIcon from '@assets/trash-icon.svg'
 
 interface PropsType {
@@ -97,9 +97,10 @@ function StillageItem({
       </ShelfNameContainer>
       {userId && userId === shelfUserId && (
         <ButtonsContainer>
-          <button>
+          {/* TODO change later */}
+          {/* <button>
             <img src={editIcon} alt='Rename shelf' />
-          </button>
+          </button> */}
           <button onClick={showDeleteModal}>
             <img src={trashIcon} alt='Delete shelf' />
           </button>
