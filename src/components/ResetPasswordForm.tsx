@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import Form from './Form'
 import Input from './Input'
 import Button from './Button'
@@ -8,7 +8,7 @@ import SecondaryText from './SecondaryText'
 import { Title } from './Titles'
 import { css } from '@linaria/core'
 import { api } from '../api'
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ToolTip from './ToolTip'
 import { setHint } from '../redux/slices/hintSlice'
 import { useDispatch } from 'react-redux'
@@ -24,6 +24,7 @@ const ResetPasswordFormStyle = css`
 `
 
 const ResetPasswordForm: React.FC = () => {
+  const navigate = useNavigate()
   const { pathname } = useLocation()
   const id = pathname.substring('/password-reset/'.length)
   const dispatch = useDispatch()
@@ -37,34 +38,32 @@ const ResetPasswordForm: React.FC = () => {
     setFormData((previousData) => ({ ...previousData, [name]: value }))
   }
 
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault()
+  const handleSubmit = useCallback(
+    async (e: React.ChangeEvent<HTMLFormElement>) => {
+      e.preventDefault()
 
-    if (!(formData.newPassword === formData.confimedPassword)) {
-      dispatch(setHint({ message: 'Passwords should be the same' }))
-      return
-    }
+      if (!(formData.newPassword === formData.confimedPassword)) {
+        return dispatch(setHint({ message: 'Passwords should be the same' }))
+      }
 
-    if (PassportValidator.validatePassword(formData.newPassword)) {
-      api.auth
-        .newPassword({ id, password: formData.newPassword })
-        .then(() => {
-          setFormData({ newPassword: '', confimedPassword: '' })
+      if (!PassportValidator.validatePassword(formData.newPassword)) {
+        const errors = PassportValidator.getPasswordValidationErrors(formData.newPassword)
+        return dispatch(setHint({ message: errors.join('\n') }))
+      }
+
+      const resp = await api.auth.newPassword({ id, password: formData.newPassword })
+      if (!resp.error) {
+        setFormData({ newPassword: '', confimedPassword: '' })
+        navigate('/library')
+        setTimeout(() => {
           dispatch(setHint({ message: 'Password changed successfully!' }))
-        })
-        .catch((error) => {
-          dispatch(setHint({ message: error.message }))
-        })
-      setFormData({
-        newPassword: '',
-        confimedPassword: '',
-      })
-    } else {
-      const errors = PassportValidator.getPasswordValidationErrors(formData.newPassword)
-      dispatch(setHint({ message: errors.join('\n') }))
-    }
-    ``
-  }
+        }, 100)
+      } else {
+        dispatch(setHint({ message: resp.message }))
+      }
+    },
+    [formData],
+  )
   return (
     <CenteredContainer>
       <GreyContainerBox>

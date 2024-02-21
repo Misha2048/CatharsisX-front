@@ -13,6 +13,7 @@ import {
   IGetFilesRequest,
   ILoginRequest,
   INewPasswordRequest,
+  INewPasswordResponse,
   INewUniversityRequest,
   INewUniversityResponse,
   IShelf,
@@ -81,14 +82,14 @@ export const api = {
         })
         .then((response) => response.data as ITokensResponse)
     },
-    newPassword: async (options: INewPasswordRequest): Promise<ITokensResponse> => {
+    newPassword: async (options: INewPasswordRequest): Promise<INewPasswordResponse> => {
       return axiosInstance
         .request({
           method: 'POST',
           url: '/auth/new-password',
           data: options,
         })
-        .then((response) => response.data as ITokensResponse)
+        .then((response) => response.data as INewPasswordResponse)
     },
     logout: async (): Promise<null> => {
       return axiosInstance.request({
