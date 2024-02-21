@@ -81,7 +81,7 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
       }
       const res = await api.files.upload(data)
       setIsFinishedLoading(true)
-      if (!res.id || !res.name || !res.size) {
+      if (!res.id || !res.name) {
         setFinishMessage("File wasn't uploaded")
         dispatch(
           setHint({
