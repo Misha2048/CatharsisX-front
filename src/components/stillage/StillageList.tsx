@@ -10,6 +10,7 @@ import { api } from '@api/index'
 import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
 import ShelfModal from '@components/shelf/ShelfModal'
 import UploadFileModal from '@components/UploadFileModal'
+import { setValue } from '@redux/slices/UserSlice'
 
 interface Props {
   setStillageName: React.Dispatch<React.SetStateAction<string>>
@@ -46,11 +47,18 @@ function StillageList({ setStillageName, setStillageUserId, reduxUserId }: Props
   const [shelfUserId, setShelfUserId] = useState('')
 
   const fetchData = useCallback(async () => {
-    const resp = await api.shelves.get({ stillage: stillageId as string })
-    if (resp.stillageName && resp.findShelfsResponse && resp.stillageUserId) {
-      setStillageName(resp.stillageName)
-      setStillageUserId(resp.stillageUserId)
-      dispatch(setStillageList(resp.findShelfsResponse))
+    if (!reduxUserId) {
+      const userData = await api.users.me()
+      if (userData.id && userData.email) {
+        dispatch(setValue({ id: userData.id }))
+      }
+    }
+
+    const shelves = await api.shelves.get({ stillage: stillageId as string })
+    if (shelves.stillageName && shelves.findShelfsResponse && shelves.stillageUserId) {
+      setStillageName(shelves.stillageName)
+      setStillageUserId(shelves.stillageUserId)
+      dispatch(setStillageList(shelves.findShelfsResponse))
     }
   }, [stillageId])
 
