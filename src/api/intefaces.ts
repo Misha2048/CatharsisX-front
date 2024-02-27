@@ -157,3 +157,22 @@ export interface ICreateStillageRequest {
 export interface IDownloadFileRequest {
   id: string
 }
+
+export interface IGetForumTopicsRequest {
+  title?: string
+  offset: number
+  limit: number
+}
+
+export interface IForumTopic {
+  forumId: string
+  title: string
+  tags: string[]
+  body: string
+}
+
+export interface IGetForumTopicsResponse {
+  count: number
+  forums: IForumTopic[]
+  error?: string
+}

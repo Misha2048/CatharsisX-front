@@ -13,6 +13,7 @@ import ProtectedRoute from '@components/ProtectedRoute'
 import Library from '@pages/Library'
 import MyStillages from '@pages/MyStillages'
 import LikedStillages from '@pages/LikedStillages'
+import Forum from '@pages/Forum'
 
 dayjs.locale('en-gb')
 
@@ -25,6 +26,7 @@ function App() {
       <Route path='/stillages/:id' element={<ProtectedRoute component={Stillage} />} />
       <Route path='/stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
       <Route path='/library' element={<ProtectedRoute component={Library} />} />
+      <Route path='/forum' element={<ProtectedRoute component={Forum} />} />
 
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
