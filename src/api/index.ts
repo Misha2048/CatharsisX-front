@@ -11,6 +11,8 @@ import {
   IFilesResponse,
   IForgotPasswordRequest,
   IGetFilesRequest,
+  IGetForumTopicsRequest,
+  IGetForumTopicsResponse,
   ILoginRequest,
   INewPasswordRequest,
   INewPasswordResponse,
@@ -251,5 +253,17 @@ export const api = {
         params: options,
       })
       .then((response) => response.data as ICatalogResponse)
+  },
+
+  forum: {
+    get: async (options?: IGetForumTopicsRequest): Promise<IGetForumTopicsResponse> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: '/forum',
+          params: options,
+        })
+        .then((response) => response.data as IGetForumTopicsResponse)
+    },
   },
 }

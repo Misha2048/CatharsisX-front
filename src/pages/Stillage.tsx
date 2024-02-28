@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
-import { useCallback, useEffect, useState } from 'react'
+import { useCallback, useState } from 'react'
 
 import StillageContainer from '@components/stillage/StillageContainer'
 import StillageHeadingRow from '@components/stillage/StillageHeadingRow'
@@ -15,7 +15,6 @@ import { setStillageList } from '@redux/slices/stillageSlice'
 import { FilterParams } from '@helpers/filterTypes'
 import Page from '@components/Page'
 import { RootState } from '@redux/store'
-import { setValue } from '@redux/slices/UserSlice'
 import CreateShelf from '@components/stillage/CreateShelf'
 
 function Stillage() {
@@ -35,19 +34,6 @@ function Stillage() {
     },
     [id],
   )
-
-  const fetchData = useCallback(async () => {
-    if (!reduxUserId) {
-      const userData = await api.users.me()
-      if (userData.id && userData.email) {
-        dispatch(setValue({ id: userData.id }))
-      }
-    }
-  }, [id])
-
-  useEffect(() => {
-    fetchData()
-  }, [id])
 
   return (
     <Page hasHeader hasTooltip>

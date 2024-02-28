@@ -72,8 +72,13 @@ function UploadFileModal({ isShow, setIsShow, shelfId }: Props) {
 
       if (!file) return
 
-      setIsLoading(true)
       const name = showFileName(false)
+
+      if (!name.substring(0, name.lastIndexOf('.')).trim()) {
+        return dispatch(setHint({ message: 'Please enter a file name' }))
+      }
+
+      setIsLoading(true)
       const data = {
         file,
         shelfId,
