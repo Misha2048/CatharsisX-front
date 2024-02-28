@@ -9,6 +9,7 @@ import { RootState } from '@redux/store'
 import { api } from '@api/index'
 import { setForumState } from '@redux/slices/forumSlice'
 import { range } from '@utils/arrayUtils'
+import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   dispatch: Dispatch<UnknownAction>
@@ -75,13 +76,19 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
       if (page === currentPage || page > totalPageCount) {
         return canGoToTop && goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
       }
-
       const offset = page * pageLimit - pageLimit
       const resp = await api.forum.get({ offset, limit: forumTopicsInitialLimit })
       if (!resp.error) {
         dispatch(setForumState({ topics: resp.forums, totalCount: resp.count }))
         goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
         setCurrentPage(page)
+      } else {
+        dispatch(
+          setHint({
+            message:
+              "Something went wrong. Could't go to the requested page. Please refresh the tab and try again.",
+          }),
+        )
       }
     },
     [pageLimit, currentPage, totalPageCount],
