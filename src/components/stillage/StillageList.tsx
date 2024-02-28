@@ -11,6 +11,7 @@ import DeleteShelfModal from '@components/stillage/DeleteShelfModal'
 import ShelfModal from '@components/shelf/ShelfModal'
 import UploadFileModal from '@components/UploadFileModal'
 import { setValue } from '@redux/slices/UserSlice'
+import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   setStillageName: React.Dispatch<React.SetStateAction<string>>
@@ -59,6 +60,13 @@ function StillageList({ setStillageName, setStillageUserId, reduxUserId }: Props
       setStillageName(resp.stillageName)
       setStillageUserId(resp.stillageUserId)
       dispatch(setStillageList(resp.findShelfsResponse))
+    } else {
+      dispatch(
+        setHint({
+          message:
+            "Something went wrong. Could't receive a list of shelves. Please refresh the page.",
+        }),
+      )
     }
   }, [stillageId])
 

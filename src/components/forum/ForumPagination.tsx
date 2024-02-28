@@ -1,12 +1,14 @@
 import { styled } from '@linaria/react'
-import PaginationRadioInput from './PaginationRadioInput'
 import { useCallback, useMemo, useState } from 'react'
-import { forumTopicsInitialLimit } from '@const'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
-import { RootState } from '@redux/store'
 import { useSelector } from 'react-redux'
+
+import PaginationRadioInput from '@components/forum/PaginationRadioInput'
+import { forumTopicsInitialLimit } from '@const'
+import { RootState } from '@redux/store'
 import { api } from '@api/index'
 import { setForumState } from '@redux/slices/forumSlice'
+import { range } from '@utils/arrayUtils'
 
 interface Props {
   dispatch: Dispatch<UnknownAction>
@@ -58,15 +60,6 @@ const PaginationColumn = styled.div`
   flex-wrap: wrap;
 `
 
-const range = (start: number, end: number) => {
-  const length = end - start + 1
-  /*
-  	Create an array of certain length and set the elements within it from
-    start value to end value.
-  */
-  return Array.from({ length }, (_, idx) => idx + start)
-}
-
 const dots = '...'
 const siblingCount = 1
 
@@ -75,9 +68,7 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
   const [pageLimit, setPageLimit] = useState(forumTopicsInitialLimit)
   const [currentPage, setCurrentPage] = useState(1)
 
-  const totalPageCount = useMemo(() => {
-    return Math.ceil(totalCount / pageLimit)
-  }, [totalCount, pageLimit])
+  const totalPageCount = Math.ceil(totalCount / pageLimit)
 
   const goToPage = useCallback(
     async (page: number, canGoToTop?: boolean) => {

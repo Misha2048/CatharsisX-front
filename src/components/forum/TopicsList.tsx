@@ -8,6 +8,7 @@ import { api } from '@api/index'
 import { clearForumTopics, setForumState } from '@redux/slices/forumSlice'
 import { RootState } from '@redux/store'
 import { forumTopicsInitialLimit } from '@const'
+import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   goToTopRef: React.MutableRefObject<HTMLElement | null>
@@ -26,6 +27,13 @@ function TopicsList({ goToTopRef }: Props) {
     const resp = await api.forum.get({ offset: 0, limit: forumTopicsInitialLimit })
     if (!resp.error) {
       dispatch(setForumState({ topics: resp.forums, totalCount: resp.count }))
+    } else {
+      dispatch(
+        setHint({
+          message:
+            "Something went wrong. Could't receive a list of forum topics. Please refresh the page.",
+        }),
+      )
     }
   }, [])
 
