@@ -61,11 +61,10 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
   const submitForm = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
-      let tags: string[] | undefined = []
+      const tags: string[] = []
       for (const value of Object.values(tagsData)) {
         if (value.trim()) tags.push(value)
       }
-      if (tags.length === 0) tags = undefined
       const resp = await api.forum.post({ title: formData.title, body: formData.description, tags })
       if (resp.id) {
         navigate(`/forum/${resp.id}`)
