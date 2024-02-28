@@ -6,7 +6,7 @@ interface Props {
 
 const ModalBody = styled.div<Props>`
   width: 300px;
-  max-height: calc(100vh - 40px);
+  max-height: calc(100svh - 40px);
   overflow: auto;
   padding: 20px;
   background-color: #333;

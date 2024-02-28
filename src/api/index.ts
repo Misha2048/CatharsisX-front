@@ -2,6 +2,8 @@ import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
   ICatalogResponse,
+  ICreateForumRequest,
+  ICreateForumResponse,
   ICreateShelfRequest,
   ICreateStillageRequest,
   IDeleteShelvesRequest,
@@ -264,6 +266,15 @@ export const api = {
           params: options,
         })
         .then((response) => response.data as IGetForumTopicsResponse)
+    },
+    post: async (options: ICreateForumRequest): Promise<ICreateForumResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/forum',
+          data: options,
+        })
+        .then((response) => response.data as ICreateForumResponse)
     },
   },
 }
