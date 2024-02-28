@@ -72,12 +72,13 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
   const totalPageCount = Math.ceil(totalCount / pageLimit)
 
   const goToPage = useCallback(
-    async (page: number, canGoToTop?: boolean) => {
-      if (page === currentPage || page > totalPageCount) {
-        return canGoToTop && goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
+    async (page: number, newPageLimit?: number, canFetchDataAlways?: boolean) => {
+      if (!canFetchDataAlways && (page === currentPage || page > totalPageCount)) {
+        return
       }
-      const offset = page * pageLimit - pageLimit
-      const resp = await api.forum.get({ offset, limit: forumTopicsInitialLimit })
+      const currentPageLimit = newPageLimit || pageLimit
+      const offset = page * currentPageLimit - currentPageLimit
+      const resp = await api.forum.get({ offset, limit: currentPageLimit })
       if (!resp.error) {
         dispatch(setForumState({ topics: resp.forums, totalCount: resp.count }))
         goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -86,7 +87,7 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
         dispatch(
           setHint({
             message:
-              "Something went wrong. Could't go to the requested page. Please refresh the tab and try again.",
+              "Something went wrong. Could't go to the requested page. Please refresh the page and try again.",
           }),
         )
       }
@@ -97,7 +98,7 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
   const changeResultsPerPage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
     const newPageLimit = Number(event.target.value)
     setPageLimit(newPageLimit)
-    goToPage(1, true)
+    goToPage(1, newPageLimit, true)
   }, [])
 
   const paginationRange = useMemo(() => {
@@ -132,23 +133,23 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
       const middleRange = range(leftSiblingIndex, rightSiblingIndex)
       return [firstPageIndex, dots, ...middleRange, dots, lastPageIndex]
     }
-  }, [totalCount, pageLimit, currentPage, totalPageCount, siblingCount])
+  }, [totalCount, pageLimit, currentPage, totalPageCount])
 
   return (
     <PaginationContainer>
       {paginationRange && paginationRange.length > 1 && (
         <PaginationColumn>
-          {paginationRange.map((value) =>
+          {paginationRange.map((value, i) =>
             value !== dots ? (
               <PaginationBtn
-                key={value}
+                key={i}
                 onClick={() => goToPage(value as number)}
                 isCurrent={currentPage === value}
               >
                 {value}
               </PaginationBtn>
             ) : (
-              <PaginationText key={value}>...</PaginationText>
+              <PaginationText key={i}>...</PaginationText>
             ),
           )}
           <PaginationBtn
