@@ -17,7 +17,7 @@ import { setHint } from '@redux/slices/hintSlice'
 
 interface Props {
   isShow: boolean
-  setIsShow: React.Dispatch<React.SetStateAction<boolean>>
+  setIsShow: (value: boolean) => void
 }
 
 const TagsContainer = styled.div`
@@ -66,9 +66,9 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
         if (value.trim()) tags.push(value)
       }
       const resp = await api.forum.post({ title: formData.title, body: formData.description, tags })
-      if (resp.id) {
-        navigate(`/forum/${resp.id}`)
-      } else if (resp.error) {
+      if (!resp.error) {
+        navigate(`/forum/${resp.forumId}`)
+      } else {
         dispatch(setHint({ message: resp.error }))
       }
     },
@@ -151,7 +151,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
             />
           </TagsContainer>
           <ModalWindowBtn type='submit' alignCenter>
-            Create
+            Create Qestion
           </ModalWindowBtn>
         </ModalBody>
       </form>

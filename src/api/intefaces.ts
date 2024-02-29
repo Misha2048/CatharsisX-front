@@ -184,7 +184,7 @@ export interface ICreateForumRequest {
 }
 
 export interface ICreateForumResponse {
-  id: string
+  forumId: string
   title: string
   userId: string
   tags: string[]
