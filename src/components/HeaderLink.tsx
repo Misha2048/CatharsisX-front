@@ -14,6 +14,10 @@ const HeaderLink = styled.button`
   &:hover {
     text-decoration: underline;
   }
+
+  @media only screen and (max-width: 820px) {
+    font-size: 24px;
+  }
 `
 
 export default HeaderLink
