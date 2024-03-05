@@ -14,6 +14,7 @@ import Library from '@pages/Library'
 import MyStillages from '@pages/MyStillages'
 import LikedStillages from '@pages/LikedStillages'
 import Forum from '@pages/Forum'
+import ForumTopicPage from '@pages/ForumTopicPage'
 
 dayjs.locale('en-gb')
 
@@ -27,6 +28,7 @@ function App() {
       <Route path='/stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
       <Route path='/library' element={<ProtectedRoute component={Library} />} />
       <Route path='/forum' element={<ProtectedRoute component={Forum} />} />
+      <Route path='/forum/:id' element={<ProtectedRoute component={ForumTopicPage} />} />
 
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />

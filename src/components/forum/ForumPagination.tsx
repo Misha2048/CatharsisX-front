@@ -1,15 +1,15 @@
 import { styled } from '@linaria/react'
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useEffect, useMemo } from 'react'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
 import { useSelector } from 'react-redux'
 
-import PaginationRadioInput from '@components/forum/PaginationRadioInput'
-import { forumTopicsInitialLimit } from '@const'
+import PaginationRadioInput from '@components/PaginationRadioInput'
 import { RootState } from '@redux/store'
 import { api } from '@api/index'
 import { setForumState } from '@redux/slices/forumSlice'
 import { range } from '@utils/arrayUtils'
 import { setHint } from '@redux/slices/hintSlice'
+import { setInitialPaginationValues, setPaginationValues } from '@redux/slices/paginationSlice'
 
 interface Props {
   dispatch: Dispatch<UnknownAction>
@@ -17,7 +17,7 @@ interface Props {
 }
 
 const PaginationContainer = styled.div`
-  padding: 25px 20px;
+  padding: 25px 20px 5px 20px;
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1;
@@ -65,9 +65,10 @@ const dots = '...'
 const siblingCount = 1
 
 function ForumPagination({ dispatch, goToTopRef }: Props) {
-  const totalCount = useSelector((state: RootState) => state.forum.totalCount)
-  const [pageLimit, setPageLimit] = useState(forumTopicsInitialLimit)
-  const [currentPage, setCurrentPage] = useState(1)
+  const totalCount = useSelector((state: RootState) => state.pagination.totalCount) as number
+  const pageLimit = useSelector((state: RootState) => state.pagination.pageLimit) as number
+  const currentPage = useSelector((state: RootState) => state.pagination.currentPage) as number
+  const questionTitle = useSelector((state: RootState) => state.forum.questionTitle)
 
   const totalPageCount = Math.ceil(totalCount / pageLimit)
 
@@ -78,11 +79,11 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
       }
       const currentPageLimit = newPageLimit || pageLimit
       const offset = page * currentPageLimit - currentPageLimit
-      const resp = await api.forum.get({ offset, limit: currentPageLimit })
+      const resp = await api.forum.get({ offset, limit: currentPageLimit, title: questionTitle })
       if (!resp.error) {
-        dispatch(setForumState({ topics: resp.forums, totalCount: resp.count }))
+        dispatch(setForumState({ topics: resp.forums }))
         goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
-        setCurrentPage(page)
+        dispatch(setPaginationValues({ currentPage: page, totalCount: resp.count }))
       } else {
         dispatch(
           setHint({
@@ -92,14 +93,17 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
         )
       }
     },
-    [pageLimit, currentPage, totalPageCount],
+    [pageLimit, currentPage, totalPageCount, questionTitle],
   )
 
-  const changeResultsPerPage = useCallback((event: React.ChangeEvent<HTMLInputElement>) => {
-    const newPageLimit = Number(event.target.value)
-    setPageLimit(newPageLimit)
-    goToPage(1, newPageLimit, true)
-  }, [])
+  const changeResultsPerPage = useCallback(
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+      const newPageLimit = Number(event.target.value)
+      dispatch(setPaginationValues({ pageLimit: newPageLimit }))
+      goToPage(1, newPageLimit, true)
+    },
+    [questionTitle],
+  )
 
   const paginationRange = useMemo(() => {
     // Pages count is determined as siblingCount + (firstPage + lastPage + currentPage + 2*DOTS)
@@ -134,6 +138,12 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
       return [firstPageIndex, dots, ...middleRange, dots, lastPageIndex]
     }
   }, [totalCount, pageLimit, currentPage, totalPageCount])
+
+  useEffect(() => {
+    return () => {
+      dispatch(setInitialPaginationValues())
+    }
+  }, [])
 
   return (
     <PaginationContainer>

@@ -8,6 +8,8 @@ import libraryReducer from '@redux/slices/librarySlice'
 import historyReducer from '@redux/slices/historySlice'
 import filesReducer from '@redux/slices/filesSlice'
 import forumReducer from '@redux/slices/forumSlice'
+import forumTopicReducer from '@redux/slices/forumTopicSlice'
+import paginationReducer from '@redux/slices/paginationSlice'
 
 export const store = configureStore({
   reducer: {
@@ -19,6 +21,8 @@ export const store = configureStore({
     history: historyReducer,
     files: filesReducer,
     forum: forumReducer,
+    forumTopic: forumTopicReducer,
+    pagination: paginationReducer,
   },
 })
 

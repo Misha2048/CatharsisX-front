@@ -3,13 +3,15 @@ import { createSlice } from '@reduxjs/toolkit'
 import { IForumTopic } from '@api/intefaces'
 
 export interface ForumState {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
   topics: IForumTopic[]
-  totalCount: number
+  questionTitle?: string
 }
 
 const initialState: ForumState = {
   topics: [],
-  totalCount: 0,
+  questionTitle: undefined,
 }
 
 export const forumSlice = createSlice({
@@ -20,15 +22,23 @@ export const forumSlice = createSlice({
       state.topics = action.payload
     },
     setForumState: (state, action: { payload: ForumState; type: string }) => {
-      state.topics = action.payload.topics
-      state.totalCount = action.payload.totalCount
+      for (const [key, value] of Object.entries(action.payload)) {
+        if (action.payload[key] !== undefined) {
+          state[key] = value
+        }
+      }
     },
     clearForumTopics: (state) => {
-      state.topics = []
-      state.totalCount = 0
+      for (const key of Object.keys(initialState)) {
+        state[key] = initialState[key]
+      }
     },
     addForumTopic: (state, action: { payload: IForumTopic; type: string }) => {
-      state.topics.push(action.payload)
+      if (!state.topics) {
+        state.topics = [action.payload]
+      } else {
+        state.topics.push(action.payload)
+      }
     },
   },
 })

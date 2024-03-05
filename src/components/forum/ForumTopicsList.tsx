@@ -9,6 +9,7 @@ import { clearForumTopics, setForumState } from '@redux/slices/forumSlice'
 import { RootState } from '@redux/store'
 import { forumTopicsInitialLimit } from '@const'
 import { setHint } from '@redux/slices/hintSlice'
+import { setPaginationValues } from '@redux/slices/paginationSlice'
 
 interface Props {
   goToTopRef: React.MutableRefObject<HTMLElement | null>
@@ -19,14 +20,15 @@ const StyledList = styled.ul`
   flex-direction: column;
 `
 
-function TopicsList({ goToTopRef }: Props) {
+function ForumTopicsList({ goToTopRef }: Props) {
   const topics = useSelector((state: RootState) => state.forum.topics)
   const dispatch = useDispatch()
 
   const fetchData = useCallback(async () => {
     const resp = await api.forum.get({ offset: 0, limit: forumTopicsInitialLimit })
     if (!resp.error) {
-      dispatch(setForumState({ topics: resp.forums, totalCount: resp.count }))
+      dispatch(setForumState({ topics: resp.forums }))
+      dispatch(setPaginationValues({ totalCount: resp.count }))
     } else {
       dispatch(
         setHint({
@@ -47,8 +49,13 @@ function TopicsList({ goToTopRef }: Props) {
   return (
     <>
       <StyledList>
-        {topics.map((topic) => (
-          <ForumTopic key={topic.forumId} title={topic.title} tags={topic.tags} />
+        {topics?.map((topic) => (
+          <ForumTopic
+            key={topic.forumId}
+            topicId={topic.forumId}
+            title={topic.title}
+            tags={topic.tags}
+          />
         ))}
       </StyledList>
       <ForumPagination dispatch={dispatch} goToTopRef={goToTopRef} />
@@ -56,4 +63,4 @@ function TopicsList({ goToTopRef }: Props) {
   )
 }
 
-export default TopicsList
+export default ForumTopicsList
