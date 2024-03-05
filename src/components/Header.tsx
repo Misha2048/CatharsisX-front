@@ -3,7 +3,6 @@ import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
 
 import Logo from '@components/Logo'
-import SearchField from '@components/SearchField'
 import Button from '@components/Button'
 import BurgerIcon from '@components/BurgerIcon'
 import OutlinedButton from '@components/OutlinedButton'
@@ -152,7 +151,7 @@ function Header() {
             </HeaderLogoContainer>
             <BurgerMenuContainer open={isOpen}>
               {/* TODO delete or show SearchField later */}
-              <SearchField />
+              {/* <SearchField /> */}
               <HeaderNavigation>
                 <HeaderLink onClick={(event) => handleRedirect('/forum', event)}>Forum</HeaderLink>
                 <HeaderLink onClick={(event) => handleRedirect('/library', event)}>
