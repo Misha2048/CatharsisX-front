@@ -18,25 +18,24 @@ const FooterLogoContainer = styled.div`
 
 const FooterContainer = styled.footer`
   display: flex;
+  justify-content:center
+  padding-inline:20px
   min-height: 310px;
-  padding: 97px 299px 87px 165px;
-  gap: 222px;
+  gap: 220px;
   justify-content: center;
   align-items: center;
   background: #000;
   @media only screen and (max-width: 1024px) {
     display: flex;
-    padding: 87px 216px 87px 97px;
     gap: 112px;
   }
   @media only screen and (max-width: 768px) {
     gap: 75px;
-    padding: 87px 109px 87px 69px;
   }
-  @media only screen and (max-width: 552px) {
+  @media only screen and (max-width: 560px) {
     flex-direction: column;
     padding: 40px;
-    gap: 14px;
+    gap: 28px;
     align-items: center;
     justify-content: center;
   }
@@ -52,11 +51,11 @@ const FooterNavigation = styled.nav`
   @media only screen and (max-width: 768px) {
     gap: 85px;
   }
-  @media only screen and (max-width: 552px) {
+  @media only screen and (max-width: 560px) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 12px;
+    gap: 18px;
   }
 `
 const FooterNavigationColumn = styled.div`
@@ -65,9 +64,9 @@ const FooterNavigationColumn = styled.div`
   align-items: flex-start;
   gap: 35px;
 
-  @media only screen and (max-width: 552px) {
+  @media only screen and (max-width: 560px) {
     display: contents;
-    gap: 12px;
+    gap: 18px;
   }
 `
 const FooterNavLink = styled.div`
