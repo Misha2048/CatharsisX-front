@@ -20,6 +20,9 @@ const HeaderNavigation = styled.nav`
   @media only screen and (max-width: 1024px) {
     gap: 15px;
   }
+  @media only screen and (max-width: 820px) {
+    gap: 20px;
+  }
   @media only screen and (max-height: 360px) {
     gap: 8px;
   }
