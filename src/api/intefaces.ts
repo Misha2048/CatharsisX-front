@@ -176,3 +176,18 @@ export interface IGetForumTopicsResponse {
   forums: IForumTopic[]
   error?: string
 }
+
+export interface ICreateForumRequest {
+  title: string
+  body: string
+  tags?: string[]
+}
+
+export interface ICreateForumResponse {
+  forumId: string
+  title: string
+  userId: string
+  tags: string[]
+  body: string
+  error?: string
+}

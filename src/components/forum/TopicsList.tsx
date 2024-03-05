@@ -14,9 +14,16 @@ interface Props {
   goToTopRef: React.MutableRefObject<HTMLElement | null>
 }
 
+const TopicsListContainer = styled.div`
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+`
+
 const StyledList = styled.ul`
   display: flex;
   flex-direction: column;
+  flex: 1 1 auto;
 `
 
 function TopicsList({ goToTopRef }: Props) {
@@ -45,14 +52,14 @@ function TopicsList({ goToTopRef }: Props) {
   }, [])
 
   return (
-    <>
+    <TopicsListContainer>
       <StyledList>
         {topics.map((topic) => (
           <ForumTopic key={topic.forumId} title={topic.title} tags={topic.tags} />
         ))}
       </StyledList>
       <ForumPagination dispatch={dispatch} goToTopRef={goToTopRef} />
-    </>
+    </TopicsListContainer>
   )
 }
 
