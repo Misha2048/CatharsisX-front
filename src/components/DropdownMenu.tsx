@@ -49,7 +49,7 @@ const DropdownBody = styled.ul<FooterMenuProps>`
   background-color: #333;
   margin-top: ${(props) => (props.isDropdownOpen ? '10px' : '0px')};
   border-radius: 5px;
-  height: ${(props) => (props.isDropdownOpen ? '89px' : '0')};
+  height: ${(props) => (props.isDropdownOpen ? '90x' : '0')};
   overflow: hidden;
   transition: all 0.3s ease;
 
@@ -76,7 +76,7 @@ const DropdownLinkContainer = styled.li<{ isFooterMenu: boolean | undefined }>`
   border-bottom: 1px solid rgba(255, 255, 255, 0.5);
   line-height: 1;
 
-  @media only screen and (min-width: 553px) {
+  @media only screen and (min-width: 560px) {
     text-align: ${(props) => (props.isFooterMenu ? 'left' : 'center')};
   }
   @media only screen and (min-width: 821px) {

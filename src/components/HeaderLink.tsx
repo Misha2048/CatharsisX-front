@@ -16,7 +16,7 @@ const HeaderLink = styled.button`
   }
 
   @media only screen and (max-width: 820px) {
-    font-size: 24px;
+    font-size: 18px;
   }
 `
 
