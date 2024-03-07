@@ -61,7 +61,7 @@ const DropdownBody = styled.ul<FooterMenuProps>`
     position: ${(props) => (props.isFooterMenu ? 'static' : 'absolute')};
     top: 100%;
     left: 50%;
-    transform: translateX(-50%);
+    transform: ${(props) => (props.isFooterMenu ? 'none' : 'translateX(-50%)')};
     min-width: 150px;
     margin-top: ${(props) => (props.isFooterMenu ? (props.isDropdownOpen ? '10px' : '0') : '10px')};
   }
