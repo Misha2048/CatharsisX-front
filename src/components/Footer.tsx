@@ -112,7 +112,7 @@ function Footer() {
             isDropdownOpen={isDropdownOpen}
             setIsDropdownOpen={setIsDropdownOpen}
           >
-            <FooterNavLink onClick={() => navigateTo('/')}>
+            <FooterNavLink>
               <img src={myMaterialIcon} alt='My materials icon' />
               <span>My materials</span>
             </FooterNavLink>
