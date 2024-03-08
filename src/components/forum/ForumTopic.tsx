@@ -1,6 +1,11 @@
 import { styled } from '@linaria/react'
+import { useNavigate } from 'react-router-dom'
+
+import Tag from '@components/Tag'
+import TagsContainer from '@components/TagsContainer'
 
 interface Props {
+  topicId: string
   title: string
   tags: string[]
 }
@@ -22,30 +27,15 @@ const TopicTitle = styled.h3`
   font-size: 20px;
   line-height: 1.25;
   word-break: break-all;
+  cursor: pointer;
 `
 
-const TagsContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  gap: 10px 15px;
-`
+function ForumTopic({ topicId, title, tags }: Props) {
+  const navigate = useNavigate()
 
-const Tag = styled.p`
-  background-color: #3ec290;
-  border-radius: 3px;
-  padding: 8px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  line-height: 1;
-  color: #fff;
-`
-
-function ForumTopic({ title, tags }: Props) {
   return (
     <StyledTopic>
-      <TopicTitle>{title}</TopicTitle>
+      <TopicTitle onClick={() => navigate(`/forum/${topicId}`)}>{title}</TopicTitle>
       <TagsContainer>
         {tags.map((tag, i) => (
           <Tag key={i}>{tag}</Tag>

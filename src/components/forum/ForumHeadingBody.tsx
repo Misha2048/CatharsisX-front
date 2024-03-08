@@ -1,7 +1,7 @@
 import { styled } from '@linaria/react'
 
-const HeadingContainer = styled.div`
-  padding: 20px;
+const ForumHeadingBody = styled.div`
+  padding-bottom: 25px;
   display: flex;
   flex-direction: column;
   gap: 50px;
@@ -14,4 +14,4 @@ const HeadingContainer = styled.div`
   }
 `
 
-export default HeadingContainer
+export default ForumHeadingBody

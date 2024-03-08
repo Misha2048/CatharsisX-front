@@ -160,8 +160,8 @@ export interface IDownloadFileRequest {
 
 export interface IGetForumTopicsRequest {
   title?: string
-  offset: number
-  limit: number
+  offset?: number
+  limit?: number
 }
 
 export interface IForumTopic {
@@ -189,5 +189,82 @@ export interface ICreateForumResponse {
   userId: string
   tags: string[]
   body: string
+  error?: string
+}
+
+export interface IGetTopicRequest {
+  id: string
+}
+
+export interface IGetTopicResponse {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [key: string]: any
+  userId: string
+  userFirstName: string
+  userLastName: string
+  title: string
+  body: string
+  tags: string[]
+  created_at: string
+  last_modified_at: string
+  answers?: IAnswer[]
+  error?: string
+}
+
+export interface IAnswer {
+  id: string
+  userId: string
+  userFirstName: string
+  userLastName: string
+  body: string
+  upvotes: number
+  createdAt: string
+  comments?: IComment[]
+}
+
+export interface IComment {
+  id: string
+  userId: string
+  userFirstName: string
+  userLastName: string
+  body: string
+  answerId: string
+  createdAt: string
+}
+
+export interface IAnswerUpvoteRequest {
+  id: string
+  score: number
+}
+
+export interface IAnswerUpvoteResponse {
+  message: string
+  error?: string
+}
+
+export interface IPostCommentRequest {
+  answerId: string
+  body: string
+}
+
+export interface IPostCommentResponse {
+  id: string
+  userId: string
+  userFirstName: string
+  userLastName: string
+  body: string
+  answerId: string
+  created_at: string
+  last_modified_at: string
+  createdAt: string
+  error?: string
+}
+
+export interface IPostAnswerRequest {
+  forumId: string
+  body: string
+}
+
+export interface IPostAnswerResponse extends IAnswer {
   error?: string
 }

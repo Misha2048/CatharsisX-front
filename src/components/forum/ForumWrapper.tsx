@@ -6,6 +6,7 @@ const ForumWrapper = styled.div`
   min-height: inherit;
   display: flex;
   flex-direction: column;
+  padding: 20px;
 `
 
 export default ForumWrapper

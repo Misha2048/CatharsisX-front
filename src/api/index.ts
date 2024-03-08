@@ -1,6 +1,8 @@
 import axiosInstance from '@api/axiosInstanse'
 import { dispatchSetTokens } from '@helpers/tokensHelper'
 import {
+  IAnswerUpvoteRequest,
+  IAnswerUpvoteResponse,
   ICatalogResponse,
   ICreateForumRequest,
   ICreateForumResponse,
@@ -15,11 +17,17 @@ import {
   IGetFilesRequest,
   IGetForumTopicsRequest,
   IGetForumTopicsResponse,
+  IGetTopicRequest,
+  IGetTopicResponse,
   ILoginRequest,
   INewPasswordRequest,
   INewPasswordResponse,
   INewUniversityRequest,
   INewUniversityResponse,
+  IPostAnswerRequest,
+  IPostAnswerResponse,
+  IPostCommentRequest,
+  IPostCommentResponse,
   IShelf,
   IShelvesRequest,
   IShelvesResponse,
@@ -275,6 +283,48 @@ export const api = {
           data: options,
         })
         .then((response) => response.data as ICreateForumResponse)
+    },
+  },
+
+  topic: async (options: IGetTopicRequest): Promise<IGetTopicResponse> => {
+    return axiosInstance
+      .request({
+        method: 'GET',
+        url: `/forum/topic/${options.id}`,
+      })
+      .then((response) => response.data as IGetTopicResponse)
+  },
+
+  answer: {
+    post: async (options: IPostAnswerRequest): Promise<IPostAnswerResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/answer',
+          data: options,
+        })
+        .then((response) => response.data as IPostAnswerResponse)
+    },
+    upvote: async (options: IAnswerUpvoteRequest): Promise<IAnswerUpvoteResponse> => {
+      return axiosInstance
+        .request({
+          method: 'PATCH',
+          url: '/answer/upvote',
+          data: options,
+        })
+        .then((response) => response.data as IAnswerUpvoteResponse)
+    },
+  },
+
+  comment: {
+    post: async (options: IPostCommentRequest): Promise<IPostCommentResponse> => {
+      return axiosInstance
+        .request({
+          method: 'POST',
+          url: '/comment',
+          data: options,
+        })
+        .then((response) => response.data as IPostCommentResponse)
     },
   },
 }
