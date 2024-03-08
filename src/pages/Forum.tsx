@@ -2,7 +2,7 @@ import { useRef } from 'react'
 
 import ForumHeadingRow from '@components/forum/ForumHeadingRow'
 import Page from '@components/Page'
-import AskQuestionBtn from '@components/forum/AskQuestionBtn'
+import AskQuestion from '@components/forum/AskQuestion'
 import ForumBackground from '@components/forum/ForumBackground'
 import ForumFilter from '@components/forum/ForumFilter'
 import ForumHeading from '@components/forum/ForumHeading'
@@ -14,13 +14,13 @@ function Forum() {
   const goToTopRef = useRef<HTMLDivElement | null>(null)
 
   return (
-    <Page hasHeader hasFooter>
+    <Page hasHeader hasFooter hasTooltip>
       <ForumBackground ref={goToTopRef}>
         <ForumWrapper>
           <ForumHeadingBody>
             <ForumHeadingRow>
               <ForumHeading>Top questions</ForumHeading>
-              <AskQuestionBtn>Ask Question</AskQuestionBtn>
+              <AskQuestion />
             </ForumHeadingRow>
             <ForumFilter />
           </ForumHeadingBody>
