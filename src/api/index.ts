@@ -284,15 +284,14 @@ export const api = {
         })
         .then((response) => response.data as ICreateForumResponse)
     },
-  },
-
-  topic: async (options: IGetTopicRequest): Promise<IGetTopicResponse> => {
-    return axiosInstance
-      .request({
-        method: 'GET',
-        url: `/forum/topic/${options.id}`,
-      })
-      .then((response) => response.data as IGetTopicResponse)
+    topic: async (options: IGetTopicRequest): Promise<IGetTopicResponse> => {
+      return axiosInstance
+        .request({
+          method: 'GET',
+          url: `/forum/topic/${options.id}`,
+        })
+        .then((response) => response.data as IGetTopicResponse)
+    },
   },
 
   answer: {
