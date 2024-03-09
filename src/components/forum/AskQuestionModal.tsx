@@ -67,6 +67,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
       }
       const resp = await api.forum.post({ title: formData.title, body: formData.description, tags })
       if (!resp.error) {
+        document.body.classList.remove('_lock')
         navigate(`/forum/${resp.forumId}`)
       } else {
         dispatch(setHint({ message: resp.error }))
@@ -110,8 +111,9 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               name='tag1'
               value={tagsData.tag1}
               onChange={handleTagChange}
-              minLength={2}
+              minLength={1}
               maxLength={50}
+              required
             />
             <Input
               label='tag #2'
@@ -119,7 +121,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               name='tag2'
               value={tagsData.tag2}
               onChange={handleTagChange}
-              minLength={2}
+              minLength={1}
               maxLength={50}
             />
             <Input
@@ -128,7 +130,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               name='tag3'
               value={tagsData.tag3}
               onChange={handleTagChange}
-              minLength={2}
+              minLength={1}
               maxLength={50}
             />
             <Input
@@ -137,7 +139,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               name='tag4'
               value={tagsData.tag4}
               onChange={handleTagChange}
-              minLength={2}
+              minLength={1}
               maxLength={50}
             />
             <Input
@@ -146,7 +148,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               name='tag5'
               value={tagsData.tag5}
               onChange={handleTagChange}
-              minLength={2}
+              minLength={1}
               maxLength={50}
             />
           </TagsContainer>
