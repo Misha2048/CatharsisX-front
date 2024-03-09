@@ -3,6 +3,7 @@ import { styled } from '@linaria/react'
 interface Props {
   show: boolean
   zIndex?: number
+  noBlur?: boolean
 }
 
 const BlackOverlay = styled.div<Props>`
@@ -12,7 +13,7 @@ const BlackOverlay = styled.div<Props>`
   width: 100vw;
   height: 100vh;
   background-color: rgba(0, 0, 0, 0.5);
-  backdrop-filter: blur(4px);
+  backdrop-filter: ${(props) => (props.noBlur ? 'inset' : 'blur(4px)')};
   z-index: ${(props) => (props.zIndex ? props.zIndex : 400)};
   transition: all 0.3s;
   visibility: ${(props) => (props.show ? 'visible' : 'hidden')};

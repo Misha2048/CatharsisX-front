@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 import TopicItem from '@components/forumTopic/TopicItem'
 import TopicBigText from '@components/forumTopic/TopicBigText'
@@ -10,6 +11,8 @@ import { IComment } from '@api/intefaces'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
 import whiteTriangle from '@assets/white-triangle.svg'
+import { RootState } from '@redux/store'
+import { setPopupState } from '@redux/slices/popupSlice'
 
 interface Props {
   id: string
@@ -97,10 +100,14 @@ const CommentAuthor = styled.p`
 
 function TopicAnswer({ id, upvotes, answerText, answerIndex, comments, dispatch }: Props) {
   const [votes, setVotes] = useState(0)
+  const isUserLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
 
   const voteForAnswer = useCallback(
     async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>, value: -1 | 1) => {
       event.preventDefault()
+      if (!isUserLoggedIn) {
+        return dispatch(setPopupState({ isShow: true }))
+      }
       const resp = await api.answer.upvote({ id, score: value })
       if (!resp.error) {
         setVotes(votes + value)
