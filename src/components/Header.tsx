@@ -91,7 +91,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   &[open] {
     overflow-y: scroll;
     width: 100%;
-    height: 100svh;
+    height: 100vh;
     position: fixed;
     z-index: 1000;
     left: 0;
