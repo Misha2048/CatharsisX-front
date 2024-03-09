@@ -22,13 +22,14 @@ function App() {
   return (
     <Routes>
       <Route path='/' element={<Home />} />
+      <Route path='/forum' element={<Forum />} />
+      <Route path='/forum/:id' element={<ForumTopicPage />} />
+
       <Route path='/check-email' element={<CheckVerify />} />
       <Route path='/stillages' element={<ProtectedRoute component={MyStillages} />} />
       <Route path='/stillages/:id' element={<ProtectedRoute component={Stillage} />} />
       <Route path='/stillages/liked' element={<ProtectedRoute component={LikedStillages} />} />
       <Route path='/library' element={<ProtectedRoute component={Library} />} />
-      <Route path='/forum' element={<ProtectedRoute component={Forum} />} />
-      <Route path='/forum/:id' element={<ProtectedRoute component={ForumTopicPage} />} />
 
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
