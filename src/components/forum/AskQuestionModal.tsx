@@ -79,8 +79,8 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
   }, [])
 
   const submitForm = useCallback(
-    async (event?: React.FormEvent<HTMLFormElement>) => {
-      event?.preventDefault()
+    async (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault()
       if (formData.description.length < 20) {
         textareaRef.current?.setCustomValidity('Use at least 20 characters')
         return formRef.current?.reportValidity()
