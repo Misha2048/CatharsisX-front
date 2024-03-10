@@ -1,5 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { Navigate } from 'react-router-dom'
+import { useSelector } from 'react-redux'
 
 import HomeMainScreen from '@components/home/HomeMainScreen'
 import HomeAdvantages from '@components/home/HomeAdvantages'
@@ -8,7 +9,6 @@ import SignUp from '@components/regestration/SignUp'
 import HomeSignUpContainer from '@components/home/HomeSignUpContainer'
 import Page from '@components/Page'
 import Spinner from '@components/Spinner'
-import { useSelector } from 'react-redux'
 import { RootState } from '@redux/store'
 
 function Home() {
