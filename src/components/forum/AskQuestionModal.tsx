@@ -33,6 +33,7 @@ const Input = styled.input`
     color: #000;
     opacity: 70%;
     font-size: 16px;
+    font-weight: 300;
     line-height: 1.15;
   }
 `
