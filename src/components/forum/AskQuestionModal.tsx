@@ -1,11 +1,10 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useRef, useState } from 'react'
 import { styled } from '@linaria/react'
 import { useNavigate } from 'react-router-dom'
 import { useDispatch } from 'react-redux'
 
 import BlackOverlay from '@components/BlackOverlay'
 import CloseBtn from '@components/CloseBtn'
-import Input from '@components/Input'
 import CloseBtnContainer from '@components/filter/CloseBtnContainer'
 import ModalBody from '@components/modalWindow/ModalBody'
 import ModalTitle from '@components/modalWindow/ModalTitle'
@@ -19,6 +18,24 @@ interface Props {
   isShow: boolean
   setIsShow: (value: boolean) => void
 }
+
+const Input = styled.input`
+  font-family: 'Inter', sans-serif;
+  font-size: 16px;
+  line-height: 1.15;
+  display: block;
+  width: 100%;
+  border: 1px solid #fff;
+  padding: 10px 0 10px 10px;
+  border-radius: 5px;
+
+  &::placeholder {
+    color: #000;
+    opacity: 70%;
+    font-size: 16px;
+    line-height: 1.15;
+  }
+`
 
 const TagsContainer = styled.div`
   display: flex;
@@ -34,6 +51,8 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
   const [tagsData, setTagsData] = useState(initialTagsData)
   const navigate = useNavigate()
   const dispatch = useDispatch()
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null)
+  const formRef = useRef<HTMLFormElement | null>(null)
 
   const hideModal = useCallback((event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     event.preventDefault()
@@ -46,6 +65,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
       event.preventDefault()
       const name = event.target.name
       const value = event.target.value
+      if (name === 'description') textareaRef.current?.setCustomValidity('')
       setFormData((prevData) => ({ ...prevData, [name]: value }))
     },
     [],
@@ -59,12 +79,17 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
   }, [])
 
   const submitForm = useCallback(
-    async (event: React.FormEvent<HTMLFormElement>) => {
-      event.preventDefault()
-      const tags: string[] = []
+    async (event?: React.FormEvent<HTMLFormElement>) => {
+      event?.preventDefault()
+      if (formData.description.length < 20) {
+        textareaRef.current?.setCustomValidity('Use at least 20 characters')
+        return formRef.current?.reportValidity()
+      }
+      let tags: string[] | undefined = []
       for (const value of Object.values(tagsData)) {
         if (value.trim()) tags.push(value)
       }
+      if (tags.length === 0) tags = undefined
       const resp = await api.forum.post({ title: formData.title, body: formData.description, tags })
       if (!resp.error) {
         document.body.classList.remove('_lock')
@@ -79,14 +104,14 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
   return (
     <>
       <BlackOverlay show={isShow} onClick={hideModal} />
-      <form onSubmit={submitForm}>
+      <form onSubmit={submitForm} ref={formRef}>
         <ModalBody show={isShow}>
           <ModalTitle>Ask a question</ModalTitle>
           <CloseBtnContainer>
             <CloseBtn size='small' onClick={hideModal} />
           </CloseBtnContainer>
           <Input
-            label='Title'
+            placeholder='Title'
             type='text'
             name='title'
             value={formData.title}
@@ -96,27 +121,26 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
             maxLength={150}
           />
           <TextArea
+            ref={textareaRef}
             placeholder='Description'
             name='description'
             value={formData.description}
             onChange={handleInputChange}
             required
-            minLength={20}
           />
           <TagsContainer>
             <ModalText>Tags (optional)</ModalText>
             <Input
-              label='tag #1'
+              placeholder='tag #1'
               type='text'
               name='tag1'
               value={tagsData.tag1}
               onChange={handleTagChange}
               minLength={1}
               maxLength={50}
-              required
             />
             <Input
-              label='tag #2'
+              placeholder='tag #2'
               type='text'
               name='tag2'
               value={tagsData.tag2}
@@ -125,7 +149,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               maxLength={50}
             />
             <Input
-              label='tag #3'
+              placeholder='tag #3'
               type='text'
               name='tag3'
               value={tagsData.tag3}
@@ -134,7 +158,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               maxLength={50}
             />
             <Input
-              label='tag #4'
+              placeholder='tag #4'
               type='text'
               name='tag4'
               value={tagsData.tag4}
@@ -143,7 +167,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
               maxLength={50}
             />
             <Input
-              label='tag #5'
+              placeholder='tag #5'
               type='text'
               name='tag5'
               value={tagsData.tag5}
@@ -153,7 +177,7 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
             />
           </TagsContainer>
           <ModalWindowBtn type='submit' alignCenter>
-            Create Qestion
+            Create Question
           </ModalWindowBtn>
         </ModalBody>
       </form>
