@@ -21,6 +21,7 @@ import { RootState } from '@redux/store'
 import { setTopic } from '@redux/slices/forumTopicSlice'
 import { api } from '@api/index'
 import { setHint } from '@redux/slices/hintSlice'
+import { setPopupState } from '@redux/slices/popupSlice'
 
 function ForumTopicPage() {
   const { id } = useParams()
@@ -43,10 +44,13 @@ function ForumTopicPage() {
 
   useEffect(() => {
     fetchData()
+    return () => {
+      dispatch(setPopupState({ isShow: false }))
+    }
   }, [])
 
   return (
-    <Page hasHeader hasFooter hasTooltip>
+    <Page hasHeader hasFooter hasTooltip hasLoginPopup>
       <ForumBackground>
         <TopicContainer>
           <TopicItem>

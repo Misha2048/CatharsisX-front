@@ -10,6 +10,7 @@ import filesReducer from '@redux/slices/filesSlice'
 import forumReducer from '@redux/slices/forumSlice'
 import forumTopicReducer from '@redux/slices/forumTopicSlice'
 import paginationReducer from '@redux/slices/paginationSlice'
+import popupReducer from '@redux/slices/popupSlice'
 
 export const store = configureStore({
   reducer: {
@@ -23,6 +24,7 @@ export const store = configureStore({
     forum: forumReducer,
     forumTopic: forumTopicReducer,
     pagination: paginationReducer,
+    popup: popupReducer,
   },
 })
 

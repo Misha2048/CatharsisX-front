@@ -49,7 +49,7 @@ const DropdownBody = styled.ul<FooterMenuProps>`
   background-color: #333;
   margin-top: ${(props) => (props.isDropdownOpen ? '10px' : '0px')};
   border-radius: 5px;
-  height: ${(props) => (props.isDropdownOpen ? '90x' : '0')};
+  max-height: ${(props) => (props.isDropdownOpen ? '100px' : '0')};
   overflow: hidden;
   transition: all 0.3s ease;
 

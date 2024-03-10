@@ -1,11 +1,14 @@
 import { styled } from '@linaria/react'
 import { useCallback, useState } from 'react'
 import { Dispatch, UnknownAction } from '@reduxjs/toolkit'
+import { useSelector } from 'react-redux'
 
 import TextareaWithBtn from '@components/TextareaWithBtn'
 import { api } from '@api/index'
 import { addComment } from '@redux/slices/forumTopicSlice'
 import { setHint } from '@redux/slices/hintSlice'
+import { RootState } from '@redux/store'
+import { setPopupState } from '@redux/slices/popupSlice'
 
 interface Props {
   answerId: string
@@ -35,6 +38,7 @@ const AddCommentText = styled.p<{ hasMarginBottom: boolean }>`
 function AddComment({ answerId, answerIndex, dispatch }: Props) {
   const [isShowTextarea, setIsShowTextarea] = useState(false)
   const [text, setText] = useState('')
+  const isUserLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
 
   const toggleTextarea = useCallback(() => {
     setIsShowTextarea(!isShowTextarea)
@@ -43,6 +47,9 @@ function AddComment({ answerId, answerIndex, dispatch }: Props) {
   const addNewComment = useCallback(
     async (event: React.FormEvent<HTMLFormElement>) => {
       event.preventDefault()
+      if (!isUserLoggedIn) {
+        return dispatch(setPopupState({ isShow: true }))
+      }
       const resp = await api.comment.post({ answerId, body: text })
       if (!resp.error) {
         dispatch(addComment({ answerIndex, comment: resp }))

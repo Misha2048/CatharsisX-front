@@ -1,4 +1,5 @@
-import { useRef } from 'react'
+import { useEffect, useRef } from 'react'
+import { useDispatch } from 'react-redux'
 
 import ForumHeadingRow from '@components/forum/ForumHeadingRow'
 import Page from '@components/Page'
@@ -9,12 +10,20 @@ import ForumHeading from '@components/forum/ForumHeading'
 import ForumWrapper from '@components/forum/ForumWrapper'
 import ForumHeadingBody from '@components/forum/ForumHeadingBody'
 import ForumTopicsList from '@components/forum/ForumTopicsList'
+import { setPopupState } from '@redux/slices/popupSlice'
 
 function Forum() {
   const goToTopRef = useRef<HTMLDivElement | null>(null)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    return () => {
+      dispatch(setPopupState({ isShow: false }))
+    }
+  }, [])
 
   return (
-    <Page hasHeader hasFooter hasTooltip>
+    <Page hasHeader hasFooter hasTooltip hasLoginPopup>
       <ForumBackground ref={goToTopRef}>
         <ForumWrapper>
           <ForumHeadingBody>

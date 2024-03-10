@@ -16,11 +16,10 @@ const TextArea = styled.textarea`
   &::placeholder {
     color: #000;
     opacity: 70%;
-    font-size: 12px;
+    font-size: 16px;
     font-style: normal;
     font-weight: 300;
-    line-height: 1;
-    letter-spacing: 0.42px;
+    line-height: 1.1;
   }
 `
 

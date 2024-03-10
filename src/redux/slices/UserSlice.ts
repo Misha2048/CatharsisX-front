@@ -10,6 +10,7 @@ export interface IUserState {
   last_name?: string | null
   email?: string | null
   emailVerified?: boolean
+  isLoggedIn: boolean | null
 }
 
 export interface PropertyType {
@@ -23,6 +24,7 @@ const initialState: IUserState = {
   last_name: null,
   email: null,
   emailVerified: false,
+  isLoggedIn: null,
 }
 
 export const userSlice = createSlice({

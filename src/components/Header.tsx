@@ -1,6 +1,7 @@
 import { styled } from '@linaria/react'
 import { useCallback, useEffect, useState } from 'react'
 import { Outlet, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 
 import Logo from '@components/Logo'
 import Button from '@components/Button'
@@ -9,6 +10,8 @@ import OutlinedButton from '@components/OutlinedButton'
 import HeaderLink from '@components/HeaderLink'
 import DropdownMenu from '@components/DropdownMenu'
 import { checkUserIsLoggedIn } from '@helpers/userHelper'
+import { RootState } from '@redux/store'
+import { setValue } from '@redux/slices/UserSlice'
 
 const HeaderNavigation = styled.nav`
   display: flex;
@@ -91,7 +94,7 @@ const HeaderContainer = styled.header<{ open: boolean }>`
   &[open] {
     overflow-y: scroll;
     width: 100%;
-    height: 100svh;
+    height: 100vh;
     position: fixed;
     z-index: 1000;
     left: 0;
@@ -125,12 +128,14 @@ const HeaderBurger = styled.div<{ open: boolean }>`
 
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
-  const [isUserLoggedIn, setIsUserLoggedIn] = useState(true)
+  const isUserLoggedIn = useSelector((state: RootState) => state.user.isLoggedIn)
+  const dispatch = useDispatch()
   const [isDropdownOpen, setIsDropdownOpen] = useState(false)
   const navigate = useNavigate()
 
   useEffect(() => {
-    checkUserIsLoggedIn(setIsUserLoggedIn)
+    const isUserLoggedIn = checkUserIsLoggedIn()
+    dispatch(setValue({ isLoggedIn: isUserLoggedIn }))
   }, [])
 
   const handleRedirect = useCallback(
@@ -174,7 +179,7 @@ function Header() {
                 <HeaderLink onClick={(event) => handleRedirect('/price', event)}>Price</HeaderLink> */}
                 <HeaderLink onClick={(event) => handleRedirect('/chat', event)}>Chat</HeaderLink>
               </HeaderNavigation>
-              {!isUserLoggedIn && (
+              {isUserLoggedIn !== null && !isUserLoggedIn && (
                 <ButtonsContainer>
                   <Button onClick={(event) => handleRedirect('/login', event)}>Log in</Button>
                   <OutlinedButton onClick={(event) => handleRedirect('/signup', event)}>
