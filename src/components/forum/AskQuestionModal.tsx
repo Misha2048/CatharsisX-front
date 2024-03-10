@@ -90,6 +90,9 @@ function AskQuestionModal({ isShow, setIsShow }: Props) {
       for (const value of Object.values(tagsData)) {
         if (value.trim()) tags.push(value)
       }
+      if (tags.length > 1 && new Set(tags).size !== tags.length) {
+        return dispatch(setHint({ message: "Tags shouldn't be the same" }))
+      }
       if (tags.length === 0) tags = undefined
       const resp = await api.forum.post({ title: formData.title, body: formData.description, tags })
       if (!resp.error) {
