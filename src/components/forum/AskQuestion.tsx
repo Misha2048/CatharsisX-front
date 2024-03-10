@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react'
+import { useCallback, useEffect, useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 
 import AskQuestionBtn from '@components/forum/AskQuestionBtn'
@@ -18,6 +18,12 @@ function AskQuestion() {
     document.body.classList.add('_lock')
     setIsShow(true)
   }, [isUserLoggedIn])
+
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove('_lock')
+    }
+  }, [])
 
   return (
     <div>
