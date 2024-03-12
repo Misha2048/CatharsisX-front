@@ -32,14 +32,16 @@ const SearchFieldStyle = css`
     opacity: 0.5;
   }
 
-  & > img {
+  & button {
     width: 14px;
     height: 14px;
-  }
-
-  & button {
     background-color: transparent;
     cursor: auto;
+  }
+
+  & img {
+    width: inherit;
+    height: inherit;
   }
 
   @media only screen and (max-width: 1100px) {
