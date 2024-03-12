@@ -38,6 +38,8 @@ const SearchFieldStyle = css`
   }
 
   & button {
+    width: 14px;
+    height: 14px;
     background-color: transparent;
     cursor: auto;
   }
