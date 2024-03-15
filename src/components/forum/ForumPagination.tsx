@@ -64,7 +64,7 @@ const PaginationColumn = styled.div`
 const dots = '...'
 const siblingCount = 1
 
-function ForumPagination({ dispatch, goToTopRef }: Props) {
+function ForumPagination({ dispatch }: Props) {
   const totalCount = useSelector((state: RootState) => state.pagination.totalCount) as number
   const pageLimit = useSelector((state: RootState) => state.pagination.pageLimit) as number
   const currentPage = useSelector((state: RootState) => state.pagination.currentPage) as number
@@ -82,8 +82,8 @@ function ForumPagination({ dispatch, goToTopRef }: Props) {
       const resp = await api.forum.get({ offset, limit: currentPageLimit, title: questionTitle })
       if (!resp.error) {
         dispatch(setForumState({ topics: resp.forums }))
-        goToTopRef.current?.scrollIntoView({ behavior: 'smooth' })
         dispatch(setPaginationValues({ currentPage: page, totalCount: resp.count }))
+        scrollTo(0, 0)
       } else {
         dispatch(
           setHint({
