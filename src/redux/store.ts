@@ -11,6 +11,7 @@ import forumReducer from '@redux/slices/forumSlice'
 import forumTopicReducer from '@redux/slices/forumTopicSlice'
 import paginationReducer from '@redux/slices/paginationSlice'
 import popupReducer from '@redux/slices/popupSlice'
+import chatReducer from '@redux/slices/chatSlice'
 
 export const store = configureStore({
   reducer: {
@@ -25,6 +26,7 @@ export const store = configureStore({
     forumTopic: forumTopicReducer,
     pagination: paginationReducer,
     popup: popupReducer,
+    chat: chatReducer,
   },
 })
 

@@ -2,7 +2,8 @@ import { styled } from '@linaria/react'
 import { PropsWithChildren } from 'react'
 
 export const styles = `
-  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;700&display=swap');
 
   /*---------------------------*/
   /* Reseting default styles: */
