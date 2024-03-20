@@ -41,6 +41,7 @@ function WriteAnswer({ forumId, dispatch }: Props) {
       text={answerText}
       setText={setAnswerText}
       onSubmit={addNewAnswer}
+      maxLength={5000}
     />
   )
 }
