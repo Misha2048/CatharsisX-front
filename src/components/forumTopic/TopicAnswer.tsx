@@ -89,7 +89,7 @@ const CommentText = styled.p`
   font-family: 'Inter', sans-serif;
   font-size: 14px;
   line-height: 1.3;
-  word-break: break-all;
+  overflow-wrap: break-word;
 `
 
 const CommentAuthor = styled.p`
