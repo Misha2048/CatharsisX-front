@@ -6,6 +6,7 @@ const TopicText = styled.p`
   font-size: 18px;
   line-height: 1.3;
   letter-spacing: 0.01em;
+  word-break: break-all;
 `
 
 export default TopicText
