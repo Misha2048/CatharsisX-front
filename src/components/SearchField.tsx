@@ -14,11 +14,9 @@ const SearchFieldStyle = css`
   display: flex;
   gap: 15px;
   opacity: 0.5;
-  padding: 8px 20px;
+  padding: 12px 20px;
   align-items: center;
-  max-width: 170px;
-  min-width: 100px;
-  border-radius: 15px;
+  border-radius: 20px;
   background: #333;
 
   & > input {
@@ -29,7 +27,6 @@ const SearchFieldStyle = css`
 
   & > input:placeholder {
     color: #fff;
-    opacity: 0.5;
   }
 
   & button {
@@ -45,10 +42,10 @@ const SearchFieldStyle = css`
   }
 
   @media only screen and (max-width: 1100px) {
-    padding: 8px 15px 8px 20px;
+    padding: 12px 15px 12px 20px;
   }
   @media only screen and (max-width: 900px) {
-    padding: 8px 10px 8px 20px;
+    padding: 12px 10px 12px 20px;
   }
 `
 
