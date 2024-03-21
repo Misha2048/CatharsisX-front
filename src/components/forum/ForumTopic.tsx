@@ -26,7 +26,7 @@ const TopicTitle = styled.h3`
   color: #fff;
   font-size: 20px;
   line-height: 1.25;
-  overflow-wrap: break-word;
+  word-break: break-all;
   cursor: pointer;
 `
 
