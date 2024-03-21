@@ -8,5 +8,4 @@ const TopicText = styled.p`
   letter-spacing: 0.01em;
   word-break: break-all;
 `
-
 export default TopicText
