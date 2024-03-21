@@ -72,6 +72,7 @@ function AddComment({ answerId, answerIndex, dispatch }: Props) {
         setText={setText}
         onSubmit={addNewComment}
         height={isShowTextarea ? '128px' : '0'}
+        maxLength={1000}
       />
     </AddCommentContainer>
   )

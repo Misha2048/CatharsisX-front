@@ -7,6 +7,7 @@ interface Props {
   setText: React.Dispatch<React.SetStateAction<string>>
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   height?: string
+  maxLength?: number
 }
 
 const StyledForm = styled.form<{ height?: string }>`
@@ -55,7 +56,7 @@ const TextareaBtn = styled.button`
   font-weight: 700;
 `
 
-function TextareaWithBtn({ placeholder, text, setText, onSubmit, height }: Props) {
+function TextareaWithBtn({ placeholder, text, setText, onSubmit, height, maxLength }: Props) {
   const onTextareaChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value)
   }, [])
@@ -68,6 +69,7 @@ function TextareaWithBtn({ placeholder, text, setText, onSubmit, height }: Props
         onChange={onTextareaChange}
         required
         minLength={1}
+        maxLength={maxLength}
       />
       <TextareaBtn type='submit'>Comment</TextareaBtn>
     </StyledForm>
