@@ -6,7 +6,7 @@ const ForumHeading = styled.h2`
   color: #fff;
   font-size: 24px;
   line-height: 1.2;
-  overflow-wrap: break-word;
+  word-break: break-all;
 
   @media screen and (min-width: 768px) {
     font-size: 32px;
