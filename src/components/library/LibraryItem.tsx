@@ -14,12 +14,13 @@ import MuiTooltip from '@components/MuiTooltip'
 interface Props {
   id: string
   name: string
+  isPrivate: boolean
   liked: boolean | undefined
   color: string
   dispatch: Dispatch<UnknownAction>
 }
 
-const StyledLibraryItem = styled.li<{ color: string }>`
+const StyledLibraryItem = styled.li<{ color: string; isPrivate: boolean }>`
   position: relative;
   background-color: ${(props) => (props.color ? props.color : '#019c56')};
   width: 250px;
@@ -29,6 +30,18 @@ const StyledLibraryItem = styled.li<{ color: string }>`
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
+  &::after {
+    position: absolute;
+    content: '';
+    background-image: url(../../assets/lock-icon.svg);
+    background-position: center center;
+    background-size: cover;
+    width: 24px;
+    aspect-ratio: 1;
+    top: 24px;
+    left: 20px;
+    display: ${(props) => (props.isPrivate ? 'block' : 'none')};
+  }
 `
 
 const StarBtn = styled.button`
@@ -76,13 +89,10 @@ const StyledLink = styled(Link)`
   }
 `
 
-function LibraryItem({ name, id, liked, color, dispatch }: Props) {
+function LibraryItem({ name, id, liked, isPrivate, color, dispatch }: Props) {
   const handleClick = useCallback(
     async (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
       event.preventDefault()
-      if (liked === undefined) {
-        liked = false // TODO delete it later (when all endpoints returns elems with the liked prop)
-      }
       await api.stillages.like({ id })
       liked = !liked
       dispatch(setLiked({ id, liked }))
@@ -96,7 +106,7 @@ function LibraryItem({ name, id, liked, color, dispatch }: Props) {
   )
 
   return (
-    <StyledLibraryItem color={color}>
+    <StyledLibraryItem color={color} isPrivate={isPrivate}>
       <StarBtn onClick={handleClick}>
         <img src={liked ? starFilled : starTransparent} alt='' />
       </StarBtn>
