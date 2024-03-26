@@ -3,11 +3,12 @@ import { useCallback } from 'react'
 
 interface Props {
   placeholder: string
-  text: string
+  text?: string
   setText: React.Dispatch<React.SetStateAction<string>>
   onSubmit: (event: React.FormEvent<HTMLFormElement>) => void
   height?: string
   maxLength?: number
+  buttonText?: string
 }
 
 const StyledForm = styled.form<{ height?: string }>`
@@ -56,7 +57,15 @@ const TextareaBtn = styled.button`
   font-weight: 700;
 `
 
-function TextareaWithBtn({ placeholder, text, setText, onSubmit, height, maxLength }: Props) {
+function TextareaWithBtn({
+  placeholder,
+  text,
+  setText,
+  onSubmit,
+  height,
+  maxLength,
+  buttonText,
+}: Props) {
   const onTextareaChange = useCallback((event: React.ChangeEvent<HTMLTextAreaElement>) => {
     setText(event.target.value)
   }, [])
@@ -71,7 +80,7 @@ function TextareaWithBtn({ placeholder, text, setText, onSubmit, height, maxLeng
         minLength={1}
         maxLength={maxLength}
       />
-      <TextareaBtn type='submit'>Comment</TextareaBtn>
+      <TextareaBtn type='submit'>{buttonText ?? 'Comment'}</TextareaBtn>
     </StyledForm>
   )
 }

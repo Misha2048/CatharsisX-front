@@ -15,6 +15,7 @@ import MyStillages from '@pages/MyStillages'
 import LikedStillages from '@pages/LikedStillages'
 import Forum from '@pages/Forum'
 import ForumTopicPage from '@pages/ForumTopicPage'
+import AddUniversity from '@pages/AddUniversity'
 
 dayjs.locale('en-gb')
 
@@ -34,6 +35,7 @@ function App() {
       <Route path='/login' element={<LogIn />} />
       <Route path='/signup' element={<SignUp />} />
       <Route path='/forgot-password' element={<ForgotPasswordForm />} />
+      <Route path='/add-university' element={<AddUniversity />} />
       <Route path={`/password-reset/:id`} element={<ResetPasswordForm />} />
     </Routes>
   )
