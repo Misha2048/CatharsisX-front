@@ -37,7 +37,7 @@ function WriteAnswer({ forumId, dispatch }: Props) {
 
   return (
     <TextareaWithBtn
-      placeholder='Write an answer'
+      placeholder='Write an answer (up to 5000 symbols)'
       text={answerText}
       setText={setAnswerText}
       onSubmit={addNewAnswer}

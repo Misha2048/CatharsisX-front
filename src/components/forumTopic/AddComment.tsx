@@ -67,7 +67,7 @@ function AddComment({ answerId, answerIndex, dispatch }: Props) {
         Add a comment
       </AddCommentText>
       <TextareaWithBtn
-        placeholder='Write a comment'
+        placeholder='Write a comment (up to 1000 symbols)'
         text={text}
         setText={setText}
         onSubmit={addNewComment}
