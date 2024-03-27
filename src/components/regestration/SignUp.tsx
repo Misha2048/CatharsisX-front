@@ -134,6 +134,7 @@ function SignUp() {
               onChange={handleChange}
               required
             ></AutoComplete>
+            <Link to={'/add-university'}>Can&apos;t find your university?</Link>
             <Button>Sign up</Button>
           </Form>
         </MainRegistryContent>
