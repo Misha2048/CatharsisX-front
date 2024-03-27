@@ -5,6 +5,8 @@ import TextareaWithBtn from '@components/TextareaWithBtn'
 import { useState } from 'react'
 import { api } from '@api/index'
 import { useNavigate } from 'react-router-dom'
+import { setHint } from '@redux/slices/hintSlice'
+import { useDispatch } from 'react-redux'
 
 const BackgroundContainer = styled(FullscreenUnderHeader)`
   background-color: #282828;
@@ -34,11 +36,15 @@ const AddUniversityWrapper = styled.div`
 function AddUniversity() {
   const [text, setText] = useState('')
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   async function addUni(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault()
     await api.mail.newUniversityLetter({ name: text })
     navigate('/signup')
+    setTimeout(() => {
+      dispatch(setHint({ message: 'The administrator will add new university soon...' }))
+    }, 100)
   }
 
   return (
